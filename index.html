@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institut Barbarella — Paris République</title>
+  <meta name="description" content="Institut Barbarella — Massages d'exception, épilation à la cire orientale, manucure & produits dérivés. Cadre feutré, sensualité raffinée et soins. 58 rue Notre Dame de Nazareth, 75003 Paris.">
+  <meta name="theme-color" content="#070707">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#070707;--dark:#0c0c0c;--card:#131313;--elev:#181818;--gold:#c9b896;--gold2:#e8d5b0;--muted:rgba(255,255,255,.52);--green:#5eead4;--line:rgba(255,255,255,.06);--ease:cubic-bezier(.16,1,.3,1)}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.hidden{display:none!important}
+    .nav{position:fixed;inset:0 0 auto;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(7,7,7,.8);backdrop-filter:blur(22px);border-bottom:1px solid rgba(201,184,150,.08)}
+    .brand{display:flex;align-items:center;gap:11px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+    .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(145deg,#e8d5b0,#a8906e);display:grid;place-items:center;color:#111;font-size:14px;font-weight:600}
+    .nav-links{display:flex;gap:26px;list-style:none;font-size:13px;color:var(--muted)}.nav-links a:hover{color:#fff}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;font-size:13.5px;font-weight:500;transition:all .35s var(--ease)}
+    .btn-gold{background:linear-gradient(135deg,#e8d5b0,#c9b896);color:#111}.btn-gold:hover{filter:brightness(1.06);transform:scale(1.02)}.btn-gold:active,.btn-ghost:active{transform:scale(.97);opacity:.9}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.16);color:#fff}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+    .btn-sm{padding:9px 14px;font-size:12.5px;border-radius:10px}.btn:active{transform:scale(.97);opacity:.92}.method,.pkg-bubble,.prest-tab,.price-bubble{user-select:none}.pkg-bubble:active,.prest-tab:active,.price-bubble:active{transform:scale(.96)}
+    .hero{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative;padding:100px 24px 80px}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,7,.42) 0%,rgba(7,7,7,.8) 55%,#070707 100%),url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop') center/cover}
+    .hero-inner{position:relative;z-index:1;max-width:720px}.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:500}
+    .hero h1{font-size:clamp(40px,7vw,68px);line-height:1.06;letter-spacing:-.02em;margin-bottom:18px}.hero h1 em{font-style:italic;color:var(--gold2)}
+    .hero p{font-size:16.5px;color:rgba(255,255,255,.68);font-weight:300;max-width:460px;margin:0 auto 34px}.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    section{padding:88px 24px}.wrap{max-width:1100px;margin:0 auto}.sec-head{text-align:center;max-width:540px;margin:0 auto 48px}.sec-head h2{font-size:clamp(28px,4vw,40px);margin-bottom:10px}.sec-head p{color:var(--muted);font-size:15px;font-weight:300}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 22px}
+    .prest-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+    .prest-tab{padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);font-size:12.5px;cursor:pointer;transition:all .3s}
+    .prest-tab:hover{border-color:rgba(201,184,150,.35);color:#fff}.prest-tab.on{background:rgba(201,184,150,.12);border-color:var(--gold);color:var(--gold2)}
+    .prest-detail{max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:36px 28px;text-align:center}
+    .prest-detail h3{font-size:30px;margin-bottom:8px}.prest-detail p{color:var(--muted);font-size:15px;font-weight:300;line-height:1.7;max-width:500px;margin:0 auto 22px}
+    .price-bubbles{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px}
+    .price-bubble{padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:var(--muted);font-size:13px;cursor:pointer;transition:all .3s;font-weight:500}
+    .price-bubble:hover{border-color:rgba(201,184,150,.4);color:#fff}.price-bubble.on{background:linear-gradient(135deg,rgba(232,213,176,.18),rgba(201,184,150,.1));border-color:var(--gold);color:var(--gold2)}
+    .price-bubble small{display:block;font-size:11px;font-weight:400;opacity:.8;margin-top:2px}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.team-card{overflow:hidden;padding:0}.team-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}.team-body{padding:18px}.team-body h3{font-size:22px;margin-bottom:4px}.team-body .role{font-size:12px;color:var(--gold);margin-bottom:8px}
+    .book-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:24px;align-items:start}
+    .pkg{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;margin-bottom:8px;transition:all .3s;position:relative}.pkg.active{border-color:var(--gold);background:#16140f}
+    .pkg-top{display:flex;justify-content:space-between;align-items:center}.pkg h4{font-size:14.5px;font-weight:500}.pkg .amt{color:var(--gold);font-weight:500;font-size:14px}
+    .pkg-bubbles{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.pkg-bubble{font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.1);color:var(--muted);cursor:pointer}.pkg-bubble.on{border-color:var(--gold);color:var(--gold);background:rgba(201,184,150,.1)}
+    .badge{position:absolute;top:-8px;right:12px;background:var(--gold);color:#111;font-size:10px;font-weight:600;padding:3px 8px;border-radius:999px}
+    .pay-box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
+    .sum{display:flex;justify-content:space-between;align-items:center;background:rgba(201,184,150,.08);border:1px solid rgba(201,184,150,.15);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:14px}.sum strong{color:var(--gold);font-size:18px}
+    .fg{margin-bottom:12px}.fg label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:5px;font-weight:500}
+    .fg input,.fg select,.fg textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:11px 13px;color:#fff;outline:none}
+    .fg input:focus,.fg select:focus{border-color:rgba(201,184,150,.4)}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .methods{display:flex;gap:8px;margin-bottom:12px}.method{flex:1;text-align:center;padding:10px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--muted)}.method.active{border-color:var(--gold);color:#fff;background:rgba(201,184,150,.08)}.method input{display:none}
+    .note{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px}
+    footer{padding:36px 24px;text-align:center;border-top:1px solid var(--line);font-size:12.5px;color:rgba(255,255,255,.35)}
+    .chat-fab{position:fixed;bottom:22px;right:22px;z-index:90;width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#e8d5b0,#c9b896);color:#111;font-size:20px;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+    .chat-panel{position:fixed;bottom:88px;right:22px;z-index:90;width:350px;max-width:calc(100vw - 28px);background:var(--elev);border:1px solid rgba(201,184,150,.2);border-radius:18px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);display:none;flex-direction:column;max-height:460px}.chat-panel.open{display:flex}
+    .chat-head{padding:12px 14px;background:rgba(201,184,150,.12);display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:500}
+    .chat-body{flex:1;overflow-y:auto;padding:12px;font-size:13px}.msg{margin-bottom:8px;padding:9px 11px;border-radius:11px;max-width:88%;line-height:1.45}.msg.bot{background:rgba(201,184,150,.1)}.msg.user{background:rgba(255,255,255,.08);margin-left:auto}
+    .chat-foot{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}.chat-foot input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px 11px;color:#fff}.lang-select{font-size:11px;background:transparent;border:none;color:var(--gold)}
+    #admin{display:none;min-height:100vh}.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .login-card{width:100%;max-width:380px;background:var(--card);border-radius:20px;padding:32px 26px;border:1px solid var(--line);text-align:center}.login-card h2{font-size:26px;margin:10px 0 6px}.hint{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.55}
+    .shell{display:flex;min-height:100vh}.side{width:220px;background:var(--dark);border-right:1px solid var(--line);position:fixed;height:100vh;overflow-y:auto;padding:20px 0}
+    .side-brand{padding:0 16px 18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;display:flex;gap:9px;align-items:center}
+    .side nav a{display:block;padding:10px 16px;font-size:13px;color:var(--muted);border-left:3px solid transparent}.side nav a:hover,.side nav a.on{color:#fff;background:rgba(255,255,255,.03);border-left-color:var(--gold)}
+    .side-user{padding:14px 16px;font-size:11px;color:rgba(255,255,255,.35);border-top:1px solid var(--line);margin-top:14px}
+    .main{margin-left:220px;flex:1;padding:26px 28px 50px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:12px;flex-wrap:wrap}.top h1{font-size:24px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}.stat{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--line)}.stat span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.stat b{display:block;font-size:22px;font-weight:400;margin-top:4px;font-family:"Cormorant Garamond",serif}
+    .panel{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);margin-bottom:14px}.panel h2{font-size:14px;font-weight:500;margin-bottom:12px;font-family:Inter,sans-serif}
+    table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;padding:8px 6px;color:var(--muted);font-weight:400;font-size:11px;border-bottom:1px solid var(--line)}td{padding:10px 6px;border-bottom:1px solid rgba(255,255,255,.04)}
+    .tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:500}.tag-ok{background:rgba(94,234,212,.12);color:var(--green)}.tag-wait{background:rgba(201,184,150,.15);color:var(--gold)}
+    .agenda{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.aday{background:rgba(255,255,255,.03);border-radius:10px;padding:8px;min-height:90px;border:1px solid var(--line)}.aday h5{font-size:10.5px;color:var(--muted);text-align:center;margin-bottom:6px}.slot{font-size:10.5px;padding:3px 5px;border-radius:5px;margin-bottom:3px;background:rgba(94,234,212,.12);color:var(--green)}
+    .feed{max-height:240px;overflow-y:auto}.feed-item{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12.5px}.feed-item time{display:block;font-size:10.5px;color:rgba(255,255,255,.35);margin-top:2px}
+    .ai-card{background:linear-gradient(135deg,rgba(125,211,252,.05),rgba(201,184,150,.05));border:1px solid rgba(125,211,252,.12);border-radius:12px;padding:14px;margin-bottom:10px}.ai-card h3{font-size:13px;color:#7dd3fc;margin-bottom:5px;font-family:Inter,sans-serif;font-weight:500}.ai-card p{font-size:12.5px;color:var(--muted)}
+    .list-row{display:flex;gap:10px;align-items:center;padding:11px;border-radius:11px;background:rgba(255,255,255,.02);border:1px solid var(--line);margin-bottom:7px;flex-wrap:wrap}.list-row img{width:44px;height:44px;border-radius:9px;object-fit:cover}.list-row h4{font-size:13.5px;font-weight:500}.list-row p{font-size:12px;color:var(--muted)}.list-actions{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+    .mob-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:80;background:var(--dark);border-top:1px solid var(--line);padding:8px;gap:4px;overflow-x:auto}
+    @media(max-width:1024px){.team-grid{grid-template-columns:1fr 1fr}.book-layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.nav-links{display:none}.team-grid{grid-template-columns:1fr}.side{display:none}.main{margin-left:0;padding:18px 16px 80px}.row2{grid-template-columns:1fr}.agenda{grid-template-columns:1fr 1fr}.chat-panel{right:10px;left:10px;width:auto}.mob-bar{display:flex}}
+  </style>
+</head>
+<body>
+<div id="public">
+  <nav class="nav">
+    <a href="#" class="brand" onclick="showPublic();return false"><span class="mark">✦</span> Institut Barbarella</a>
+    <ul class="nav-links"><li><a href="#prestations">Prestations</a></li><li><a href="#equipe">Équipe</a></li><li><a href="#reserver">Réserver</a></li><li><a href="#espace-client">Espace client</a></li></ul>
+    <a href="#" class="btn btn-gold btn-sm" onclick="openPro();return false">Espace Pro</a>
+  </nav>
+  <header class="hero"><div class="hero-bg"></div><div class="hero-inner">
+    <div class="eyebrow">Paris · République</div>
+    <h1>L’art du<br><em>toucher</em></h1>
+    <p>Un écrin de sérénité. Des soins d’exception, une atmosphère feutrée, une discrétion absolue.</p>
+    <div class="hero-cta"><a href="#reserver" class="btn btn-gold">Réserver un moment</a><a href="#prestations" class="btn btn-ghost">La carte</a></div>
+  </div></header>
+
+  <section id="prestations"><div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Soins d’exception</div><h2>Carte des prestations</h2><p>Massages, épilation à la cire orientale — chaque soin a sa signature.</p></div>
+    <div class="prest-tabs" id="cat-tabs" style="margin-bottom:16px"></div>
+    <div class="prest-tabs" id="prest-tabs"></div>
+    <div class="prest-detail" id="prest-detail"></div>
+    <div id="promo-banner" class="card" style="margin-top:24px;border-color:rgba(94,234,212,.22);display:none"><div class="eyebrow" style="margin-bottom:6px">Offre en cours</div><h3 id="promo-title-pub" style="font-size:20px;margin-bottom:6px"></h3><p id="promo-desc-pub" style="margin:0;color:var(--muted);font-size:14px"></p></div>
+    <div id="news-public" style="margin-top:16px"></div>
+    <div id="manucure-section" class="hidden" style="margin-top:40px">
+      <div class="sec-head"><div class="eyebrow">Manucure & Pédicure</div><h2>Soins des mains et des pieds</h2><p>Section activable depuis le Dashboard.</p></div>
+      <div id="manucure-public" class="card" style="text-align:center;color:var(--muted)">Bientôt disponible — activez cette section dans l’Espace Pro.</div>
+    </div>
+    <div id="produits-section" class="hidden" style="margin-top:40px">
+      <div class="sec-head"><div class="eyebrow">Boutique</div><h2>Produits dérivés</h2><p>Huiles, bougies, savons noirs, cires maison et diffuseurs — prolonger le soin chez soi, dans le même esprit de sensualité et de bien-être.</p></div>
+      <div id="produits-public" class="card" style="text-align:center;color:var(--muted)">Section masquée — activez « Produits dérivés » dans l’Espace Pro pour publier la boutique.</div>
+    </div>
+  </div></section>
+
+  <section id="equipe" style="background:var(--dark)"><div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Équipe</div><h2>Nos expertes</h2></div>
+    <div class="team-grid" id="team-public"></div>
+  </div></section>
+
+  <section id="reserver"><div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Réservation</div><h2>Réserver votre expérience</h2><p>Choisissez votre catégorie puis votre soin. La confirmation se fait au moment du règlement.</p></div>
+    <div class="book-layout">
+      <div>
+        <div class="prest-tabs" id="book-cat-tabs" style="justify-content:flex-start;margin-bottom:14px"></div>
+        <div id="packages"></div>
+        <div id="pkg-detail" class="hidden" style="margin-top:12px;padding:16px 18px;border-radius:14px;border:1px solid rgba(201,184,150,.25);background:rgba(201,184,150,.06)">
+          <div class="eyebrow" style="margin-bottom:8px" id="pkg-detail-eyebrow">Sur mesure</div>
+          <h4 style="font-size:16px;margin-bottom:8px" id="pkg-detail-title"></h4>
+          <div id="pkg-detail-tabs" class="hidden" style="flex-wrap:wrap;gap:8px;margin-bottom:12px">
+            <button type="button" class="prest-tab on" id="bk-tab-desc" onclick="switchBookSurMesureTab('desc')">Description</button>
+            <button type="button" class="prest-tab" id="bk-tab-comp" onclick="switchBookSurMesureTab('comp')">Composition</button>
+            <button type="button" class="prest-tab" id="bk-tab-rituel" onclick="switchBookSurMesureTab('rituel')">Rituel</button>
+          </div>
+          <div id="pkg-detail-body" style="font-size:13px;color:var(--muted);line-height:1.55"></div>
+        </div>
+      </div>
+      <div class="pay-box">
+        <div class="sum" id="sum-box"><div><div id="sel-name">Massage Iris — 1 heure · 180 €</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Page de paiement · confirmation</div></div><strong id="sel-price">29,99 €</strong></div>
+        <form id="book-form">
+          <div class="row2"><div class="fg"><label>Prénom</label><input id="fn" required></div><div class="fg"><label>Nom</label><input id="ln" required></div></div>
+          <div class="fg"><label>Email</label><input type="email" id="em" required placeholder="vous@email.com"></div>
+          <div class="row2"><div class="fg"><label>Téléphone</label><input type="tel" id="ph" required></div><div class="fg"><label>Date de naissance</label><input type="date" id="dob" required></div></div>
+          <div class="fg"><label>Date du rendez-vous</label><input type="date" id="dt" required></div>
+          <div class="fg"><label>Experte</label><select id="ms"></select></div>
+          <div class="fg"><label>Code fidélité (optionnel)</label><input id="loyalty-code" placeholder="ex: VIP ou email client" oninput="applyLoyalty()"></div>
+          <div id="loyalty-msg" style="font-size:12px;color:var(--gold);margin-bottom:10px;display:none"></div>
+          <div class="methods">
+            <label class="method active"><input type="radio" name="pay" value="card" checked> Carte</label>
+            <label class="method"><input type="radio" name="pay" value="onsite"> Sur place</label>
+          </div>
+          <div id="card-fields">
+            <div class="fg"><label>Numéro de carte</label><input id="cc" placeholder="•••• •••• •••• ••••" maxlength="19" autocomplete="cc-number"></div>
+            <div class="row2"><div class="fg"><label>Expiration</label><input id="exp" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp"></div><div class="fg"><label>CVC</label><input id="cvc" placeholder="•••" maxlength="4" autocomplete="cc-csc"></div></div>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%" id="pay-btn">Confirmer · 29,99 €</button>
+          <p class="note">Paiement sécurisé · Confirmation immédiate</p>
+        </form>
+        <div id="book-ok" class="hidden" style="text-align:center;padding:28px 8px"><div style="font-size:40px;margin-bottom:10px">✓</div><h3 style="font-size:24px;margin-bottom:8px">Réservation confirmée</h3><p style="color:var(--muted);font-size:14px">Votre moment est réservé. Un message de confirmation vous a été envoyé.</p></div>
+      </div>
+    </div>
+  </div></section>
+  <section id="espace-client" style="background:var(--dark)"><div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Fidélité</div><h2>Espace client</h2><p>Connectez-vous avec votre email pour voir vos tarifs préférentiels et votre historique.</p></div>
+    <div class="pay-box" style="max-width:480px;margin:0 auto">
+      <div class="fg"><label>Email</label><input type="email" id="client-login-email" placeholder="votre@email.com"></div>
+      <button type="button" class="btn btn-gold" style="width:100%" onclick="openClientSpace()">Accéder à mon espace</button>
+      <div id="client-space" class="hidden" style="margin-top:20px">
+        <div id="client-space-info" style="margin-bottom:16px;font-size:14px"></div>
+        <div id="client-space-tarifs"></div>
+        <button type="button" class="btn btn-ghost btn-sm" style="margin-top:12px" onclick="document.getElementById('reserver').scrollIntoView({behavior:'smooth'})">Réserver avec mon tarif</button>
+      </div>
+    </div>
+  </div></section>
+  <footer>
+    Institut Barbarella · 58 rue Notre Dame de Nazareth, 75003 Paris · 01 43 31 53 00 · Tous les jours, 11h – 20h
+    <div id="wa-footer" style="margin-top:10px;font-size:11px;opacity:.55;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center">
+      <a id="wa-link-1" href="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3" target="_blank" rel="noopener" style="color:rgba(201,184,150,.7);text-decoration:none;letter-spacing:.04em">Actualités · WhatsApp</a>
+      <a id="wa-link-2" href="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3" target="_blank" rel="noopener" style="color:rgba(201,184,150,.7);text-decoration:none;letter-spacing:.04em">Clients fidèles · WhatsApp</a>
+      <a id="wa-link-3" href="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3" target="_blank" rel="noopener" style="color:rgba(201,184,150,.7);text-decoration:none;letter-spacing:.04em">Réclamations · WhatsApp</a>
+    </div>
+
+  </footer>
+  <button class="chat-fab" onclick="toggleChat()" title="Assistant">✦</button>
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-head"><span>Assistant · Résa & Réclamations</span><select class="lang-select" id="chat-lang" onchange="chatLang()"><option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="it">IT</option></select></div>
+    <div style="display:flex;gap:6px;padding:8px 10px;flex-wrap:wrap;border-bottom:1px solid var(--line)">
+      <button type="button" class="btn btn-ghost btn-sm" onclick="chatQuick('resa')">Réserver</button>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="chatQuick('tarif')">Tarifs</button>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="chatQuick('recla')">Réclamation</button>
+      <button type="button" class="btn btn-ghost btn-sm" onclick="chatQuick('espace')">Mon espace</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-foot"><input id="chat-in" placeholder="Votre message…" onkeydown="if(event.key==='Enter')sendChat()"><button type="button" class="btn btn-gold btn-sm" onclick="sendChat()">→</button></div>
+  </div>
+</div>
+
+<div id="admin">
+  <div id="login-view" class="login-wrap"><div class="login-card">
+    <div class="mark" style="margin:0 auto">✦</div>
+    <h2>Espace Pro</h2>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:18px">Admin · Managers · Équipe</p>
+    <div class="fg" style="text-align:left"><label>Identifiant</label><input id="login-user" placeholder="Identifiant"></div>
+    <div class="fg" style="text-align:left"><label>Mot de passe</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:6px" onclick="doLogin()">Se connecter</button>
+    <p class="hint">Identifiants communiqués par la direction.<br>Les mots de passe ne s’affichent jamais dans l’Espace Pro.</p>
+  </div></div>
+  <div id="app-view" class="hidden"><div class="shell">
+    <aside class="side"><div class="side-brand"><span class="mark">✦</span> Barbarella Pro</div><nav id="side-nav"></nav><div class="side-user" id="side-user"></div></aside>
+    <div class="main">
+      <div id="view-dash" class="view"><div class="top"><h1>Dashboard</h1><span class="tag tag-ok">Temps réel</span></div>
+        <div class="stats"><div class="stat"><span>CA jour</span><b style="color:var(--gold)">1 240 €</b></div><div class="stat"><span>Confirmations</span><b style="color:var(--green)">+620 €</b></div><div class="stat"><span>Réservations</span><b>7</b></div><div class="stat"><span>Occupation</span><b>78 %</b></div></div>
+        <div class="panel"><h2>Feed managers</h2><div class="feed" id="manager-feed"></div></div>
+        <div class="panel"><h2>Dernières réservations</h2><table><thead><tr><th>Client</th><th>Soin</th><th>Conf.</th><th>Statut</th></tr></thead><tbody id="resa-body"></tbody></table></div>
+      </div>
+      <div id="view-agenda" class="view hidden"><div class="top"><h1>Agenda partagé</h1></div><div class="panel"><div class="agenda" id="agenda"></div></div></div>
+      <div id="view-catalog" class="view hidden">
+        <div class="top"><h1>Prix & prestations</h1><button class="btn btn-gold btn-sm" onclick="openServiceForm()">+ Prestation</button></div>
+        <div class="panel">
+          <h2>Catégories actives sur le site</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="cat-massage" onchange="toggleCategory('massage',this.checked)" checked> Massages</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="cat-epilation" onchange="toggleCategory('epilation',this.checked)" checked> Épilation cire orientale</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="cat-manucure" onchange="toggleCategory('manucure',this.checked)" checked> Manucure & Pédicure</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="cat-produits" onchange="toggleCategory('produits',this.checked)" checked> Produits dérivés</label>
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin:0">Cochez Manucure ou Produits dérivés pour les afficher sur le site. Tarifs et fiches modifiables ci-dessous.</p>
+        </div>
+        <div class="panel"><div id="catalog-list"></div></div>
+        <div class="panel hidden" id="service-form-panel">
+          <h2 id="svc-form-title">Nouvelle prestation</h2>
+          <div class="row2"><div class="fg"><label>Nom</label><input id="svc-name"></div><div class="fg"><label>Catégorie</label><select id="svc-cat"><option value="massage">Massage</option><option value="epilation">Épilation cire orientale</option><option value="manucure">Manucure / Pédicure</option><option value="produits">Produit dérivé</option></select></div></div>
+          <div class="row2"><div class="fg"><label>Durée principale</label><input id="svc-dur" placeholder="1 heure ou Séance"></div><div class="fg"><label>Prix séance (€)</label><input type="number" id="svc-price" placeholder="180"></div></div>
+          <div class="row2"><div class="fg"><label>Prix 30 min (€, vide si non)</label><input type="number" id="svc-price30" placeholder="100"></div><div class="fg"><label></label></div></div>
+          <div class="fg"><label>Description élégante</label><textarea id="svc-desc" rows="3"></textarea></div>
+          <div style="display:flex;gap:8px"><button class="btn btn-gold btn-sm" onclick="saveServiceForm()">Enregistrer</button><button class="btn btn-ghost btn-sm" onclick="closeServiceForm()">Annuler</button></div>
+        </div>
+      </div>
+      <div id="view-inventaire" class="view hidden">
+        <div class="top"><h1>Inventaire produits</h1><button class="btn btn-gold btn-sm" onclick="validerInventaire()">Valider l’inventaire</button></div>
+        <div class="panel">
+          <h2>Seuils d’alerte</h2>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Définissez le seuil global « stock bas ». Vous pouvez aussi fixer un seuil par produit (vide = seuil global).</p>
+          <div class="row2" style="margin-bottom:12px">
+            <div class="fg"><label>Seuil global (unités)</label><input type="number" id="inv-seuil-global" min="0" step="1" value="3"></div>
+            <div class="fg"><label>Rappel inventaire (jours)</label><input type="number" id="inv-cycle-jours" min="1" step="1" value="14"></div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" onclick="saveSeuilsAlerte()">Enregistrer les seuils</button>
+        </div>
+        <div class="panel">
+          <h2>Contrôle périodique</h2>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Comptez le stock réel, saisissez les quantités, puis validez. Un rappel s’affiche si le délai configuré est dépassé.</p>
+          <div id="inv-status" style="margin-bottom:14px;font-size:13px"></div>
+          <div id="inv-list"></div>
+        </div>
+        <div class="panel">
+          <h2>Historique des inventaires</h2>
+          <div id="inv-history" style="font-size:13px;color:var(--muted)"></div>
+        </div>
+      </div>
+      <div id="view-promos" class="view hidden"><div class="top"><h1>Promotions</h1></div><div class="panel"><div class="fg"><label>Titre</label><input id="pr-title" value="-15 % Massage couple"></div><div class="fg"><label>Texte</label><textarea id="pr-desc">Massage pour le couple à tarif préférentiel. Places limitées.</textarea></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-gold btn-sm" onclick="publishPromo()">Publier</button><button class="btn btn-ghost btn-sm" onclick="clearPromo()">Retirer</button></div></div></div>
+      <div id="view-news" class="view hidden">
+        <div class="top"><h1>Nouveautés</h1><button class="btn btn-gold btn-sm" onclick="openNewsForm()">+ Nouveauté</button></div>
+        <div class="panel"><div id="news-list"></div></div>
+        <div class="panel hidden" id="news-form-panel">
+          <h2 id="news-form-title">Nouvelle actualité</h2>
+          <div class="fg"><label>Titre</label><input id="news-title"></div>
+          <div class="fg"><label>Texte</label><textarea id="news-text" rows="3"></textarea></div>
+          <div style="display:flex;gap:8px"><button class="btn btn-gold btn-sm" onclick="saveNewsForm()">Enregistrer</button><button class="btn btn-ghost btn-sm" onclick="closeNewsForm()">Annuler</button></div>
+        </div>
+      </div>
+      <div id="view-clients" class="view hidden">
+        <div class="top"><h1>Clients</h1><button class="btn btn-gold btn-sm" onclick="openClientForm()">+ Client</button></div>
+        <div class="panel"><table><thead><tr><th>Nom / Email</th><th>Tél</th><th>Naissance / Dernière</th><th>Total</th><th>Fidélité</th></tr></thead><tbody id="clients-body"></tbody></table></div>
+        <div class="panel hidden" id="client-form-panel">
+          <h2>Nouveau client</h2>
+          <div class="row2"><div class="fg"><label>Nom</label><input id="cl-name"></div><div class="fg"><label>Email</label><input type="email" id="cl-email"></div></div>
+          <div class="row2"><div class="fg"><label>Téléphone</label><input id="cl-tel"></div><div class="fg"><label>Date de naissance</label><input type="date" id="cl-dob"></div></div>
+          <div class="fg"><label>Fidélité</label><select id="cl-tag"><option>Nouveau</option><option>Fidèle</option><option>VIP</option></select></div>
+          <div style="display:flex;gap:8px"><button type="button" class="btn btn-gold btn-sm" onclick="saveClientForm()">Enregistrer</button><button type="button" class="btn btn-ghost btn-sm" onclick="closeClientForm()">Annuler</button></div>
+        </div>
+        <div class="panel"><button class="btn btn-ghost btn-sm" onclick="runLoyalty()">Campagne fidélisation</button></div>
+      </div>
+      <div id="view-team" class="view hidden">
+        <div class="top"><h1>Profils</h1><button class="btn btn-gold btn-sm" onclick="openProfileForm()">+ Profil</button></div>
+        <div class="panel" id="team-admin"></div>
+        <div class="panel hidden" id="profile-form-panel">
+          <h2 id="prof-form-title">Nouveau profil</h2>
+          <div class="row2"><div class="fg"><label>Nom affiché</label><input id="pf-name"></div><div class="fg"><label>Spécialité / rôle</label><input id="pf-role" placeholder="ex: Douceur & Huiles"></div></div>
+          <div class="fg"><label>Description (site public)</label><textarea id="pf-desc" rows="3"></textarea></div>
+          <div class="fg">
+            <label>Photo du profil</label>
+            <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap">
+              <img id="pf-preview" src="" alt="Aperçu" style="width:72px;height:72px;border-radius:12px;object-fit:cover;border:1px solid var(--line);background:rgba(255,255,255,.04);display:none">
+              <div style="flex:1;min-width:180px">
+                <input type="file" id="pf-file" accept="image/*" style="font-size:12px;margin-bottom:8px;width:100%" onchange="previewProfilePhoto(this)">
+                <input id="pf-photo" placeholder="Ou coller une URL https://..." style="margin-top:4px">
+                <p style="font-size:11px;color:var(--muted);margin-top:6px">Galerie / fichier (JPG, PNG, WEBP) ou URL. Max ~1,5 Mo recommandé.</p>
+              </div>
+            </div>
+          </div>
+          <div class="fg"><label>Visible sur le site</label><select id="pf-visible"><option value="1">Oui</option><option value="0">Non</option></select></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-gold btn-sm" onclick="saveProfileForm()">Enregistrer</button><button class="btn btn-ghost btn-sm" onclick="closeProfileForm()">Annuler</button></div>
+        </div>
+      </div>
+      <div id="view-roles" class="view hidden">
+        <div class="top"><h1>Accès & identifiants</h1><button class="btn btn-gold btn-sm" onclick="openUserForm()">+ Utilisateur</button></div>
+        <div class="panel"><p style="font-size:12px;color:var(--muted);margin-bottom:12px">Programmez les identifiants. Les mots de passe ne sont jamais réaffichés après enregistrement.</p>
+          <table><thead><tr><th>Login</th><th>Nom</th><th>Rôle</th><th></th></tr></thead><tbody id="users-body"></tbody></table>
+        </div>
+        <div class="panel hidden" id="user-form-panel">
+          <h2 id="user-form-title">Nouvel utilisateur</h2>
+          <div class="row2"><div class="fg"><label>Identifiant (login)</label><input id="u-login" autocomplete="off"></div><div class="fg"><label>Nom affiché</label><input id="u-name"></div></div>
+          <div class="row2"><div class="fg"><label>Mot de passe</label><input type="password" id="u-pass" autocomplete="new-password"></div><div class="fg"><label>Confirmer mot de passe</label><input type="password" id="u-pass2" autocomplete="new-password"></div></div>
+          <div class="fg"><label>Rôle</label><select id="u-role"><option value="manager">Manager (gestion complète site)</option><option value="employee">Employée (agenda)</option><option value="admin">Admin (tout + maintenance)</option></select></div>
+          <div style="display:flex;gap:8px"><button class="btn btn-gold btn-sm" onclick="saveUserForm()">Enregistrer</button><button class="btn btn-ghost btn-sm" onclick="closeUserForm()">Annuler</button></div>
+        </div>
+      </div>
+      <div id="view-ai" class="view hidden">
+        <div class="top"><h1>Agents IA · Programmation</h1></div>
+        <div class="panel">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Activez, configurez et faites évoluer chaque agent. Les réglages sont sauvegardés localement (prêts à brancher Vapi / Stripe / WhatsApp en production).</p>
+          <div id="ai-config-list"></div>
+        </div>
+        <div class="panel hidden" id="ai-form-panel">
+          <h2 id="ai-form-title">Configurer l’agent</h2>
+          <div class="fg"><label>Nom</label><input id="ai-name" readonly style="opacity:.7"></div>
+          <div class="fg"><label>Statut</label><select id="ai-status"><option value="active">Actif</option><option value="pause">En pause</option><option value="setup">À configurer</option></select></div>
+          <div class="fg"><label>Langues (séparées par virgule)</label><input id="ai-langs" placeholder="fr, en, es, it"></div>
+          <div class="fg"><label>Instructions / ton</label><textarea id="ai-prompt" rows="4" placeholder="Ton élégant, discret, jamais explicite..."></textarea></div>
+          <div class="fg"><label>Escalade manager</label><select id="ai-escalade"><option value="1">Oui — notifier le feed managers</option><option value="0">Non</option></select></div>
+          <div class="fg"><label>Notes techniques (API, numéro, webhook)</label><textarea id="ai-notes" rows="2" placeholder="ex: Vapi agent_id=... / Stripe price_..."></textarea></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-gold btn-sm" onclick="saveAiForm()">Enregistrer la config</button>
+            <button class="btn btn-ghost btn-sm" onclick="closeAiForm()">Fermer</button>
+            <button class="btn btn-ghost btn-sm" id="ai-action-btn" onclick="runAiAction()">Action</button>
+          </div>
+          <div id="ai-action-out" style="margin-top:12px;font-size:13px;color:var(--muted)"></div>
+        </div>
+      </div>
+      <div id="view-admin" class="view hidden"><div class="top"><h1>Admin</h1></div>
+        <div class="panel">
+          <h2>Notifications SMS <span class="tag tag-wait">Optionnel</span></h2>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px"><strong>Mode actuel : sans SMS auto.</strong> Les confirmations passent par WhatsApp (liens en bas de page) et l’Espace Pro. Le SMS reste disponible plus tard (Twilio, OVH, SMS Partner…) si besoin — laissez « Démo » pour l’instant.</p>
+
+          <div class="row2" style="margin-bottom:10px">
+            <div class="fg"><label>Fournisseur SMS</label>
+              <select id="sms-provider" onchange="toggleTwilioFields()">
+                <option value="demo">Démo (simulation locale)</option>
+                <option value="twilio">Twilio</option>
+                <option value="ovh">OVH SMS</option>
+                <option value="messagebird">MessageBird</option>
+                <option value="vonage">Vonage (Nexmo)</option>
+              </select>
+            </div>
+            <div class="fg"><label>Expéditeur (Sender ID)</label><input id="sms-sender" placeholder="BARBARELLA" maxlength="11"></div>
+          </div>
+          <div class="row2" style="margin-bottom:10px">
+            <div class="fg"><label id="sms-key-label">Account SID (Twilio) / Clé API</label><input id="sms-api-key" type="password" placeholder="ACxxxxxxxx…" autocomplete="off"></div>
+            <div class="fg"><label id="sms-secret-label">Auth Token (Twilio) / Secret</label><input id="sms-api-secret" type="password" placeholder="••••••••" autocomplete="off"></div>
+          </div>
+          <div id="twilio-fields" class="hidden">
+            <div class="row2" style="margin-bottom:10px">
+              <div class="fg"><label>Numéro Twilio (From, E.164)</label><input id="sms-from" placeholder="+33700000000"></div>
+              <div class="fg"><label>Proxy / Webhook serveur (recommandé)</label><input id="sms-proxy" placeholder="https://votre-api.fr/sms"></div>
+            </div>
+            <p style="font-size:11px;color:var(--muted);margin:0 0 10px">Twilio bloque les appels directs depuis le navigateur (CORS + sécurité des tokens). Indiquez un <strong>proxy serveur</strong> qui relaie vers l’API Twilio, ou laissez vide pour journaliser le payload prêt à envoyer. Format attendu côté proxy : POST JSON <code style="color:var(--gold2)">{to, body, from, accountSid}</code>.</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin:12px 0;font-size:13px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="sms-on-confirm"> SMS à la confirmation de réservation</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="sms-on-reminder"> Rappel J-1 (veille du RDV)</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="sms-on-promo"> Campagnes promotions</label>
+          </div>
+          <div class="fg"><label>Modèle — confirmation <span style="color:var(--muted)">(variables : {prenom}, {soin}, {date}, {acompte}, {institut})</span></label>
+            <textarea id="sms-tpl-confirm" rows="2" placeholder="Bonjour {prenom}, votre RDV {soin} le {date} est confirmé. Acompte {acompte}. — {institut}"></textarea>
+          </div>
+          <div class="fg"><label>Modèle — rappel J-1</label>
+            <textarea id="sms-tpl-reminder" rows="2" placeholder="Rappel : RDV demain {date} — {soin} chez {institut}. À bientôt."></textarea>
+          </div>
+          <div class="fg"><label>Modèle — promotion</label>
+            <textarea id="sms-tpl-promo" rows="2" placeholder="{institut} : {promo}. Répondez STOP pour vous désinscrire."></textarea>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+            <button class="btn btn-gold btn-sm" onclick="saveSmsConfig()">Enregistrer SMS</button>
+            <button class="btn btn-ghost btn-sm" onclick="testSmsSend()">Envoyer un SMS test</button>
+          </div>
+          <div class="fg" style="margin-top:12px"><label>Numéro de test (format international)</label><input id="sms-test-to" placeholder="+33612345678"></div>
+          <h3 style="font-size:13px;margin:16px 0 8px;color:var(--muted)">Journal des SMS (derniers 30)</h3>
+          <div id="sms-log" style="max-height:180px;overflow:auto;font-size:12px;color:var(--muted)"></div>
+        </div>
+        <div class="panel">
+          <h2>Stripe · Paiement acomptes</h2>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Suggestion 1 &amp; 2 : config Dashboard + paiement carte à la réservation. La clé secrète ne doit <strong>jamais</strong> être dans le site — utilisez un proxy serveur (Netlify Function, Cloudflare Worker, PHP…).</p>
+          <div class="fg"><label><input type="checkbox" id="stripe-enabled"> Activer Stripe pour les acomptes (mode Carte)</label></div>
+          <div class="row2" style="margin-bottom:10px">
+            <div class="fg"><label>Clé publiable (pk_test_… ou pk_live_…)</label><input id="stripe-pk" placeholder="pk_test_..." autocomplete="off"></div>
+            <div class="fg"><label>Mode</label>
+              <select id="stripe-mode"><option value="test">Test</option><option value="live">Live</option></select>
+            </div>
+          </div>
+          <div class="fg"><label>Proxy paiement (URL serveur)</label><input id="stripe-proxy" placeholder="https://votre-site.netlify.app/.netlify/functions/create-checkout"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="setStripeProxyLocal()">① Test local (netlify dev)</button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="setStripeProxyProd()">② Test via Netlify déployé</button>
+          </div>
+          <p style="font-size:11px;color:var(--muted);margin:0 0 10px">
+            <strong style="color:var(--gold2)">Deux modes de test :</strong><br>
+            ① <code>http://localhost:8888/.netlify/functions/create-checkout</code> — avec <code>netlify dev</code> + Stripe CLI<br>
+            ② <code>https://TON-SITE.netlify.app/.netlify/functions/create-checkout</code> — site local branché sur les fonctions déjà en ligne
+          </p>
+
+          <div class="fg"><label>Description activité (pour Stripe Dashboard)</label><input id="stripe-biz" value="Institut de beauté et bien-être — massages, épilation cire orientale, manucure, produits de soin"></div>
+          <p style="font-size:11px;color:var(--muted);margin:12px 0 8px;padding:10px;border:1px solid var(--line);border-radius:10px;line-height:1.5">
+            <strong style="color:var(--gold2)">Webhook Stripe</strong><br>
+            URL à enregistrer dans Stripe → Developers → Webhooks :<br>
+            <code style="color:var(--gold2)">https://TON-SITE.netlify.app/.netlify/functions/stripe-webhook</code><br>
+            Événements : <code>checkout.session.completed</code>, <code>checkout.session.expired</code>, <code>payment_intent.payment_failed</code><br>
+            Puis ajouter <code>STRIPE_WEBHOOK_SECRET</code> (<code>whsec_…</code>) dans Netlify Environment variables.
+          </p>
+          <button class="btn btn-gold btn-sm" onclick="saveStripeConfig()">Enregistrer Stripe</button>
+          <span id="stripe-save-msg" style="margin-left:10px;font-size:12px;color:var(--green)"></span>
+        </div>
+
+        <div class="panel">
+          <h2>Liens WhatsApp (les 3)</h2>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Affichés en bas du site. Même lien Communauté possible pour les 3, ou sous-groupes distincts.</p>
+          <div class="fg"><label>1. Actualités</label><input id="wa-link-1-inp" placeholder="https://chat.whatsapp.com/..." value="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3"></div>
+          <div class="fg"><label>2. Clients fidèles</label><input id="wa-link-2-inp" placeholder="https://chat.whatsapp.com/..." value="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3"></div>
+          <div class="fg"><label>3. Réclamations</label><input id="wa-link-3-inp" placeholder="https://chat.whatsapp.com/..." value="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3"></div>
+          <button class="btn btn-gold btn-sm" onclick="saveWaLink()">Enregistrer les 3 liens</button>
+        </div>
+
+        <div class="panel"><p style="font-size:13px;color:var(--muted);margin-bottom:12px">Maintenance · reset données démo.</p><button class="btn btn-ghost btn-sm" onclick="if(confirm('Reset données démo ?')){localStorage.clear();location.reload()}">Reset démo</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="mob-bar" id="mob-bar"></div>
+</div>
+
+<script>
+function getDeposit(s){
+  if(!s)return 29.99;
+  const cat=s.cat||'massage';
+  const name=(s.name||'').toLowerCase();
+  if(cat==='massage')return 29.99;
+  if(cat==='manucure')return 9.99;
+  if(cat==='produits')return 0; // vente comptoir — pas d’acompte RDV
+  if(cat==='epilation'){
+    if(name.indexOf('intégral')>=0||name.indexOf('integral')>=0)return 29.99;
+    return 4.99;
+  }
+  return 29.99;
+}
+let services=JSON.parse(localStorage.getItem('bb_svc_v7'))||[
+  // Massages
+  {name:'Massage Iris',cat:'massage',price:180,price30:100,dur:'1 heure',dur30:'30 min',desc:'Inspiration de la déesse de l’arc-en-ciel. Gestes fluides et précis qui apaisent le mental et détendent chaque muscle, dans une lumière douce et un silence respectueux. Un soin de détente pure, au service de votre bien-être.'},
+  {name:'Massage Arthemis',cat:'massage',price:220,price30:130,dur:'1 heure',dur30:'30 min',desc:'Force et grâce. Un rituel plus soutenu, conçu pour libérer les tensions profondes et restaurer une sensation de légèreté durable. Soin expert, présence attentive.'},
+  {name:'Massage Aphrodisiaque',cat:'massage',price:250,price30:150,dur:'1 heure',dur30:'30 min',desc:'Huiles chaudes, rythme lent, atmosphère feutrée. Un voyage sensoriel qui éveille les sens avec délicatesse — sensualité raffinée, ancrée dans le soin et le respect.'},
+  {name:'Massage pour le couple',cat:'massage',price:280,price30:null,dur:'1 heure',dur30:null,desc:'Deux présences, un même espace. Une parenthèse partagée, synchronisée, pour se reconnecter dans un cadre intime, élégant et bienveillant. Connexion et soin, côte à côte.'},
+  {name:'Massage Ventouse',cat:'massage',price:120,price30:null,dur:'Séance',dur30:null,desc:'Technique ancestrale revisitée. Les ventouses détendent les tissus, stimulent la circulation et offrent une sensation de renouveau. Un soin corps en profondeur.'},
+  {name:'Massage Appareil',cat:'massage',price:90,price30:null,dur:'Séance',dur30:null,desc:'Précision et constance. Un soin assisté par appareil, idéal pour cibler les zones de tension avec douceur et efficacité.'},
+  {name:'Massage à la demande',cat:'massage',price:0,price30:null,dur:'Sur mesure',dur30:null,desc:'Une expérience composée selon vos envies du moment — entre sensualité feutrée et soin profond. Durée, intensité et rituel s’adaptent à vous, dans la discrétion et l’élégance de l’Institut.'},
+  // Épilation cire orientale — tarifs alignés marché Paris 2026
+  {name:'Épilation lèvres',cat:'epilation',price:10,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — lèvres. Soin précis et discret.'},
+  {name:'Épilation menton',cat:'epilation',price:10,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — menton. Résultat net et soigné.'},
+  {name:'Épilation sourcils',cat:'epilation',price:15,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — sourcils. Dessin précis et harmonieux.'},
+  {name:'Épilation visage',cat:'epilation',price:25,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — visage complet. Peau douce et nette.'},
+  {name:'Épilation avant-bras',cat:'epilation',price:18,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — avant-bras.'},
+  {name:'Épilation bras',cat:'epilation',price:28,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — bras complets.'},
+  {name:'Épilation aisselles',cat:'epilation',price:15,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — aisselles. Confort et précision.'},
+  {name:'Épilation demi-jambes',cat:'epilation',price:22,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — demi-jambes.'},
+  {name:'Épilation jambes',cat:'epilation',price:38,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — jambes complètes.'},
+  {name:'Épilation dos',cat:'epilation',price:45,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — dos. Soin complet et minutieux.'},
+  {name:'Épilation torse',cat:'epilation',price:35,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — torse.'},
+  {name:'Épilation maillot simple',cat:'epilation',price:28,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — maillot simple. Discrétion et confort.'},
+  {name:'Épilation maillot intégral',cat:'epilation',price:42,price30:null,dur:'Séance',dur30:null,desc:'Épilation à la cire orientale — maillot intégral. Soin complet, réalisé avec minutie et discrétion.'},
+  // Manucure & Pédicure — tarifs marché Paris (visibles seulement si catégorie activée)
+  {name:'Manucure simple',cat:'manucure',price:35,price30:null,dur:'30 min',dur30:null,desc:'Soin des mains, limage, cuticules et hydratation. Sans vernis.'},
+  {name:'Manucure + vernis classique',cat:'manucure',price:45,price30:null,dur:'40 min',dur30:null,desc:'Manucure complète + pose de vernis classique.'},
+  {name:'Manucure + semi-permanent',cat:'manucure',price:55,price30:null,dur:'50 min',dur30:null,desc:'Manucure complète + vernis semi-permanent. Tenue 2 à 3 semaines.'},
+  {name:'Pédicure simple',cat:'manucure',price:45,price30:null,dur:'40 min',dur30:null,desc:'Soin des pieds, gommage, cuticules et hydratation. Sans vernis.'},
+  {name:'Pédicure + vernis classique',cat:'manucure',price:55,price30:null,dur:'50 min',dur30:null,desc:'Pédicure complète + pose de vernis classique.'},
+  {name:'Pédicure + semi-permanent',cat:'manucure',price:65,price30:null,dur:'1 heure',dur30:null,desc:'Pédicure complète + vernis semi-permanent. Tenue longue durée.'},
+  {name:'Forfait Mani + Pédi',cat:'manucure',price:90,price30:null,dur:'1 h 20',dur30:null,desc:'Manucure et pédicure combinées. Idéal pour un moment complet.'},
+  // Produits dérivés — boutique (masquée tant que la catégorie n’est pas activée)
+  {name:'Huile de massage signature',cat:'produits',price:38,price30:null,dur:'Flacon 100 ml',dur30:null,desc:'Huile soyeuse aux notes chaudes et enveloppantes. Prolonge le soin à la maison — texture sensorielle, absorption douce, cadre bien-être et sensualité raffinée.'},
+  {name:'Huiles essentielles (synergie)',cat:'produits',price:28,price30:null,dur:'Flacon 10 ml',dur30:null,desc:'Synergie d’huiles essentielles pour diffusion ou rituel. Atmosphère feutrée, respiration apaisée, esprit soin.'},
+  {name:'Bougie parfumée Institut',cat:'produits',price:32,price30:null,dur:'180 g',dur30:null,desc:'Bougie artisanale, cire propre, sillage discret et élégant. Lumière basse, ambiance sensorielle — le prolongement de l’Institut chez soi.'},
+  {name:'Savon noir maison',cat:'produits',price:14,price30:null,dur:'125 g',dur30:null,desc:'Savon noir traditionnel, gommage doux et peau satinée. Rituel corps ancré dans le soin, texture sensorielle et respect de la peau.'},
+  {name:'Cire orientale maison',cat:'produits',price:22,price30:null,dur:'Pot 200 g',dur30:null,desc:'Cire à usage professionnel ou domestique soigné, formulée dans l’esprit de nos épilations. Efficacité et confort de la cire orientale.'},
+  {name:'Diffuseur d’huiles essentielles',cat:'produits',price:49,price30:null,dur:'Appareil',dur30:null,desc:'Diffuseur discret et élégant pour huiles essentielles. Brume légère, lumière douce — recrée l’atmosphère de l’Institut dans votre intérieur.'}
+];
+let categoriesEnabled=JSON.parse(localStorage.getItem('bb_cats_v2'))||{massage:true,epilation:true,manucure:true,produits:true};
+if(categoriesEnabled.manucure===undefined)categoriesEnabled.manucure=true;
+if(categoriesEnabled.produits===undefined)categoriesEnabled.produits=true;
+// Migrer les produits dérivés si absents du catalogue stocké
+(function ensureProduits(){
+  if(services.some(function(s){return s.cat==='produits'}))return;
+  var extras=[
+    {name:'Huile de massage signature',cat:'produits',price:38,price30:null,dur:'Flacon 100 ml',dur30:null,desc:'Huile soyeuse aux notes chaudes et enveloppantes. Prolonge le soin à la maison — texture sensorielle, absorption douce, cadre bien-être et sensualité raffinée.'},
+    {name:'Huiles essentielles (synergie)',cat:'produits',price:28,price30:null,dur:'Flacon 10 ml',dur30:null,desc:'Synergie d’huiles essentielles pour diffusion ou rituel. Atmosphère feutrée, respiration apaisée, esprit soin.'},
+    {name:'Bougie parfumée Institut',cat:'produits',price:32,price30:null,dur:'180 g',dur30:null,desc:'Bougie artisanale, cire propre, sillage discret et élégant. Lumière basse, ambiance sensorielle — le prolongement de l’Institut chez soi.'},
+    {name:'Savon noir maison',cat:'produits',price:14,price30:null,dur:'125 g',dur30:null,desc:'Savon noir traditionnel, gommage doux et peau satinée. Rituel corps ancré dans le soin, texture sensorielle et respect de la peau.'},
+    {name:'Cire orientale maison',cat:'produits',price:22,price30:null,dur:'Pot 200 g',dur30:null,desc:'Cire à usage professionnel ou domestique soigné, formulée dans l’esprit de nos épilations. Efficacité et confort de la cire orientale.'},
+    {name:'Diffuseur d’huiles essentielles',cat:'produits',price:49,price30:null,dur:'Appareil',dur30:null,desc:'Diffuseur discret et élégant pour huiles essentielles. Brume légère, lumière douce — recrée l’atmosphère de l’Institut dans votre intérieur.'}
+  ];
+  services=services.concat(extras);
+  localStorage.setItem('bb_svc_v7',JSON.stringify(services));
+})();
+let team=JSON.parse(localStorage.getItem('bb_team_v5'))||[
+  {id:1,name:'Déesse Farah',role:'Direction & Rituels d’exception',desc:'Présence magnétique, gestes d’une précision rare. Elle incarne l’esprit de l’Institut et compose les expériences Signature.',photo:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',visible:true},
+  {id:2,name:'Fabuleuse Aleksandra',role:'Art du toucher & Couple',desc:'Élégance, intensité douce. Spécialiste des rituels Aphrodisiaque et des moments à deux.',photo:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop',visible:true},
+  {id:3,name:'Sabrina',role:'Douceur & Huiles chaudes',desc:'Une présence délicate, des gestes qui enveloppent. Spécialiste Iris et détente profonde.',photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop',visible:true}
+];
+let users=JSON.parse(localStorage.getItem('bb_users_v5'))||[
+  {id:1,login:'admin',name:'Admin',pass:'admin2026',role:'admin'},
+  {id:2,login:'farah',name:'Déesse Farah',pass:'farah2026',role:'manager'},
+  {id:3,login:'aleksandra',name:'Fabuleuse Aleksandra',pass:'aleks2026',role:'manager'},
+  {id:4,login:'sabrina',name:'Sabrina',pass:'massage123',role:'employee'}
+];
+let clients=JSON.parse(localStorage.getItem('bb_clients_v6'))||[
+  {id:1,name:'Marc D.',email:'marc@email.com',tel:'06 12 34 56 78',dob:'1985-03-12',last:'12/09/2026',total:420,visits:5,tag:'VIP'},
+  {id:2,name:'Thomas L.',email:'thomas@email.com',tel:'06 98 76 54 32',dob:'1990-07-22',last:'15/09/2026',total:180,visits:2,tag:'Fidèle'}
+];
+const LOYALTY={Nouveau:{label:'Nouveau',discount:0},Fidèle:{label:'Fidèle',discount:0.10},VIP:{label:'VIP',discount:0.15}};
+let activeLoyalty={tag:'Nouveau',discount:0};
+let news=JSON.parse(localStorage.getItem('bb_news_v5'))||[{id:1,title:'Carte complète',text:'Massages signature, épilation à la cire orientale et (bientôt) manucure & pédicure — tout géré depuis l’Espace Pro.'}];
+let promo=JSON.parse(localStorage.getItem('bb_promo_v5'))||null;
+let aiAgents=JSON.parse(localStorage.getItem('bb_ai_v5'))||[
+  {id:'accueil',name:'Accueil multi-langues',status:'active',langs:'fr, en, es, it',prompt:'Ton élégant et discret. Aide à choisir un soin, oriente vers la réservation. Jamais de détail explicite. Feedback managers en temps réel.',escalade:true,notes:'Chat widget site · brancher WhatsApp Business API',action:'test'},
+  {id:'appels',name:'Appels · Réclamations · Rappels',status:'setup',langs:'fr, en',prompt:'Gère appels entrants, réclamations avec calme, rappels RDV anonymes (sans détail sensible). Escalade manager si tension.',escalade:true,notes:'Brancher Vapi.ai ou Retell + numéro pro',action:'test'},
+  {id:'facturation',name:'Facturation discrète',status:'active',langs:'fr',prompt:'Factures prestataires hebdo. Libellés: Honoraires prestation bien-être. Jamais de détail client explicite.',escalade:false,notes:'Export PDF / Stripe Invoicing',action:'invoice'},
+  {id:'marketing',name:'Marketing & réseaux',status:'active',langs:'fr, en',prompt:'Posts Instagram, scripts vidéo 15s, plan de publication. Ton premium, discret, Paris République.',escalade:false,notes:'Meta Business / Buffer',action:'mkt'},
+  {id:'maintenance',name:'Maintenance structure',status:'active',langs:'fr',prompt:'Check santé: site, rôles, paiement, domaine, sauvegardes. Alertes managers.',escalade:true,notes:'Cron hebdo recommandé',action:'maintain'}
+];
+let editSvcIdx=null,editProfId=null,editUserId=null,editNewsId=null,editAiId=null;
+let resas=[{client:'Marc D.',soin:'Iris 1h',acompte:29.99,st:'paid'},{client:'Thomas L.',soin:'Arthemis 30min',acompte:29.99,st:'paid'}];
+let feed=[{t:'il y a 2 min',txt:'IA Accueil · Client EN · Iris demain 15h · confirmation envoyée'},{t:'il y a 18 min',txt:'IA · Rappels discrets envoyés (3 RDV demain)'}];
+let currentUser=null,selService=services[0],prestSel={},chatLangCode='fr';
+
+const roleMenus={
+  admin:['dash','agenda','catalog','inventaire','promos','news','clients','team','roles','ai','admin'],
+  manager:['dash','agenda','catalog','inventaire','promos','news','clients','team','roles','ai'],
+  employee:['dash','agenda','inventaire']
+};
+const menuLabels={dash:'Dashboard',agenda:'Agenda',catalog:'Prix & prestations',inventaire:'Inventaire produits',promos:'Promotions',news:'Nouveautés',clients:'Clients',team:'Profils',roles:'Accès',ai:'Agents IA',admin:'Admin'};
+
+let currentCat='massage';
+function getVisibleServices(){
+  return services.filter(function(s){
+    if(s.cat==='massage')return categoriesEnabled.massage!==false;
+    if(s.cat==='epilation')return categoriesEnabled.epilation!==false;
+    if(s.cat==='manucure')return categoriesEnabled.manucure===true;
+    if(s.cat==='produits')return categoriesEnabled.produits===true;
+    return true;
+  });
+}
+function getCatServices(cat){
+  return getVisibleServices().filter(function(s){return (s.cat||'massage')===cat});
+}
+function showPrestByGlobalIdx(gIdx){
+  const s=services[gIdx];
+  if(!s)return;
+  document.querySelectorAll('#prest-tabs .prest-tab').forEach(function(t){t.classList.toggle('on',parseInt(t.dataset.gidx)===gIdx)});
+  if(prestSel[gIdx]===undefined)prestSel[gIdx]=s.price30?'60':'60';
+  let bubbles='';
+  if(s.price30){
+    const on30=prestSel[gIdx]==='30'?'on':'';
+    const on60=prestSel[gIdx]==='60'?'on':'';
+    bubbles='<div class="price-bubbles">'
+      +'<button type="button" class="price-bubble '+on30+'" onclick="setPrestDur('+gIdx+',\'30\')">30 minutes<small>'+s.price30+' €</small></button>'
+      +'<button type="button" class="price-bubble '+on60+'" onclick="setPrestDur('+gIdx+',\'60\')">1 heure<small>'+s.price+' €</small></button>'
+      +'</div>';
+  }else if(s.price){
+    bubbles='<div class="price-bubbles"><button type="button" class="price-bubble on">'+s.dur+'<small>'+s.price+' €</small></button></div>';
+  }else{
+    bubbles='<div class="price-bubbles"><button type="button" class="price-bubble on">Sur mesure<small>Tarif selon composition</small></button></div>';
+  }
+  const catLabel=s.cat==='epilation'?'Épilation cire orientale':(s.cat==='manucure'?'Manucure / Pédicure':(s.cat==='produits'?'Produit dérivé':'Massage'));
+  const isSurMesure=s.cat==='massage'&&(!s.price||s.price===0||/demande|sur mesure/i.test(s.name));
+  const isMassage=s.cat==='massage';
+  const isProduit=s.cat==='produits';
+  let extra='';
+  if(isMassage){
+    const comp=massageCompHtml(s);
+    const rit=massageRituelHtml(s);
+    extra='<div style="margin:18px 0 8px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
+      +'<button type="button" class="prest-tab on" id="sm-tab-desc" onclick="switchSurMesureTab(\'desc\')">Description</button>'
+      +'<button type="button" class="prest-tab" id="sm-tab-comp" onclick="switchSurMesureTab(\'comp\')">Composition</button>'
+      +'<button type="button" class="prest-tab" id="sm-tab-rituel" onclick="switchSurMesureTab(\'rituel\')">Rituel</button>'
+      +'</div>'
+      +'<div id="sm-panel-desc"><p style="margin:0;font-size:14px;color:var(--muted);line-height:1.55">'+s.desc+'</p></div>'
+      +'<div id="sm-panel-comp" class="hidden" style="text-align:left;max-width:440px;margin:0 auto;font-size:13px;color:var(--muted)">'+comp+'</div>'
+      +'<div id="sm-panel-rituel" class="hidden" style="text-align:left;max-width:440px;margin:0 auto;font-size:13px;color:var(--muted);line-height:1.65">'+rit+'</div>';
+  }
+  const cta=isProduit
+    ?('<a href="#reserver" class="btn btn-gold btn-sm" style="margin-top:16px" onclick="goReserve('+gIdx+');return false">Réserver / retirer ce produit</a>')
+    :('<a href="#reserver" class="btn btn-gold btn-sm" style="margin-top:16px" onclick="goReserve('+gIdx+');return false">Réserver ce soin</a>');
+  document.getElementById('prest-detail').innerHTML='<div class="eyebrow" style="margin-bottom:12px">'+(isSurMesure?'Massage sur mesure':catLabel)+'</div><h3>'+s.name+'</h3>'+bubbles+(isMassage?extra:'<p>'+s.desc+'</p>')+cta;
+}
+function massageCompHtml(s){
+  const n=(s.name||'').toLowerCase();
+  const dep=getDeposit(s);
+  let lines=[];
+  if(/demande|sur mesure/.test(n)||!s.price){
+    lines=[
+      '<li><strong style="color:var(--gold2)">Sensualité</strong> — rythme lent, huiles chaudes, atmosphère feutrée</li>',
+      '<li><strong style="color:var(--gold2)">Soin</strong> — détente, tensions, bien-être durable</li>',
+      '<li>Durée libre (30 min à 1 h 30+) · zones choisies avec l’experte</li>',
+      '<li>Tarif précisé avant le soin · Acompte '+dep+' €</li>'
+    ];
+  }else if(/aphrodisiaque/.test(n)){
+    lines=[
+      '<li><strong style="color:var(--gold2)">Sensualité</strong> — huiles chaudes, rythme lent, éveil sensoriel raffiné</li>',
+      '<li><strong style="color:var(--gold2)">Soin</strong> — détente profonde, respect du corps, élégance absolue</li>',
+      '<li>Durée '+(s.dur||'1 heure')+(s.price30?' · aussi en 30 min':'')+'</li>',
+      '<li>Acompte de confirmation '+dep+' €</li>'
+    ];
+  }else if(/couple/.test(n)){
+    lines=[
+      '<li><strong style="color:var(--gold2)">Sensualité</strong> — parenthèse partagée, atmosphère intime et feutrée</li>',
+      '<li><strong style="color:var(--gold2)">Soin</strong> — deux rituels synchronisés, bienveillance, reconnexion</li>',
+      '<li>Durée '+(s.dur||'1 heure')+' · deux présences, un même espace</li>',
+      '<li>Acompte de confirmation '+dep+' €</li>'
+    ];
+  }else{
+    lines=[
+      '<li><strong style="color:var(--gold2)">Sensualité</strong> — gestes fluides, silence respectueux, lumière douce</li>',
+      '<li><strong style="color:var(--gold2)">Soin</strong> — détente musculaire, apaisement mental, légèreté</li>',
+      '<li>Durée '+(s.dur||'1 heure')+(s.price30?' · option 30 min':'')+(s.price?' · '+s.price+' €':'')+'</li>',
+      '<li>Acompte de confirmation '+dep+' €</li>'
+    ];
+  }
+  return '<ul style="margin:0;padding-left:18px;line-height:1.75">'+lines.join('')+'</ul>';
+}
+function massageRituelHtml(s){
+  const n=(s.name||'').toLowerCase();
+  if(/aphrodisiaque/.test(n)){
+    return '<p style="margin:0 0 10px">Dans une atmosphère feutrée, le rituel s’ouvre aux huiles chaudes et au rythme lent. Chaque geste éveille les sens avec délicatesse — sensualité raffinée, jamais vulgaire.</p><p style="margin:0">Le soin reste au centre : détente, respect, élégance. Vous repartez enveloppé·e, l’esprit apaisé.</p>';
+  }
+  if(/couple/.test(n)){
+    return '<p style="margin:0 0 10px">Deux tables, un même souffle. Le rituel couple invite à se reconnecter dans un cadre intime, élégant et bienveillant.</p><p style="margin:0">Sensualité partagée et soin synchronisé : la présence de l’Institut guide le moment, en toute discrétion.</p>';
+  }
+  if(/demande|sur mesure/.test(n)||!s.price){
+    return '<p style="margin:0 0 10px">Le rituel s’ouvre dans le silence et la lumière basse. Votre experte accueille vos intentions — détente, reconnexion, éveil sensoriel — puis compose le geste, l’huile et le rythme.</p><p style="margin:0">Chaque passage de main allie <strong style="color:var(--gold2)">sensualité feutrée</strong> et <strong style="color:var(--gold2)">soin précis</strong> : l’élégance de l’Institut, sans vulgarité.</p>';
+  }
+  return '<p style="margin:0 0 10px">Accueil en douceur, installation dans le silence. Le rituel '+s.name+' déploie ses gestes signature — présence attentive, huiles adaptées, rythme juste.</p><p style="margin:0">Sensualité discrète et soin expert : vous repartez léger·e, recentré·e, dans l’esprit Barbarella.</p>';
+}
+function switchSurMesureTab(tab){
+  var panels={desc:'sm-panel-desc',comp:'sm-panel-comp',rituel:'sm-panel-rituel'};
+  var tabs={desc:'sm-tab-desc',comp:'sm-tab-comp',rituel:'sm-tab-rituel'};
+  Object.keys(panels).forEach(function(k){
+    var p=document.getElementById(panels[k]);
+    var t=document.getElementById(tabs[k]);
+    if(p)p.classList.toggle('hidden',k!==tab);
+    if(t)t.classList.toggle('on',k===tab);
+  });
+}
+function setPrestDur(i,d){prestSel[i]=d;showPrestByGlobalIdx(i)}
+function goReserve(i){
+  const s=services[i];
+  if(s&&s.cat){
+    bookCat=s.cat;
+    renderBookCats();
+  }
+  setTimeout(function(){
+    const el=document.querySelector('#packages .pkg[data-idx="'+i+'"]');
+    if(el)selectPkg(i,el,prestSel[i]||'60');
+  },30);
+  document.getElementById('reserver').scrollIntoView({behavior:'smooth'});
+}
+function switchCat(cat){
+  currentCat=cat;
+  document.querySelectorAll('#cat-tabs .prest-tab').forEach(function(t){t.classList.toggle('on',t.dataset.cat===cat)});
+  const list=getCatServices(cat);
+  document.getElementById('prest-tabs').innerHTML=list.map(function(s){
+    const gIdx=services.indexOf(s);
+    return '<button type="button" class="prest-tab" data-gidx="'+gIdx+'" onclick="showPrestByGlobalIdx('+gIdx+')">'+s.name+'</button>';
+  }).join('');
+  if(list.length)showPrestByGlobalIdx(services.indexOf(list[0]));
+  else document.getElementById('prest-detail').innerHTML='<p style="color:var(--muted)">Aucun soin dans cette catégorie pour le moment.</p>';
+}
+
+function renderPublic(){
+  // Category tabs
+  const cats=[];
+  if(categoriesEnabled.massage!==false)cats.push({id:'massage',label:'Massages'});
+  if(categoriesEnabled.epilation!==false)cats.push({id:'epilation',label:'Épilation cire orientale'});
+  if(categoriesEnabled.manucure===true)cats.push({id:'manucure',label:'Manucure & Pédicure'});
+  if(categoriesEnabled.produits===true)cats.push({id:'produits',label:'Produits dérivés'});
+  document.getElementById('cat-tabs').innerHTML=cats.map(function(c,i){
+    return '<button type="button" class="prest-tab '+( (currentCat===c.id || (i===0 && !cats.find(x=>x.id===currentCat)) ) ?'on':'')+'" data-cat="'+c.id+'" onclick="switchCat(\''+c.id+'\')">'+c.label+'</button>';
+  }).join('');
+  if(cats.length && !cats.find(c=>c.id===currentCat))currentCat=cats[0].id;
+  switchCat(currentCat);
+
+  // Manucure section visibility
+  const manSec=document.getElementById('manucure-section');
+  if(categoriesEnabled.manucure===true){
+    manSec.classList.remove('hidden');
+    const manServices=services.filter(s=>s.cat==='manucure');
+    document.getElementById('manucure-public').innerHTML=manServices.length
+      ? manServices.map(s=>'<div style="margin:8px 0"><strong>'+s.name+'</strong> — '+s.price+' €</div>').join('')
+      : 'Section active. Ajoutez vos tarifs manucure / pédicure depuis le Dashboard (Prix & prestations).';
+  }else{
+    manSec.classList.add('hidden');
+  }
+  // Produits dérivés section
+  const prodSec=document.getElementById('produits-section');
+  if(prodSec){
+    if(categoriesEnabled.produits===true){
+      prodSec.classList.remove('hidden');
+      const prodList=services.filter(s=>s.cat==='produits');
+      document.getElementById('produits-public').innerHTML=prodList.length
+        ? '<div style="display:grid;gap:12px;text-align:left">'+prodList.map(function(s){
+            return '<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)"><strong>'+s.name+'</strong> — <span style="color:var(--gold)">'+s.price+' €</span><br><span style="font-size:12px;color:var(--muted)">'+s.dur+' · '+s.desc+'</span></div>';
+          }).join('')+'</div>'
+        : 'Section active. Ajoutez vos produits depuis le Dashboard (Prix & prestations).';
+    }else{
+      prodSec.classList.add('hidden');
+    }
+  }
+
+  var vis=team.filter(function(m){return m.visible!==false});
+  document.getElementById('team-public').innerHTML=vis.map(function(m){
+    return '<div class="card team-card"><img src="'+m.photo+'" alt="'+m.name+'"><div class="team-body"><h3>'+m.name+'</h3><div class="role">'+m.role+'</div><p style="margin:0;font-size:13px;color:var(--muted)">'+m.desc+'</p></div></div>';
+  }).join('');
+
+  // Packages for booking — grouped by category (same as carte)
+  renderBookCats();
+
+  document.getElementById('ms').innerHTML='<option value="">Sans préférence</option>'+team.filter(function(m){return m.visible!==false}).map(function(m){
+    return '<option>'+m.name+'</option>';
+  }).join('');
+  if(promo){
+    document.getElementById('promo-banner').style.display='block';
+    document.getElementById('promo-title-pub').textContent=promo.title;
+    document.getElementById('promo-desc-pub').textContent=promo.desc;
+  }else document.getElementById('promo-banner').style.display='none';
+  document.getElementById('news-public').innerHTML=news.map(function(n){
+    return '<div class="card" style="margin-bottom:10px;border-color:rgba(201,184,150,.15)"><div class="eyebrow" style="margin-bottom:6px">Nouveauté</div><h3 style="font-size:18px;margin-bottom:6px">'+n.title+'</h3><p style="margin:0;font-size:14px;color:var(--muted)">'+n.text+'</p></div>';
+  }).join('');
+  applyWaLink();
+}
+let bookCat=null;
+function renderBookCats(){
+  const cats=[];
+  if(categoriesEnabled.massage!==false)cats.push({id:'massage',label:'Massages'});
+  if(categoriesEnabled.epilation!==false)cats.push({id:'epilation',label:'Épilation cire orientale'});
+  if(categoriesEnabled.manucure===true)cats.push({id:'manucure',label:'Manucure & Pédicure'});
+  if(categoriesEnabled.produits===true)cats.push({id:'produits',label:'Produits dérivés'});
+  if(!bookCat||!cats.find(function(c){return c.id===bookCat}))bookCat=cats.length?cats[0].id:'massage';
+  const tabs=document.getElementById('book-cat-tabs');
+  if(tabs){
+    tabs.innerHTML=cats.map(function(c){
+      return '<button type="button" class="prest-tab '+(bookCat===c.id?'on':'')+'" data-bookcat="'+c.id+'" onclick="switchBookCat(\''+c.id+'\')">'+c.label+'</button>';
+    }).join('');
+  }
+  renderBookPackages();
+}
+function switchBookCat(cat){
+  bookCat=cat;
+  document.querySelectorAll('#book-cat-tabs .prest-tab').forEach(function(t){t.classList.toggle('on',t.dataset.bookcat===cat)});
+  renderBookPackages();
+}
+function renderBookPackages(){
+  const list=getCatServices(bookCat||'massage');
+  const box=document.getElementById('packages');
+  if(!box)return;
+  if(!list.length){
+    box.innerHTML='<p style="color:var(--muted);font-size:13px">Aucun soin dans cette catégorie.</p>';
+    const det=document.getElementById('pkg-detail');
+    if(det)det.classList.add('hidden');
+    return;
+  }
+  box.innerHTML=list.map(function(s){
+    const i=services.indexOf(s);
+    var bubbles='';
+    if(s.price30){
+      bubbles='<div class="pkg-bubbles" onclick="event.stopPropagation()">'
+        +'<span class="pkg-bubble" data-d="30" onclick="selectPkg('+i+',this.closest(\'.pkg\'),\'30\')">30 min · '+s.price30+' €</span>'
+        +'<span class="pkg-bubble on" data-d="60" onclick="selectPkg('+i+',this.closest(\'.pkg\'),\'60\')">1 h · '+s.price+' €</span>'
+        +'</div>';
+    }
+    const isSurMesure=!s.price||s.price===0||/demande|sur mesure/i.test(s.name);
+    const badge=s.cat==='epilation'?'Cire orientale':(isSurMesure?'Sur mesure':(s.cat==='massage'&&list.indexOf(s)===0?'Signature':''));
+    return '<div class="pkg" data-idx="'+i+'" onclick="selectPkg('+i+',this,prestSel['+i+']||\'60\')">'
+      +(badge?'<span class="badge">'+badge+'</span>':'')
+      +'<div class="pkg-top"><h4>'+s.name+'</h4><span class="amt" id="pkg-amt-'+i+'">'+(s.price?s.price+' €':'Sur mesure')+'</span></div>'
+      +(bubbles||('<small>'+s.dur+(s.cat==='epilation'?' · Cire orientale':'')+(isSurMesure?' · Composer votre rituel':'')+'</small>'))
+      +'</div>';
+  }).join('');
+  const first=list[0];
+  const fi=services.indexOf(first);
+  const firstPkg=document.querySelector('#packages .pkg[data-idx="'+fi+'"]');
+  if(firstPkg)selectPkg(fi,firstPkg,'60');
+}
+function selectPkg(i,el,dur){
+  document.querySelectorAll('.pkg').forEach(p=>p.classList.remove('active'));
+  const pkg=el&&el.classList&&el.classList.contains('pkg')?el:(el&&el.closest?el.closest('.pkg'):null);
+  if(pkg)pkg.classList.add('active');
+  const s=services[i];if(!s)return;
+  // Sync book category tab with selected service
+  if(s.cat&&s.cat!==bookCat){
+    bookCat=s.cat;
+    document.querySelectorAll('#book-cat-tabs .prest-tab').forEach(function(t){t.classList.toggle('on',t.dataset.bookcat===bookCat)});
+  }
+  dur=dur||prestSel[i]||'60';prestSel[i]=dur;
+  if(pkg){pkg.querySelectorAll('.pkg-bubble').forEach(b=>b.classList.toggle('on',b.dataset.d===dur));const amt=document.getElementById('pkg-amt-'+i);if(amt&&s.price30)amt.textContent=(dur==='30'?s.price30:s.price)+' €'}
+  let label;
+  if(s.price30)label=s.name+' — '+(dur==='30'?s.dur30:s.dur)+' · '+(dur==='30'?s.price30:s.price)+' €';
+  else if(s.price)label=s.name+' — '+s.dur+' · '+s.price+' €';
+  else label=s.name+' — Sur mesure';
+  selService=Object.assign({},s,{chosenDur:dur});
+  const dep=getDeposit(s);
+  document.getElementById('sel-name').textContent=label;
+  document.getElementById('sel-price').textContent=dep>0?(dep+' €'):(s.cat==='produits'?'Sur place':'—');
+  const onsiteNow=document.querySelector('.method.active input')&&document.querySelector('.method.active input').value==='onsite';
+  document.getElementById('pay-btn').textContent=s.cat==='produits'?(onsiteNow?'Réserver le retrait':'Commander · Sur place'):(onsiteNow?'Réserver':(dep>0?('Confirmer · '+dep+' €'):'Réserver'));
+  updateLoyaltyPrice();
+  // Panneau détail — massages : 3 onglets ; autres : description simple
+  const det=document.getElementById('pkg-detail');
+  const tabsEl=document.getElementById('pkg-detail-tabs');
+  const bodyEl=document.getElementById('pkg-detail-body');
+  const isSurMesure=s.cat==='massage'&&(!s.price||s.price===0||/demande|sur mesure/i.test(s.name));
+  const isMassage=s.cat==='massage';
+  if(det&&bodyEl){
+    if(isMassage||(s.desc&&s.desc.length>40)||s.cat==='produits'){
+      det.classList.remove('hidden');
+      document.getElementById('pkg-detail-eyebrow').textContent=isSurMesure?'Massage sur mesure':(s.cat==='produits'?'Produit dérivé':(isMassage?'Massage':'Description'));
+      document.getElementById('pkg-detail-title').textContent=s.name;
+      if(isMassage&&tabsEl){
+        tabsEl.classList.remove('hidden');
+        tabsEl.style.display='flex';
+        window._bookSmService=s;
+        switchBookSurMesureTab('desc');
+      }else{
+        if(tabsEl){tabsEl.classList.add('hidden');tabsEl.style.display='none';}
+        bodyEl.innerHTML='<p style="margin:0">'+(s.desc||'')+'</p>';
+      }
+    }else{
+      det.classList.add('hidden');
+    }
+  }
+}
+function switchBookSurMesureTab(tab){
+  var body=document.getElementById('pkg-detail-body');
+  if(!body)return;
+  var s=window._bookSmService||selService||{};
+  var map={
+    desc:'<p style="margin:0">'+(s.desc||'')+'</p>',
+    comp:massageCompHtml(s),
+    rituel:massageRituelHtml(s)
+  };
+  body.innerHTML=map[tab]||map.desc;
+  ['desc','comp','rituel'].forEach(function(k){
+    var t=document.getElementById('bk-tab-'+k);
+    if(t)t.classList.toggle('on',k===tab);
+  });
+}
+document.querySelectorAll('.method').forEach(m=>{
+  m.addEventListener('click',()=>{
+    document.querySelectorAll('.method').forEach(x=>x.classList.remove('active'));m.classList.add('active');m.querySelector('input').checked=true;
+    const onsite=m.querySelector('input').value==='onsite';
+    document.getElementById('card-fields').style.display=onsite?'none':'block';
+    const dep=getDeposit(selService);
+    document.getElementById('pay-btn').textContent=onsite?'Réserver':(dep>0?('Confirmer · '+dep+' €'):'Réserver');
+  });
+});
+document.getElementById('book-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const email=document.getElementById('em').value.trim().toLowerCase();
+  const dob=document.getElementById('dob').value;
+  if(!email||!dob){alert('Email et date de naissance sont obligatoires pour créer votre fiche client.');return}
+  const payMethod=(document.querySelector('input[name="pay"]:checked')||{}).value||'card';
+  const fn=document.getElementById('fn').value.trim();
+  const ln=document.getElementById('ln').value.trim();
+  const name=fn+' '+ln.charAt(0)+'.';
+  const tel=document.getElementById('ph').value.trim();
+  const fullName=fn+' '+ln;
+  const dep=getDeposit(selService);
+  const btn=document.getElementById('pay-btn');btn.disabled=true;btn.textContent='Traitement…';
+
+  // Stripe Checkout si carte + Stripe activé + acompte > 0
+  if(payMethod==='card'&&dep>0&&stripeConfig&&stripeConfig.enabled){
+    const payload={
+      amount:Math.round(dep*100),
+      currency:'eur',
+      name:fullName,
+      email:email,
+      soin:selService.name,
+      tel:tel,
+      success_url:location.origin+location.pathname+'?paid=1#reserver',
+      cancel_url:location.origin+location.pathname+'?cancel=1#reserver',
+      description:(stripeConfig.biz||'Institut Barbarella')+' — acompte '+selService.name
+    };
+    const result=await startStripeCheckout(payload);
+    if(result&&result.demo){
+      // continue en mode démo (confirmation locale)
+    }else if(result&&(result.url||result.id)){
+      return; // redirection Stripe en cours
+    }else{
+      btn.disabled=false;btn.textContent=dep>0?('Confirmer · '+dep+' €'):'Réserver';
+      return;
+    }
+  }
+
+  // Fiche client + réservation locale
+  let cl=clients.find(x=>x.email===email);
+  if(cl){
+    cl.name=fullName;cl.tel=tel;cl.dob=dob;cl.last=new Date().toLocaleDateString('fr-FR');
+    cl.visits=(cl.visits||0)+1;cl.total=(cl.total||0)+(selService.price||0);
+    if(cl.visits>=5)cl.tag='VIP';else if(cl.visits>=2)cl.tag='Fidèle';
+  }else{
+    clients.unshift({id:Date.now(),name:fullName,email,tel,dob,last:new Date().toLocaleDateString('fr-FR'),total:selService.price||0,visits:1,tag:'Nouveau'});
+  }
+  localStorage.setItem('bb_clients_v6',JSON.stringify(clients));
+  resas.unshift({client:name,soin:selService.name,acompte:dep,st:payMethod==='card'?'paid':'wait',email});
+  feed.unshift({t:'à l’instant',txt:'Réservation · '+name+' · '+selService.name+' · '+(payMethod==='card'?'carte':'sur place')});
+  pushManagerFeed('Réservation · '+name+' · '+email+' · '+(payMethod==='card'?'acompte carte':'sur place'));
+  try{
+    const dtEl=document.getElementById('dt');
+    const dateStr=(dtEl&&dtEl.value)?dtEl.value:'votre date';
+    const smsVars={to:tel,prenom:fn,soin:selService.name,date:dateStr,acompte:dep+' €',institut:'Institut Barbarella'};
+    queueSms('confirm',smsVars);
+    queueSms('reminder',smsVars);
+  }catch(err){}
+  document.getElementById('book-form').classList.add('hidden');
+  document.getElementById('sum-box').classList.add('hidden');
+  document.getElementById('book-ok').classList.remove('hidden');
+  btn.disabled=false;
+});
+
+function applyLoyalty(){
+  const code=(document.getElementById('loyalty-code').value||'').trim().toLowerCase();
+  const msg=document.getElementById('loyalty-msg');
+  let cl=clients.find(x=>x.email===code||x.tag.toLowerCase()===code||(code==='vip'&&x.tag==='VIP'));
+  if(code==='vip'){activeLoyalty={tag:'VIP',discount:0.15};msg.style.display='block';msg.textContent='Tarif VIP −15 % appliqué sur le soin (acompte inchangé).';updateLoyaltyPrice();return}
+  if(code==='fidele'||code==='fidèle'){activeLoyalty={tag:'Fidèle',discount:0.10};msg.style.display='block';msg.textContent='Tarif Fidèle −10 % appliqué sur le soin (acompte inchangé).';updateLoyaltyPrice();return}
+  if(cl){activeLoyalty={tag:cl.tag,discount:(LOYALTY[cl.tag]||LOYALTY.Nouveau).discount};msg.style.display='block';msg.textContent='Bonjour '+cl.name+' · statut '+cl.tag+(activeLoyalty.discount?' · −'+Math.round(activeLoyalty.discount*100)+' %':'');updateLoyaltyPrice();return}
+  activeLoyalty={tag:'Nouveau',discount:0};msg.style.display=code?'block':'none';msg.textContent=code?'Code non reconnu · tarif standard.':'';updateLoyaltyPrice();
+}
+function updateLoyaltyPrice(){
+  if(!selService)return;
+  const idx=services.findIndex(s=>s.name===selService.name);
+  const dur=prestSel[idx]||selService.chosenDur||'60';
+  let base=0, durLabel='';
+  if(selService.price30&&dur==='30'){base=selService.price30;durLabel=selService.dur30||'30 min'}
+  else if(selService.price){base=selService.price;durLabel=selService.dur||'1 heure'}
+  const disc=activeLoyalty.discount||0;
+  const final=base?Math.round(base*(1-disc)):0;
+  let label=selService.name;
+  if(base){
+    label=selService.name+' — '+durLabel+' · '+final+' €';
+    if(disc)label+=' (−'+Math.round(disc*100)+' %)';
+  }else label=selService.name+' — Sur mesure';
+  document.getElementById('sel-name').textContent=label;
+  const dep=getDeposit(selService);
+  document.getElementById('sel-price').textContent=dep>0?(dep+' €'):'Sur place';
+}
+function openClientSpace(){
+  const email=(document.getElementById('client-login-email').value||'').trim().toLowerCase();
+  const box=document.getElementById('client-space');
+  const info=document.getElementById('client-space-info');
+  const tarifs=document.getElementById('client-space-tarifs');
+  if(!email){alert('Indiquez votre email');return}
+  const cl=clients.find(x=>x.email===email);
+  box.classList.remove('hidden');
+  if(!cl){
+    info.innerHTML='<p style="color:var(--muted)">Aucun fichier trouvé. Réservez une fois pour créer votre fiche (email + date de naissance obligatoires).</p>';
+    tarifs.innerHTML='';
+    return;
+  }
+  const disc=(LOYALTY[cl.tag]||LOYALTY.Nouveau).discount;
+  const discLabel=disc?(' −'+Math.round(disc*100)+' %'):'';
+  info.innerHTML='<strong>'+cl.name+'</strong><br><span style="color:var(--muted);font-size:13px">'+cl.email+' · Né(e) le '+(cl.dob||'—')+' · '+(cl.visits||0)+' visite(s)</span><br><span class="tag '+(cl.tag==='VIP'?'tag-ok':'tag-wait')+'">'+cl.tag+discLabel+'</span>';
+  tarifs.innerHTML='<p style="font-size:13px;margin:12px 0 8px;color:var(--muted)">Vos tarifs adaptés</p>'+services.filter(s=>s.price).map(s=>{
+    const p60=Math.round(s.price*(1-disc));
+    const p30=s.price30?Math.round(s.price30*(1-disc)):null;
+    const nameEsc=s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    return '<div class="list-row"><div style="flex:1"><h4>'+s.name+'</h4><p>'+(p30?p30+' € (30 min) · ':'')+p60+' € '+(s.dur||'')+(disc?' <span style="color:var(--gold)">(préférentiel)</span>':'')+'</p></div><button type="button" class="btn btn-gold btn-sm" onclick="bookAsClient(\''+cl.email+'\',\''+nameEsc+'\')">Réserver</button></div>';
+  }).join('');
+  activeLoyalty={tag:cl.tag,discount:disc};
+  document.getElementById('loyalty-code').value=email;
+}
+function bookAsClient(email,soinName){
+  document.getElementById('em').value=email;
+  const cl=clients.find(x=>x.email===email);
+  if(cl){
+    const parts=(cl.name||'').split(' ');
+    document.getElementById('fn').value=parts[0]||'';
+    document.getElementById('ln').value=parts.slice(1).join(' ')||'';
+    document.getElementById('ph').value=cl.tel||'';
+    if(cl.dob)document.getElementById('dob').value=cl.dob;
+  }
+  document.getElementById('loyalty-code').value=email;
+  applyLoyalty();
+  const i=services.findIndex(s=>s.name===soinName);
+  if(i>=0){const pkg=document.querySelectorAll('.pkg')[i];if(pkg)selectPkg(i,pkg,'60')}
+  document.getElementById('reserver').scrollIntoView({behavior:'smooth'});
+}
+
+const greetings={fr:'Bonjour, je suis l’assistante de l’Institut Barbarella. Comment puis-je vous aider ?',en:'Hello, I’m the Barbarella Institute assistant. How may I help you?',es:'Hola, soy la asistente del Institut Barbarella. ¿En qué puedo ayudarle?',it:'Buongiorno, sono l’assistente dell’Institut Barbarella. Come posso aiutarla?'};
+function toggleChat(){const p=document.getElementById('chat-panel');p.classList.toggle('open');if(p.classList.contains('open')&&!document.getElementById('chat-body').dataset.ready){addBot(greetings[chatLangCode]);document.getElementById('chat-body').dataset.ready='1'}}
+function chatLang(){chatLangCode=document.getElementById('chat-lang').value;document.getElementById('chat-body').innerHTML='';addBot(greetings[chatLangCode]||greetings.en)}
+function addBot(t){document.getElementById('chat-body').innerHTML+=`<div class="msg bot">${t}</div>`;document.getElementById('chat-body').scrollTop=9999}
+function addUser(t){document.getElementById('chat-body').innerHTML+=`<div class="msg user">${t}</div>`}
+function sendChat(){const inp=document.getElementById('chat-in');const t=inp.value.trim();if(!t)return;addUser(t);inp.value='';setTimeout(()=>{addBot(replyAI(t));pushManagerFeed('Chat client ('+chatLangCode.toUpperCase()+') · « '+t.slice(0,40)+'… »')},500)}
+function replyAI(t){
+  const low=t.toLowerCase();
+  if(/réclam|reclam|plainte|problème|problem| insatisf/.test(low)){
+    pushManagerFeed('Réclamation client via chat · « '+t.slice(0,50)+'… » · escalade manager');
+    return chatLangCode==='fr'?'Je suis désolée pour ce désagrément. Votre message est transmis à la direction. Laissez votre email pour un retour sous 24 h, ou écrivez-nous.':'I’m sorry. Your message is forwarded to management. Please leave your email for a reply within 24h.';
+  }
+  if(/prix|price|tarif|€|fidél|vip|acompte|deposit/.test(low))return chatLangCode==='fr'?'Acomptes de confirmation : massages 29,99 € · épilation 4,99 € (intégrales 29,99 €) · manucure 9,99 €. Produits dérivés : règlement sur place. Fidèle −10 %, VIP −15 % (espace client).':'Deposits: massages €29.99 · waxing €4.99 (full €29.99) · manicure €9.99. Products: pay on site. Loyalty −10%, VIP −15%.';
+  if(/rdv|book|reserv|créneau|date|produit|huile|bougie/.test(low))return chatLangCode==='fr'?'Pour réserver un soin : section Réserver (catégories Massages / Épilation…). Produits dérivés : retrait sur place une fois la section activée. Email + date de naissance pour les soins.':'To book: use Reserve. Products: pickup on site when the shop section is enabled.';
+  if(/espace|compte|historique/.test(low))return chatLangCode==='fr'?'Ouvrez « Espace client » avec votre email pour voir vos tarifs fidélité et réserver.':'Open Client area with your email for loyalty rates.';
+  return chatLangCode==='fr'?'Je gère les réservations et les réclamations. Horaires 11h–20h. Que souhaitez-vous ?':'I handle bookings and complaints. Hours 11am–8pm. How can I help?';
+}
+function chatQuick(type){
+  const map={resa:'Je souhaite réserver un massage',tarif:'Quels sont vos tarifs et réductions fidélité ?',recla:'Je souhaite faire une réclamation',espace:'Comment accéder à mon espace client ?'};
+  const t=map[type];if(!t)return;addUser(t);setTimeout(()=>{addBot(replyAI(t));if(type==='resa')document.getElementById('reserver').scrollIntoView({behavior:'smooth'});if(type==='espace')document.getElementById('espace-client').scrollIntoView({behavior:'smooth'})},400);
+}
+function pushManagerFeed(txt){feed.unshift({t:'à l’instant',txt});const el=document.getElementById('manager-feed');if(el)renderFeed()}
+
+function openPro(){document.getElementById('public').style.display='none';document.getElementById('admin').style.display='block';document.getElementById('login-view').classList.remove('hidden');document.getElementById('app-view').classList.add('hidden')}
+function showPublic(){document.getElementById('admin').style.display='none';document.getElementById('public').style.display='block'}
+function doLogin(){
+  const u=(document.getElementById('login-user').value||'').trim().toLowerCase();const p=document.getElementById('login-pass').value;
+  const user=users.find(x=>x.login===u&&x.pass===p);if(!user){alert('Identifiants incorrects');return}
+  currentUser=user;document.getElementById('login-view').classList.add('hidden');document.getElementById('app-view').classList.remove('hidden');buildSide();renderAllPro();goView((roleMenus[user.role]||['dash'])[0]);
+}
+function logout(){currentUser=null;document.getElementById('app-view').classList.add('hidden');document.getElementById('login-view').classList.remove('hidden');document.getElementById('login-user').value='';document.getElementById('login-pass').value=''}
+function buildSide(){
+  const menus=roleMenus[currentUser.role]||['dash'];
+  document.getElementById('side-nav').innerHTML=menus.map(k=>`<a href="#" data-v="${k}" onclick="goView('${k}');return false">${menuLabels[k]}</a>`).join('')
+    +`<a href="#" onclick="publishSite();return false" style="color:var(--gold);font-weight:500">↻ Actualiser le site</a>`
+    +`<a href="#" onclick="logout();return false">Déconnexion</a>`
+    +`<a href="#" onclick="showPublic();return false">← Site public</a>`;
+  document.getElementById('side-user').textContent=currentUser.name+' · '+currentUser.role;
+  document.getElementById('mob-bar').innerHTML=menus.map(k=>`<button class="btn btn-ghost btn-sm" onclick="goView('${k}')">${menuLabels[k]}</button>`).join('')
+    +`<button class="btn btn-gold btn-sm" onclick="publishSite()">↻ Actualiser</button>`
+    +`<button class="btn btn-ghost btn-sm" onclick="showPublic()">← Site</button>`
+    +`<button class="btn btn-ghost btn-sm" onclick="logout()">Déconnexion</button>`;
+}
+function publishSite(){
+  renderPublic();
+  applyWaLink();
+  pushManagerFeed('Site public actualisé · '+new Date().toLocaleTimeString('fr-FR'));
+  const toast=document.createElement('div');
+  toast.textContent='✓ Site public mis à jour';
+  toast.style.cssText='position:fixed;top:20px;right:20px;z-index:999;background:linear-gradient(135deg,#e8d5b0,#c9b896);color:#111;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.35)';
+  document.body.appendChild(toast);
+  setTimeout(function(){toast.remove()},2200);
+}
+const WA_DEFAULT='https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3';
+let waLinks=JSON.parse(localStorage.getItem('bb_wa_v3')||'null')||{a:WA_DEFAULT,b:WA_DEFAULT,c:WA_DEFAULT};
+function applyWaLink(){
+  const map=[['wa-link-1',waLinks.a],['wa-link-2',waLinks.b],['wa-link-3',waLinks.c]];
+  map.forEach(function(pair){
+    const el=document.getElementById(pair[0]);
+    if(el){el.href=pair[1]||WA_DEFAULT;el.style.display=(pair[1]&&pair[1].indexOf('chat.whatsapp')>=0)?'inline':'none'}
+  });
+  const i1=document.getElementById('wa-link-1-inp');if(i1)i1.value=waLinks.a||WA_DEFAULT;
+  const i2=document.getElementById('wa-link-2-inp');if(i2)i2.value=waLinks.b||WA_DEFAULT;
+  const i3=document.getElementById('wa-link-3-inp');if(i3)i3.value=waLinks.c||WA_DEFAULT;
+}
+function saveWaLink(){
+  const a=(document.getElementById('wa-link-1-inp')&&document.getElementById('wa-link-1-inp').value||'').trim()||WA_DEFAULT;
+  const b=(document.getElementById('wa-link-2-inp')&&document.getElementById('wa-link-2-inp').value||'').trim()||WA_DEFAULT;
+  const c=(document.getElementById('wa-link-3-inp')&&document.getElementById('wa-link-3-inp').value||'').trim()||WA_DEFAULT;
+  waLinks={a:a,b:b,c:c};
+  localStorage.setItem('bb_wa_v3',JSON.stringify(waLinks));
+  applyWaLink();
+  alert('Les 3 liens WhatsApp sont enregistrés (bas de page).');
+}
+
+/* ——— Stripe (acomptes) ——— */
+var stripeConfig=JSON.parse(localStorage.getItem('bb_stripe_v1')||'null')||{
+  enabled:false, pk:'', mode:'test', proxy:'', biz:'Institut de beauté et bien-être — massages, épilation cire orientale, manucure, produits de soin'
+};
+function loadStripeForm(){
+  var c=stripeConfig;
+  var en=document.getElementById('stripe-enabled'); if(en)en.checked=!!c.enabled;
+  var pk=document.getElementById('stripe-pk'); if(pk)pk.value=c.pk||'';
+  var mode=document.getElementById('stripe-mode'); if(mode)mode.value=c.mode||'test';
+  var proxy=document.getElementById('stripe-proxy'); if(proxy)proxy.value=c.proxy||'';
+  var biz=document.getElementById('stripe-biz'); if(biz)biz.value=c.biz||'';
+}
+function saveStripeConfig(){
+  stripeConfig={
+    enabled:!!(document.getElementById('stripe-enabled')&&document.getElementById('stripe-enabled').checked),
+    pk:(document.getElementById('stripe-pk')&&document.getElementById('stripe-pk').value||'').trim(),
+    mode:(document.getElementById('stripe-mode')&&document.getElementById('stripe-mode').value)||'test',
+    proxy:(document.getElementById('stripe-proxy')&&document.getElementById('stripe-proxy').value||'').trim(),
+    biz:(document.getElementById('stripe-biz')&&document.getElementById('stripe-biz').value||'').trim()
+  };
+  localStorage.setItem('bb_stripe_v1',JSON.stringify(stripeConfig));
+  var msg=document.getElementById('stripe-save-msg');
+  if(msg){msg.textContent='✓ Stripe enregistré';setTimeout(function(){msg.textContent='';},2500)}
+}
+function setStripeProxyLocal(){
+  var el=document.getElementById('stripe-proxy');
+  if(el)el.value='http://localhost:8888/.netlify/functions/create-checkout';
+  var en=document.getElementById('stripe-enabled'); if(en)en.checked=true;
+  var mode=document.getElementById('stripe-mode'); if(mode)mode.value='test';
+  saveStripeConfig();
+  alert('Mode ① Test local activé.\n\nProxy : http://localhost:8888/.netlify/functions/create-checkout\n\nLance :\n  netlify dev\n  stripe listen --forward-to localhost:8888/.netlify/functions/stripe-webhook');
+}
+function setStripeProxyProd(){
+  var current=(document.getElementById('stripe-proxy')&&document.getElementById('stripe-proxy').value||'').trim();
+  var base='';
+  if(/^https:\/\/[^/]+\.netlify\.app/i.test(current)){
+    base=current.replace(/\/\.netlify\/functions\/.*$/i,'');
+  }else if(location.hostname.indexOf('netlify.app')>=0){
+    base=location.origin;
+  }
+  var url=base
+    ? base.replace(/\/$/,'')+'/.netlify/functions/create-checkout'
+    : 'https://TON-SITE.netlify.app/.netlify/functions/create-checkout';
+  var el=document.getElementById('stripe-proxy');
+  if(el)el.value=url;
+  var en=document.getElementById('stripe-enabled'); if(en)en.checked=true;
+  var mode=document.getElementById('stripe-mode'); if(mode)mode.value='test';
+  saveStripeConfig();
+  if(url.indexOf('TON-SITE')>=0){
+    alert('Mode ② Netlify déployé.\n\nRemplace TON-SITE par l’URL réelle de ton site Netlify, puis Enregistrer.\n\nExemple :\nhttps://institut-barbarella.netlify.app/.netlify/functions/create-checkout');
+  }else{
+    alert('Mode ② Netlify déployé activé.\n\nProxy : '+url);
+  }
+}
+
+function mapStripeClientError(data, httpStatus, networkErr){
+  if(networkErr){
+    if(networkErr.name==='TypeError'||/Failed to fetch|NetworkError|Load failed/i.test(networkErr.message||'')){
+      return 'Impossible de joindre le serveur de paiement.\n\nVérifiez :\n• l’URL du proxy dans Admin → Stripe\n• que le site Netlify est bien déployé\n• votre connexion internet';
+    }
+    return 'Erreur réseau : '+(networkErr.message||'inconnue');
+  }
+  var code=data&&data.code;
+  var msg=(data&&data.error)||'';
+  var hints={
+    missing_secret:'Ajoutez STRIPE_SECRET_KEY dans Netlify → Environment variables, puis Trigger deploy.',
+    invalid_secret_format:'La clé secrète doit commencer par sk_test_ ou sk_live_.',
+    invalid_api_key:'Clé secrète refusée par Stripe. Recopiez sk_test_… (mode Test) depuis le Dashboard.',
+    mode_mismatch:'Mélange Test/Live : pk_test_ avec sk_test_, ou pk_live_ avec sk_live_.',
+    amount_too_small:'Montant d’acompte trop faible pour Stripe (min. 0,50 €).',
+    missing_urls:'URLs de retour manquantes (bug site). Rechargez la page.',
+    method_not_allowed:'Le proxy n’accepte que POST.',
+    invalid_json:'Requête mal formée.'
+  };
+  var hint=hints[code]||'';
+  if(httpStatus===404){
+    return 'Proxy introuvable (404).\n\nURL attendue :\nhttps://VOTRE-SITE.netlify.app/.netlify/functions/create-checkout';
+  }
+  if(httpStatus===401||httpStatus===403){
+    return 'Accès refusé par le serveur de paiement.\n\n'+(msg||'Vérifiez STRIPE_SECRET_KEY.');
+  }
+  if(!msg)msg='Erreur de paiement (HTTP '+httpStatus+').';
+  return hint?msg+'\n\n→ '+hint:msg;
+}
+async function startStripeCheckout(payload){
+  if(!stripeConfig.enabled){
+    alert('Stripe n’est pas encore activé.\n\nEspace Pro → Admin → section Stripe → cocher « Activer » → Enregistrer.');
+    return null;
+  }
+  if(!stripeConfig.proxy){
+    console.log('Stripe démo — payload prêt:',payload);
+    alert('Mode démo : aucun proxy configuré.\n\nDans Admin → Stripe, collez :\nhttps://VOTRE-SITE.netlify.app/.netlify/functions/create-checkout');
+    return {demo:true};
+  }
+  if(!/^https?:\/\//i.test(stripeConfig.proxy)){
+    alert('URL du proxy invalide : elle doit commencer par https:// (ou http:// en local).');
+    return null;
+  }
+  // https obligatoire hors localhost
+  if(/^http:\/\//i.test(stripeConfig.proxy) && !/localhost|127\.0\.0\.1/i.test(stripeConfig.proxy)){
+    alert('Hors local, le proxy doit être en https://');
+    return null;
+  }
+
+  try{
+    var res=await fetch(stripeConfig.proxy,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    var data={};
+    try{data=await res.json()}catch(parseErr){
+      alert(mapStripeClientError(null,res.status)+'\n\nRéponse non-JSON du serveur (vérifiez les logs Netlify → create-checkout).');
+      return null;
+    }
+    if(!res.ok){
+      var friendly=mapStripeClientError(data,res.status);
+      console.error('Stripe proxy error',res.status,data);
+      try{pushManagerFeed('Erreur Stripe · '+(data.code||res.status)+' · '+(data.error||'').slice(0,80))}catch(e){}
+      alert('Paiement impossible\n\n'+friendly);
+      return null;
+    }
+    if(data.url){window.location.href=data.url;return data}
+    if(data.id&&window.Stripe&&stripeConfig.pk){
+      var stripe=window.Stripe(stripeConfig.pk);
+      var result=await stripe.redirectToCheckout({sessionId:data.id});
+      if(result&&result.error){
+        alert('Stripe Checkout : '+(result.error.message||'redirection impossible'));
+        return null;
+      }
+      return data;
+    }
+    alert('Réponse proxy inattendue (ni url ni id).\n\n'+JSON.stringify(data));
+    return null;
+  }catch(err){
+    console.error(err);
+    try{pushManagerFeed('Erreur Stripe réseau · '+(err.message||'').slice(0,60))}catch(e){}
+    alert('Paiement impossible\n\n'+mapStripeClientError(null,0,err));
+    return null;
+  }
+}
+
+
+/* ——— Notifications SMS ——— */
+
+var smsConfig=JSON.parse(localStorage.getItem('bb_sms_v1')||'null')||{
+  provider:'demo',
+  sender:'BARBARELLA',
+  apiKey:'',
+  apiSecret:'',
+  from:'',
+  proxy:'',
+  onConfirm:true,
+  onReminder:true,
+  onPromo:false,
+  tplConfirm:'Bonjour {prenom}, votre RDV {soin} le {date} est confirmé. Acompte {acompte}. — {institut}',
+  tplReminder:'Rappel : RDV demain {date} — {soin} chez {institut}. À bientôt.',
+  tplPromo:'{institut} : {promo}. Répondez STOP pour vous désinscrire.'
+};
+var smsLog=JSON.parse(localStorage.getItem('bb_sms_log_v1')||'[]');
+
+function toggleTwilioFields(){
+  var p=document.getElementById('sms-provider');
+  var box=document.getElementById('twilio-fields');
+  if(!p||!box)return;
+  var isTw=p.value==='twilio';
+  box.classList.toggle('hidden',!isTw);
+  var kl=document.getElementById('sms-key-label');
+  var sl=document.getElementById('sms-secret-label');
+  if(kl)kl.textContent=isTw?'Account SID (Twilio)':'Clé API';
+  if(sl)sl.textContent=isTw?'Auth Token (Twilio)':'Secret / Auth Token';
+}
+function fillSmsForm(){
+  var c=smsConfig;
+  var set=function(id,val){var el=document.getElementById(id);if(el)el.value=val||'';};
+  var chk=function(id,on){var el=document.getElementById(id);if(el)el.checked=!!on;};
+  set('sms-provider',c.provider);
+  set('sms-sender',c.sender);
+  set('sms-api-key',c.apiKey);
+  set('sms-api-secret',c.apiSecret);
+  set('sms-from',c.from);
+  set('sms-proxy',c.proxy);
+  chk('sms-on-confirm',c.onConfirm);
+  chk('sms-on-reminder',c.onReminder);
+  chk('sms-on-promo',c.onPromo);
+  set('sms-tpl-confirm',c.tplConfirm);
+  set('sms-tpl-reminder',c.tplReminder);
+  set('sms-tpl-promo',c.tplPromo);
+  toggleTwilioFields();
+  renderSmsLog();
+}
+function saveSmsConfig(silent){
+  smsConfig={
+    provider:document.getElementById('sms-provider').value,
+    sender:(document.getElementById('sms-sender').value||'BARBARELLA').trim().slice(0,11),
+    apiKey:document.getElementById('sms-api-key').value,
+    apiSecret:document.getElementById('sms-api-secret').value,
+    from:(document.getElementById('sms-from')&&document.getElementById('sms-from').value||'').trim(),
+    proxy:(document.getElementById('sms-proxy')&&document.getElementById('sms-proxy').value||'').trim(),
+    onConfirm:document.getElementById('sms-on-confirm').checked,
+    onReminder:document.getElementById('sms-on-reminder').checked,
+    onPromo:document.getElementById('sms-on-promo').checked,
+    tplConfirm:document.getElementById('sms-tpl-confirm').value.trim()||smsConfig.tplConfirm,
+    tplReminder:document.getElementById('sms-tpl-reminder').value.trim()||smsConfig.tplReminder,
+    tplPromo:document.getElementById('sms-tpl-promo').value.trim()||smsConfig.tplPromo
+  };
+  localStorage.setItem('bb_sms_v1',JSON.stringify(smsConfig));
+  pushManagerFeed('SMS · configuration enregistrée ('+smsConfig.provider+')');
+  if(!silent){
+    var msg='Configuration SMS enregistrée.\nFournisseur : '+smsConfig.provider;
+    if(smsConfig.provider==='twilio')msg+='\nTwilio : Account SID + Auth Token + numéro From.\nProxy serveur recommandé pour l’envoi réel.';
+    alert(msg);
+  }
+}
+function renderSmsTpl(tpl,vars){
+  var t=tpl||'';
+  Object.keys(vars||{}).forEach(function(k){
+    t=t.split('{'+k+'}').join(vars[k]!=null?String(vars[k]):'');
+  });
+  return t;
+}
+function logSms(entry){
+  smsLog.unshift(entry);
+  if(smsLog.length>30)smsLog=smsLog.slice(0,30);
+  localStorage.setItem('bb_sms_log_v1',JSON.stringify(smsLog));
+  renderSmsLog();
+}
+function renderSmsLog(){
+  var box=document.getElementById('sms-log');
+  if(!box)return;
+  if(!smsLog.length){box.innerHTML='<em>Aucun SMS encore.</em>';return;}
+  box.innerHTML=smsLog.map(function(e){
+    return '<div style="border-bottom:1px solid rgba(255,255,255,.06);padding:6px 0"><strong style="color:var(--gold)">'+(e.type||'')+'</strong> → '+(e.to||'—')+' · '+(e.status||'')+'<br><span style="opacity:.85">'+(e.body||'')+'</span><br><span style="font-size:10px">'+(e.at||'')+(e.provider?' · '+e.provider:'')+'</span></div>';
+  }).join('');
+}
+function normalizePhone(raw){
+  var t=String(raw||'').replace(/[\s.\-()]/g,'');
+  if(t.indexOf('00')===0)t='+'+t.slice(2);
+  if(t.indexOf('0')===0&&t.length===10)t='+33'+t.slice(1);
+  return t;
+}
+function queueSms(type,vars){
+  if(!smsConfig)return;
+  if(type==='confirm'&&!smsConfig.onConfirm)return;
+  if(type==='reminder'&&!smsConfig.onReminder)return;
+  if(type==='promo'&&!smsConfig.onPromo)return;
+  var to=normalizePhone(vars&&vars.to||'');
+  if(!to||to.length<8){
+    logSms({type:type,to:to||'—',status:'ignoré (pas de n°)',body:'',at:new Date().toLocaleString('fr-FR'),provider:smsConfig.provider});
+    return;
+  }
+  var tpl=type==='confirm'?smsConfig.tplConfirm:(type==='reminder'?smsConfig.tplReminder:smsConfig.tplPromo);
+  var body=renderSmsTpl(tpl,vars);
+  var at=new Date().toLocaleString('fr-FR');
+
+  if(smsConfig.provider==='demo'){
+    logSms({type:type,to:to,status:'simulé (démo)',body:body,at:at,provider:'demo'});
+    pushManagerFeed('SMS '+type+' · '+to+' · simulé');
+    return;
+  }
+
+  if(smsConfig.provider==='twilio'){
+    var from=smsConfig.from||smsConfig.sender;
+    if(!smsConfig.apiKey||!smsConfig.apiSecret){
+      logSms({type:type,to:to,status:'erreur config Twilio (SID/Token manquants)',body:body,at:at,provider:'twilio'});
+      pushManagerFeed('SMS Twilio · config incomplète');
+      return;
+    }
+    if(smsConfig.proxy){
+      // Envoi via proxy serveur (recommandé)
+      fetch(smsConfig.proxy,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          provider:'twilio',
+          accountSid:smsConfig.apiKey,
+          authToken:smsConfig.apiSecret,
+          from:from,
+          to:to,
+          body:body,
+          type:type
+        })
+      }).then(function(r){
+        if(!r.ok)throw new Error('HTTP '+r.status);
+        return r.json().catch(function(){return {};});
+      }).then(function(data){
+        logSms({type:type,to:to,status:'envoyé via proxy Twilio'+(data.sid?' · '+data.sid:''),body:body,at:new Date().toLocaleString('fr-FR'),provider:'twilio'});
+        pushManagerFeed('SMS Twilio envoyé · '+to);
+      }).catch(function(err){
+        logSms({type:type,to:to,status:'échec proxy · '+(err.message||'erreur'),body:body,at:new Date().toLocaleString('fr-FR'),provider:'twilio'});
+        pushManagerFeed('SMS Twilio échec proxy · '+to);
+      });
+      logSms({type:type,to:to,status:'envoi Twilio en cours (proxy)…',body:body,at:at,provider:'twilio'});
+      return;
+    }
+    // Sans proxy : payload journalisé (prêt pour backend) — pas d’appel navigateur direct (CORS/sécurité)
+    logSms({
+      type:type,to:to,
+      status:'payload Twilio prêt (ajoutez un proxy pour envoi réel)',
+      body:body,
+      at:at,
+      provider:'twilio',
+      meta:'From='+from+' · SID='+(smsConfig.apiKey||'').slice(0,8)+'…'
+    });
+    pushManagerFeed('SMS Twilio · payload prêt · '+to);
+    return;
+  }
+
+  // Autres fournisseurs : file d’attente générique
+  var status='en file (API '+smsConfig.provider+')';
+  if(smsConfig.proxy){
+    fetch(smsConfig.proxy,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({provider:smsConfig.provider,to:to,body:body,from:smsConfig.from||smsConfig.sender,type:type})
+    }).catch(function(){});
+    status='envoyé via proxy ('+smsConfig.provider+')';
+  }
+  logSms({type:type,to:to,status:status,body:body,at:at,provider:smsConfig.provider});
+  pushManagerFeed('SMS '+type+' · '+to+' · '+status);
+}
+function testSmsSend(){
+  var to=(document.getElementById('sms-test-to').value||'').trim();
+  if(!to){alert('Indiquez un numéro de test au format international (+33…)');return;}
+  saveSmsConfig(true);
+  queueSms('confirm',{
+    to:to,
+    prenom:'Test',
+    soin:'Massage Iris',
+    date:new Date().toLocaleDateString('fr-FR'),
+    acompte:'29,99 €',
+    institut:'Institut Barbarella'
+  });
+  var tip=smsConfig.provider==='twilio'
+    ?(smsConfig.proxy?'Envoi Twilio via votre proxy en cours…':'Payload Twilio journalisé. Ajoutez l’URL du proxy pour un envoi réel.')
+    :'SMS test journalisé.';
+  alert(tip);
+}
+
+function goView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+  const el=document.getElementById('view-'+id);
+  if(el)el.classList.remove('hidden');
+  document.querySelectorAll('#side-nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===id));
+  if(id==='admin'){fillSmsForm();loadStripeForm();applyWaLink()}
+  if(id==='catalog')renderCatalog();
+  if(id==='inventaire')renderInventaire();
+}
+
+function showView(id){goView(id)}
+
+/* ——— Inventaire produits + seuils d’alerte ——— */
+let stockData=JSON.parse(localStorage.getItem('bb_stock_v1'))||{};
+let stockSeuils=JSON.parse(localStorage.getItem('bb_stock_seuils_v1'))||{}; // par produit (optionnel)
+let invHistory=JSON.parse(localStorage.getItem('bb_inv_hist_v1'))||[];
+let lastInventaire=localStorage.getItem('bb_inv_last_v1')||null;
+let invConfig=JSON.parse(localStorage.getItem('bb_inv_cfg_v1'))||{seuilGlobal:3,cycleJours:14};
+
+function getSeuilFor(name){
+  if(stockSeuils[name]!=null&&stockSeuils[name]!=='')return Number(stockSeuils[name]);
+  return Number(invConfig.seuilGlobal!=null?invConfig.seuilGlobal:3);
+}
+function getCycleJours(){
+  var c=Number(invConfig.cycleJours);
+  return (c>0)?c:14;
+}
+function ensureStockKeys(){
+  services.filter(function(s){return s.cat==='produits'}).forEach(function(s){
+    if(stockData[s.name]===undefined)stockData[s.name]=10;
+  });
+}
+function daysSinceLastInv(){
+  if(!lastInventaire)return 999;
+  return Math.floor((Date.now()-new Date(lastInventaire).getTime())/(1000*60*60*24));
+}
+function isStockBas(name,q){
+  return q<=getSeuilFor(name);
+}
+function saveSeuilsAlerte(){
+  var g=parseInt(document.getElementById('inv-seuil-global').value,10);
+  var c=parseInt(document.getElementById('inv-cycle-jours').value,10);
+  if(isNaN(g)||g<0)g=3;
+  if(isNaN(c)||c<1)c=14;
+  invConfig={seuilGlobal:g,cycleJours:c};
+  localStorage.setItem('bb_inv_cfg_v1',JSON.stringify(invConfig));
+  // Seuils par produit
+  document.querySelectorAll('.inv-seuil-prod').forEach(function(inp){
+    var name=inp.getAttribute('data-prod');
+    var v=inp.value.trim();
+    if(v==='')delete stockSeuils[name];
+    else{
+      var n=parseInt(v,10);
+      if(!isNaN(n)&&n>=0)stockSeuils[name]=n;
+    }
+  });
+  localStorage.setItem('bb_stock_seuils_v1',JSON.stringify(stockSeuils));
+  pushManagerFeed('Seuils d’alerte inventaire · global '+g+' · cycle '+c+' j');
+  renderInventaire();
+  alert('Seuils enregistrés.\nStock bas ≤ '+g+' (ou seuil produit).\nRappel inventaire tous les '+c+' jours.');
+}
+function renderInventaire(){
+  ensureStockKeys();
+  var cycle=getCycleJours();
+  var days=daysSinceLastInv();
+  var sg=document.getElementById('inv-seuil-global');
+  var cj=document.getElementById('inv-cycle-jours');
+  if(sg)sg.value=invConfig.seuilGlobal!=null?invConfig.seuilGlobal:3;
+  if(cj)cj.value=cycle;
+  var statusEl=document.getElementById('inv-status');
+  if(statusEl){
+    if(days>=cycle){
+      statusEl.innerHTML='<span class="tag tag-wait">Rappel inventaire</span> Dernier inventaire il y a <strong>'+days+' jours</strong> — cycle configuré : '+cycle+' jours.';
+    }else if(lastInventaire){
+      statusEl.innerHTML='<span class="tag tag-ok">À jour</span> Dernier inventaire le <strong>'+new Date(lastInventaire).toLocaleDateString('fr-FR')+'</strong> · prochain dans '+(cycle-days)+' jour(s).';
+    }else{
+      statusEl.innerHTML='<span class="tag tag-wait">Premier inventaire</span> Aucun inventaire enregistré — saisissez les stocks puis validez.';
+    }
+  }
+  var list=services.filter(function(s){return s.cat==='produits'});
+  var el=document.getElementById('inv-list');
+  if(!el)return;
+  if(!list.length){
+    el.innerHTML='<p style="color:var(--muted)">Aucun produit. Ajoutez-en dans Prix & prestations (catégorie Produit dérivé).</p>';
+    return;
+  }
+  el.innerHTML=list.map(function(s){
+    var q=stockData[s.name]!=null?stockData[s.name]:0;
+    var seuil=getSeuilFor(s.name);
+    var low=isStockBas(s.name,q);
+    var custom=stockSeuils[s.name]!=null?stockSeuils[s.name]:'';
+    return '<div class="list-row" style="align-items:center;flex-wrap:wrap;gap:10px">'
+      +'<div style="flex:1;min-width:140px"><h4>'+s.name+'</h4><p>'+s.dur+' · '+s.price+' € · alerte ≤ '+seuil+'</p></div>'
+      +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'
+      +(low?'<span class="tag tag-wait">Stock bas</span>':'')
+      +'<label style="font-size:12px;color:var(--muted)">Qté</label>'
+      +'<input type="number" min="0" step="1" value="'+q+'" data-prod="'+s.name.replace(/"/g,'&quot;')+'" class="inv-qty" style="width:72px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--elev);color:#fff">'
+      +'<label style="font-size:12px;color:var(--muted)">Seuil</label>'
+      +'<input type="number" min="0" step="1" placeholder="global" value="'+custom+'" data-prod="'+s.name.replace(/"/g,'&quot;')+'" class="inv-seuil-prod" style="width:72px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--elev);color:#fff" title="Vide = seuil global">'
+      +'</div></div>';
+  }).join('');
+  var hist=document.getElementById('inv-history');
+  if(hist){
+    if(!invHistory.length)hist.innerHTML='Aucun historique pour le moment.';
+    else hist.innerHTML=invHistory.slice(0,12).map(function(h){
+      return '<div style="padding:8px 0;border-bottom:1px solid var(--line)"><strong style="color:var(--gold2)">'+h.date+'</strong> · '+h.by+' · '+h.summary+'</div>';
+    }).join('');
+  }
+}
+function validerInventaire(){
+  ensureStockKeys();
+  var inputs=document.querySelectorAll('.inv-qty');
+  var lowCount=0;
+  var lines=[];
+  inputs.forEach(function(inp){
+    var name=inp.getAttribute('data-prod');
+    var q=parseInt(inp.value,10);
+    if(isNaN(q)||q<0)q=0;
+    stockData[name]=q;
+    lines.push(name+': '+q);
+    if(isStockBas(name,q))lowCount++;
+  });
+  // Sauver aussi les seuils produit saisis
+  document.querySelectorAll('.inv-seuil-prod').forEach(function(inp){
+    var name=inp.getAttribute('data-prod');
+    var v=inp.value.trim();
+    if(v==='')delete stockSeuils[name];
+    else{
+      var n=parseInt(v,10);
+      if(!isNaN(n)&&n>=0)stockSeuils[name]=n;
+    }
+  });
+  localStorage.setItem('bb_stock_seuils_v1',JSON.stringify(stockSeuils));
+  localStorage.setItem('bb_stock_v1',JSON.stringify(stockData));
+  lastInventaire=new Date().toISOString();
+  localStorage.setItem('bb_inv_last_v1',lastInventaire);
+  var cycle=getCycleJours();
+  var by=(currentUser&&currentUser.name)||'Équipe';
+  invHistory.unshift({
+    date:new Date().toLocaleString('fr-FR'),
+    by:by,
+    summary:lines.length+' produits comptés · '+lowCount+' stock(s) bas (seuils configurés)'
+  });
+  if(invHistory.length>30)invHistory=invHistory.slice(0,30);
+  localStorage.setItem('bb_inv_hist_v1',JSON.stringify(invHistory));
+  pushManagerFeed('Inventaire produits validé · '+by+' · '+lowCount+' alerte(s) · cycle '+cycle+' j');
+  renderInventaire();
+  alert('Inventaire enregistré.\n'+lowCount+' produit(s) sous le seuil d’alerte.\nProchain contrôle dans '+cycle+' jours.');
+}
+function renderFeed(){document.getElementById('manager-feed').innerHTML=feed.map(f=>`<div class="feed-item">${f.txt}<time>${f.t}</time></div>`).join('')}
+function renderAllPro(){
+  // Rappel inventaire sur le feed selon cycle configuré
+  try{
+    var cyc=(typeof getCycleJours==='function')?getCycleJours():14;
+    if(typeof daysSinceLastInv==='function'&&daysSinceLastInv()>=cyc){
+      var already=feed.some(function(f){return /Inventaire produits/.test(f.txt)&&/rappel/i.test(f.txt)});
+      if(!already)feed.unshift({t:'à l’instant',txt:'Rappel · Inventaire produits à faire (cycle '+cyc+' jours) — onglet Inventaire produits'});
+    }
+  }catch(e){}
+  renderFeed();
+  document.getElementById('resa-body').innerHTML=resas.map(r=>`<tr><td>${r.client}</td><td>${r.soin}</td><td>${r.acompte} €</td><td><span class="tag ${r.st==='paid'?'tag-ok':'tag-wait'}">${r.st==='paid'?'Confirmé':'Attente'}</span></td></tr>`).join('');
+  const days=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],slots=[['14h Farah'],['11h Aleksandra','16h Sabrina'],['15h Farah'],['10h Aleksandra','18h Sabrina'],['13h Farah'],['12h Aleksandra','17h Sabrina'],['14h Farah']];
+  document.getElementById('agenda').innerHTML=days.map((d,i)=>`<div class="aday"><h5>${d}</h5>${slots[i].map(s=>`<div class="slot">${s}</div>`).join('')}</div>`).join('');
+  document.getElementById('clients-body').innerHTML=clients.map(c=>`<tr><td>${c.name}<br><span style="font-size:11px;color:var(--muted)">${c.email||''}</span></td><td>${c.tel||''}</td><td>${c.dob||'—'}<br><span style="font-size:11px;color:var(--muted)">${c.last||''}</span></td><td>${c.total||0} € · ${c.visits||0} vis.</td><td><span class="tag ${c.tag==='VIP'?'tag-ok':'tag-wait'}">${c.tag}</span></td></tr>`).join('');
+  document.getElementById('team-admin').innerHTML=team.map(m=>`<div class="list-row"><img src="${m.photo}" alt=""><div style="flex:1;min-width:0"><h4>${m.name}</h4><p>${m.role} · ${m.visible===false?'Masquée':'Visible'}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openProfileForm(${m.id})">Modifier</button><button class="btn btn-ghost btn-sm" onclick="toggleMasseuse(${m.id})">${m.visible===false?'Afficher':'Masquer'}</button></div></div>`).join('');
+  document.getElementById('users-body').innerHTML=users.map(u=>`<tr><td>${u.login}</td><td>${u.name}</td><td>${u.role}</td><td>${u.login!=='admin'?`<button class="btn btn-ghost btn-sm" onclick="openUserForm(${u.id})">Éditer</button> <button class="btn btn-ghost btn-sm" onclick="delUser(${u.id})">Suppr.</button>`:''}</td></tr>`).join('');
+  renderCatalog();renderNewsAdmin();renderAiConfig();
+}
+function saveServices(){localStorage.setItem('bb_svc_v7',JSON.stringify(services));renderPublic();renderCatalog();pushManagerFeed('Prestations mises à jour · site actualisé')}
+function saveCategories(){localStorage.setItem('bb_cats_v2',JSON.stringify(categoriesEnabled));renderPublic();renderCatalog();pushManagerFeed('Catégories mises à jour · site actualisé')}
+function toggleCategory(cat,on){
+  categoriesEnabled[cat]=!!on;
+  saveCategories();
+  // Sync checkboxes
+  const el=document.getElementById('cat-'+cat);
+  if(el)el.checked=!!on;
+  pushManagerFeed('Catégorie « '+cat+' » '+(on?'activée':'désactivée')+' sur le site');
+}
+function renderCatalog(){
+  const el=document.getElementById('catalog-list');if(!el)return;
+  // Sync checkboxes
+  const cm=document.getElementById('cat-massage');if(cm)cm.checked=categoriesEnabled.massage!==false;
+  const ce=document.getElementById('cat-epilation');if(ce)ce.checked=categoriesEnabled.epilation!==false;
+  const cman=document.getElementById('cat-manucure');if(cman)cman.checked=categoriesEnabled.manucure===true;
+  const cprod=document.getElementById('cat-produits');if(cprod)cprod.checked=categoriesEnabled.produits===true;
+
+  const groups={massage:'Massages',epilation:'Épilation à la cire orientale',manucure:'Manucure & Pédicure',produits:'Produits dérivés'};
+  let html='';
+  Object.keys(groups).forEach(function(cat){
+    const list=services.filter(s=>(s.cat||'massage')===cat);
+    const active=(cat==='manucure'||cat==='produits')?categoriesEnabled[cat]===true:categoriesEnabled[cat]!==false;
+    html+='<div style="margin-bottom:18px"><h3 style="font-size:13px;color:var(--gold);margin-bottom:8px;font-family:Inter,sans-serif">'+groups[cat]+' '+(active?'<span class="tag tag-ok">Visible</span>':'<span class="tag tag-wait">Masquée</span>')+'</h3>';
+    if(!list.length)html+='<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Aucun tarif. Cliquez « + Prestation » et choisissez cette catégorie.</p>';
+    html+=list.map(function(s){
+      const i=services.indexOf(s);
+      return '<div class="list-row"><div style="flex:1;min-width:160px"><h4>'+s.name+'</h4><p>'+(s.price30?'30 min : '+s.price30+' € · ':'')+(s.price?s.price+' €':'Sur mesure')+'</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openServiceForm('+i+')">Modifier</button><button class="btn btn-ghost btn-sm" onclick="delService('+i+')">Suppr.</button></div></div>';
+    }).join('');
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+function openServiceForm(i){
+  editSvcIdx=(i===undefined||i===null)?null:i;
+  document.getElementById('svc-form-title').textContent=editSvcIdx===null?'Nouvelle prestation':'Modifier prestation';
+  const s=editSvcIdx!==null?services[editSvcIdx]:{name:'',cat:'massage',dur:'Séance',price:'',price30:'',desc:''};
+  document.getElementById('svc-name').value=s.name||'';
+  document.getElementById('svc-cat').value=s.cat||'massage';
+  document.getElementById('svc-dur').value=s.dur||'Séance';
+  document.getElementById('svc-price').value=s.price||'';
+  document.getElementById('svc-price30').value=s.price30!=null?s.price30:'';
+  document.getElementById('svc-desc').value=s.desc||'';
+  document.getElementById('service-form-panel').classList.remove('hidden');
+}
+function closeServiceForm(){document.getElementById('service-form-panel').classList.add('hidden');editSvcIdx=null}
+function saveServiceForm(){
+  const name=document.getElementById('svc-name').value.trim();
+  if(!name){alert('Nom obligatoire');return}
+  const cat=document.getElementById('svc-cat').value||'massage';
+  const price=parseFloat(document.getElementById('svc-price').value)||0;
+  const p30raw=document.getElementById('svc-price30').value.trim();
+  const price30=p30raw===''?null:(parseFloat(p30raw)||null);
+  const dur=document.getElementById('svc-dur').value.trim()||'Séance';
+  const desc=document.getElementById('svc-desc').value.trim();
+  const data={name,cat,price,price30,dur:price?dur:'Sur mesure',dur30:price30?'30 min':null,desc};
+  if(editSvcIdx!==null)Object.assign(services[editSvcIdx],data);
+  else services.push(data);
+  saveServices();
+  closeServiceForm();
+}
+function delService(i){if(!confirm('Supprimer cette prestation ?'))return;services.splice(i,1);saveServices()}
+function publishPromo(){promo={title:document.getElementById('pr-title').value,desc:document.getElementById('pr-desc').value};localStorage.setItem('bb_promo_v5',JSON.stringify(promo));renderPublic();alert('Offre publiée.')}
+function clearPromo(){promo=null;localStorage.removeItem('bb_promo_v5');renderPublic();alert('Offre retirée.')}
+function renderNewsAdmin(){const el=document.getElementById('news-list');if(!el)return;el.innerHTML=news.map(n=>`<div class="list-row"><div style="flex:1"><h4>${n.title}</h4><p>${n.text}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openNewsForm(${n.id})">Modifier</button><button class="btn btn-ghost btn-sm" onclick="delNews(${n.id})">Suppr.</button></div></div>`).join('')||'<p style="color:var(--muted);font-size:13px">Aucune nouveauté.</p>'}
+function openNewsForm(id){editNewsId=id||null;const n=id?news.find(x=>x.id===id):null;document.getElementById('news-form-title').textContent=n?'Modifier':'Nouvelle actualité';document.getElementById('news-title').value=n?n.title:'';document.getElementById('news-text').value=n?n.text:'';document.getElementById('news-form-panel').classList.remove('hidden')}
+function closeNewsForm(){document.getElementById('news-form-panel').classList.add('hidden');editNewsId=null}
+function saveNewsForm(){const title=document.getElementById('news-title').value.trim();if(!title){alert('Titre obligatoire');return}const text=document.getElementById('news-text').value.trim();if(editNewsId){const n=news.find(x=>x.id===editNewsId);if(n){n.title=title;n.text=text}}else news.unshift({id:Date.now(),title,text});localStorage.setItem('bb_news_v5',JSON.stringify(news));renderPublic();renderNewsAdmin();closeNewsForm()}
+function delNews(id){if(!confirm('Supprimer ?'))return;news=news.filter(x=>x.id!==id);localStorage.setItem('bb_news_v5',JSON.stringify(news));renderPublic();renderNewsAdmin()}
+function openClientForm(){document.getElementById('cl-name').value='';document.getElementById('cl-tel').value='';document.getElementById('cl-tag').value='Nouveau';document.getElementById('client-form-panel').classList.remove('hidden')}
+function closeClientForm(){document.getElementById('client-form-panel').classList.add('hidden')}
+function saveClientForm(){const name=document.getElementById('cl-name').value.trim();const email=document.getElementById('cl-email').value.trim().toLowerCase();if(!name||!email){alert('Nom et email obligatoires');return}clients.unshift({id:Date.now(),name,email,tel:document.getElementById('cl-tel').value.trim(),dob:document.getElementById('cl-dob').value,last:'—',total:0,visits:0,tag:document.getElementById('cl-tag').value});localStorage.setItem('bb_clients_v6',JSON.stringify(clients));renderAllPro();closeClientForm()}
+function runLoyalty(){pushManagerFeed('Campagne fidélisation · messages discrets préparés');alert('Campagne lancée (simulation).')}
+function previewProfilePhoto(input){
+  const preview=document.getElementById('pf-preview');
+  const file=input.files&&input.files[0];
+  if(!file){preview.style.display='none';preview.src='';return}
+  if(file.size>2*1024*1024){alert('Image trop lourde (max 2 Mo). Compressez-la ou utilisez une URL.');input.value='';return}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    preview.src=e.target.result;
+    preview.style.display='block';
+    document.getElementById('pf-photo').value=''; // clear URL if file chosen
+  };
+  reader.readAsDataURL(file);
+}
+function openProfileForm(id){
+  editProfId=id||null;
+  const m=id?team.find(x=>x.id===id):null;
+  document.getElementById('prof-form-title').textContent=m?'Modifier le profil':'Nouveau profil';
+  document.getElementById('pf-name').value=m?m.name:'';
+  document.getElementById('pf-role').value=m?m.role:'';
+  document.getElementById('pf-desc').value=m?m.desc:'';
+  const photo=m&&m.photo?m.photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop';
+  document.getElementById('pf-photo').value=photo.indexOf('data:')===0?'':photo;
+  document.getElementById('pf-file').value='';
+  const preview=document.getElementById('pf-preview');
+  if(photo){preview.src=photo;preview.style.display='block'}else{preview.src='';preview.style.display='none'}
+  document.getElementById('pf-visible').value=m&&m.visible===false?'0':'1';
+  document.getElementById('profile-form-panel').classList.remove('hidden');
+}
+function closeProfileForm(){
+  document.getElementById('profile-form-panel').classList.add('hidden');
+  editProfId=null;
+  document.getElementById('pf-file').value='';
+}
+function saveProfileForm(){
+  const name=document.getElementById('pf-name').value.trim();
+  if(!name){alert('Nom obligatoire');return}
+  const fileInput=document.getElementById('pf-file');
+  const file=fileInput.files&&fileInput.files[0];
+  const urlVal=document.getElementById('pf-photo').value.trim();
+  const role=document.getElementById('pf-role').value.trim()||'Experte';
+  const desc=document.getElementById('pf-desc').value.trim();
+  const visible=document.getElementById('pf-visible').value==='1';
+  const defaultPhoto='https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop';
+
+  function finish(photo){
+    const data={name,role,desc,photo:photo||defaultPhoto,visible};
+    if(editProfId){
+      const m=team.find(x=>x.id===editProfId);
+      if(m)Object.assign(m,data);
+    }else{
+      team.push(Object.assign({id:Date.now()},data));
+    }
+    localStorage.setItem('bb_team_v5',JSON.stringify(team));
+    renderPublic();
+    renderAllPro();
+    closeProfileForm();
+    pushManagerFeed('Profil « '+name+' » enregistré · site actualisé');
+  }
+
+  if(file){
+    if(file.size>2*1024*1024){alert('Image trop lourde (max 2 Mo).');return}
+    const reader=new FileReader();
+    reader.onload=function(e){finish(e.target.result)};
+    reader.onerror=function(){alert('Erreur lecture du fichier');};
+    reader.readAsDataURL(file);
+  }else{
+    // Keep existing base64 if editing and no new URL/file
+    let photo=urlVal;
+    if(!photo&&editProfId){
+      const m=team.find(x=>x.id===editProfId);
+      if(m&&m.photo)photo=m.photo;
+    }
+    finish(photo||defaultPhoto);
+  }
+}
+function toggleMasseuse(id){const m=team.find(x=>x.id===id);if(!m)return;m.visible=m.visible===false;localStorage.setItem('bb_team_v5',JSON.stringify(team));renderPublic();renderAllPro()}
+function openUserForm(id){editUserId=id||null;const u=id?users.find(x=>x.id===id):null;document.getElementById('user-form-title').textContent=u?'Modifier l’accès':'Nouvel utilisateur';document.getElementById('u-login').value=u?u.login:'';document.getElementById('u-login').disabled=!!u;document.getElementById('u-name').value=u?u.name:'';document.getElementById('u-pass').value='';document.getElementById('u-pass2').value='';document.getElementById('u-role').value=u?u.role:'employee';document.getElementById('user-form-panel').classList.remove('hidden')}
+function closeUserForm(){document.getElementById('user-form-panel').classList.add('hidden');editUserId=null;document.getElementById('u-login').disabled=false}
+function saveUserForm(){const login=document.getElementById('u-login').value.trim().toLowerCase();const name=document.getElementById('u-name').value.trim();const pass=document.getElementById('u-pass').value;const pass2=document.getElementById('u-pass2').value;const role=document.getElementById('u-role').value;if(!login||!name){alert('Login et nom obligatoires');return}if(editUserId){const u=users.find(x=>x.id===editUserId);if(!u)return;u.name=name;u.role=role;if(pass){if(pass!==pass2){alert('Mots de passe différents');return}u.pass=pass}}else{if(!pass||pass!==pass2){alert('Mot de passe obligatoire et identique à la confirmation');return}if(users.some(x=>x.login===login)){alert('Cet identifiant existe déjà');return}users.push({id:Date.now(),login,name,pass,role})}localStorage.setItem('bb_users_v5',JSON.stringify(users));renderAllPro();closeUserForm();alert('Accès enregistré. Le mot de passe n’est plus affiché.')}
+function delUser(id){if(!confirm('Supprimer cet accès ?'))return;users=users.filter(x=>x.id!==id);localStorage.setItem('bb_users_v5',JSON.stringify(users));renderAllPro()}
+function renderAiConfig(){const el=document.getElementById('ai-config-list');if(!el)return;const st={active:'Actif',pause:'En pause',setup:'À configurer'};el.innerHTML=aiAgents.map(a=>`<div class="list-row"><div style="flex:1"><h4>${a.name}</h4><p><span class="tag ${a.status==='active'?'tag-ok':'tag-wait'}">${st[a.status]||a.status}</span> · ${a.langs}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openAiForm('${a.id}')">Programmer</button></div></div>`).join('')}
+function openAiForm(id){editAiId=id;const a=aiAgents.find(x=>x.id===id);if(!a)return;document.getElementById('ai-form-title').textContent='Programmer · '+a.name;document.getElementById('ai-name').value=a.name;document.getElementById('ai-status').value=a.status;document.getElementById('ai-langs').value=a.langs;document.getElementById('ai-prompt').value=a.prompt;document.getElementById('ai-escalade').value=a.escalade?'1':'0';document.getElementById('ai-notes').value=a.notes||'';document.getElementById('ai-action-out').textContent='';const btn=document.getElementById('ai-action-btn');btn.textContent=a.action==='invoice'?'Générer factures':a.action==='mkt'?'Générer contenu':a.action==='maintain'?'Check santé':'Tester agent';document.getElementById('ai-form-panel').classList.remove('hidden')}
+function closeAiForm(){document.getElementById('ai-form-panel').classList.add('hidden');editAiId=null}
+function saveAiForm(){const a=aiAgents.find(x=>x.id===editAiId);if(!a)return;a.status=document.getElementById('ai-status').value;a.langs=document.getElementById('ai-langs').value.trim();a.prompt=document.getElementById('ai-prompt').value.trim();a.escalade=document.getElementById('ai-escalade').value==='1';a.notes=document.getElementById('ai-notes').value.trim();localStorage.setItem('bb_ai_v5',JSON.stringify(aiAgents));renderAiConfig();pushManagerFeed('Agent « '+a.name+' » · config mise à jour ('+a.status+')');alert('Configuration agent enregistrée. Évolutive : branchez API dans les notes techniques.')}
+function runAiAction(){const a=aiAgents.find(x=>x.id===editAiId);if(!a)return;const out=document.getElementById('ai-action-out');if(a.action==='invoice'){out.innerHTML=team.map(m=>'• Facture · '+m.name+' · Honoraires prestation bien-être').join('<br>');pushManagerFeed('Factures hebdo générées')}else if(a.action==='mkt'){out.textContent='✦ Institut Barbarella — Paris République\nUn écrin feutré. L’art du toucher.\n#Paris #Barbarella';pushManagerFeed('Contenu marketing généré')}else if(a.action==='maintain'){out.innerHTML='✓ Site OK · ✓ Rôles OK<br>⚠ Stripe à brancher · ⚠ Domaine + fiche Google';pushManagerFeed('Check de santé exécuté')}else{out.textContent='Test OK · ton: « '+(a.prompt||'').slice(0,80)+'… » · langues: '+a.langs;pushManagerFeed('Test agent « '+a.name+' »')}}
+
+// Retour Stripe Checkout (?paid=1 ou ?cancel=1)
+function handleStripeReturn(){
+  try{
+    var params=new URLSearchParams(location.search||'');
+    if(params.get('paid')==='1'){
+      var form=document.getElementById('book-form');
+      var sum=document.getElementById('sum-box');
+      var ok=document.getElementById('book-ok');
+      if(form)form.classList.add('hidden');
+      if(sum)sum.classList.add('hidden');
+      if(ok){
+        ok.classList.remove('hidden');
+        var p=ok.querySelector('p');
+        if(p)p.textContent='Acompte reçu. Votre réservation est confirmée. Un message de confirmation vous a été envoyé.';
+      }
+      try{pushManagerFeed('Paiement Stripe confirmé (retour client ?paid=1)')}catch(e){}
+      if(location.hash!=='#reserver')location.hash='reserver';
+      setTimeout(function(){
+        if(history.replaceState)history.replaceState({},'',location.pathname+location.hash);
+      },800);
+    }else if(params.get('cancel')==='1'){
+      if(location.hash!=='#reserver')location.hash='reserver';
+      setTimeout(function(){
+        alert('Paiement annulé. Vous pouvez réessayer ou choisir « Sur place ».');
+        if(history.replaceState)history.replaceState({},'',location.pathname+'#reserver');
+      },300);
+    }
+  }catch(e){}
+}
+
+// Alias & init final
+window.showView=goView;
+applyWaLink();
+renderPublic();
+renderBookCats();
+handleStripeReturn();
+</script>
+
+</body>
+</html>
