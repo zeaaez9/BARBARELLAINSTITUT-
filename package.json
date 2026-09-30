@@ -1,0 +1,9 @@
+{
+  "name": "institut-barbarella-netlify",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proxy Stripe Checkout pour Institut Barbarella",
+  "dependencies": {
+    "stripe": "^17.4.0"
+  }
+}
