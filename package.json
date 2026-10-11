@@ -2,8 +2,20 @@
   "name": "institut-barbarella-netlify",
   "version": "1.0.0",
   "private": true,
-  "description": "Proxy Stripe Checkout pour Institut Barbarella",
+  "description": "Institut Barbarella — site public et gestion partagée sur Netlify",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "check": "node scripts/check.cjs"
+  },
   "dependencies": {
+    "@netlify/blobs": "^11.1.4",
     "stripe": "^17.4.0"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.12"
   }
 }
