@@ -1,6 +1,6 @@
 const Stripe = require('stripe');
 const r = require('../lib/runtime');
-const { prepare } = require('../lib/bookings');
+const { claimRequest, ensureBooking } = require('../lib/bookings');
 exports.handler = r.wrap(async event => {
   if (event.httpMethod !== 'POST') r.fail(405, 'Méthode non autorisée.');
   const key = process.env.STRIPE_SECRET_KEY;
@@ -8,8 +8,9 @@ exports.handler = r.wrap(async event => {
   if (!/^whsec_/.test(process.env.STRIPE_WEBHOOK_SECRET || '')) r.fail(503, 'Confirmation de paiement non configurée. Choisissez le règlement sur place.');
   const db = r.store(event);
   await r.rateLimit(db, event, 'booking', 10);
-  const booking = await prepare(db, r.parse(event));
-  await r.privateSet(db, 'bookings/' + booking.id, booking);
+  const booking = await claimRequest(db, r.parse(event), 'card', /^(sk|rk)_live_/.test(key) ? 'live' : 'test');
+  const existing = await ensureBooking(db, booking);
+  if (existing.sessionId && existing.checkoutUrl) return r.json(200, { url: existing.checkoutUrl, id: existing.sessionId });
   const stripe = new Stripe(key);
   const base = r.origin();
   const session = await stripe.checkout.sessions.create({
@@ -19,7 +20,6 @@ exports.handler = r.wrap(async event => {
     success_url: base + '/?session_id={CHECKOUT_SESSION_ID}&booking=' + booking.id + '&token=' + booking.token + '#reserver',
     cancel_url: base + '/?cancel=1#reserver', locale: 'fr'
   }, { idempotencyKey: booking.id });
-  booking.sessionId = session.id;
-  await r.privateSet(db, 'bookings/' + booking.id, booking);
+  await r.privateUpdate(db, 'bookings/' + booking.id, value => ({ ...value, sessionId: session.id, checkoutUrl: session.url }));
   return r.json(200, { url: session.url, id: session.id });
 });
