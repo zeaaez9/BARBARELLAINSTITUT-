@@ -2,6 +2,15 @@
 const publicFields = ['services', 'categoriesEnabled', 'team', 'news', 'promo', 'waLinks'];
 const privateFields = ['clients', 'aiAgents', 'stockData', 'stockSeuils', 'invHistory', 'lastInventaire', 'invConfig'];
 let stateVersions = {}, sharedReady = false, saveQueue = Promise.resolve(), proRefresh = null;
+let pendingRequest = null;
+async function requestIdFor(payload) {
+  const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(payload)));
+  const fingerprint = Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, '0')).join('');
+  try { pendingRequest = JSON.parse(sessionStorage.getItem('bb_booking_request_v2')) || pendingRequest; } catch {}
+  if (pendingRequest?.fingerprint !== fingerprint || !/^[a-f0-9-]{36}$/i.test(pendingRequest?.requestId || '')) pendingRequest = { fingerprint, requestId: crypto.randomUUID() };
+  try { sessionStorage.setItem('bb_booking_request_v2', JSON.stringify(pendingRequest)); } catch {}
+  return pendingRequest.requestId;
+}
 function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 async function api(path, method = 'GET', body) {
   const response = await fetch('/.netlify/functions/' + path, { method, credentials: 'same-origin', headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
@@ -14,6 +23,10 @@ async function api(path, method = 'GET', body) {
   return data;
 }
 function stateSnapshot() { return { services, categoriesEnabled, team, news, promo, waLinks, clients, aiAgents, stockData, stockSeuils, invHistory, lastInventaire, invConfig }; }
+function updatePublicCache(state) {
+  const keys = { services: 'bb_svc_v7', categoriesEnabled: 'bb_cats_v2', team: 'bb_team_v5', news: 'bb_news_v5', promo: 'bb_promo_v5', waLinks: 'bb_wa_v3' };
+  try { for (const [field, key] of Object.entries(keys)) if (Object.hasOwn(state, field)) localStorage.setItem(key, JSON.stringify(state[field])); } catch {}
+}
 function applyState(state) {
   if (Array.isArray(state.services)) services = state.services;
   if (state.categoriesEnabled) categoriesEnabled = state.categoriesEnabled;
@@ -35,6 +48,7 @@ async function refreshPublic() {
   const expert = document.getElementById('ms').value;
   const data = await api('site-state');
   applyState(data.state); stateVersions = { ...stateVersions, ...data.versions };
+  updatePublicCache(data.state);
   sharedReady = data.configured;
   stripeConfig = { ...stripeConfig, enabled: data.payments.enabled, mode: data.payments.mode, proxy: location.origin + '/.netlify/functions/create-checkout' };
   renderPublic(); renderBookCats(); applyWaLink();
@@ -86,9 +100,10 @@ async function publishSite() {
   } catch (error) { alert(error.message); }
 }
 function renderStats() {
-  const paid = resas.filter(r => r.st === 'paid');
+  const paid = resas.filter(r => r.st === 'paid' && r.paymentMode === 'live');
+  const tests = resas.filter(r => r.st === 'paid' && r.paymentMode === 'test');
   const total = paid.reduce((sum, r) => sum + r.acompte, 0);
-  document.getElementById('live-stats').innerHTML = [ ['Acomptes encaissés', total.toFixed(2) + ' €'], ['Paiements vérifiés', paid.length], ['Demandes reçues', resas.length], ['Créneaux à valider', resas.filter(r => r.bookingStatus === 'requested').length] ].map(([label, value]) => '<div class="stat"><span>' + label + '</span><b>' + value + '</b></div>').join('');
+  document.getElementById('live-stats').innerHTML = [ ['Acomptes réels encaissés', total.toFixed(2) + ' €'], ['Paiements réels vérifiés', paid.length], ['Paiements de test (hors encaissements)', tests.length], ['Demandes reçues', resas.length], ['Créneaux à valider', resas.filter(r => r.bookingStatus === 'requested').length] ].map(([label, value]) => '<div class="stat"><span>' + label + '</span><b>' + value + '</b></div>').join('');
 }
 function renderRealAgenda() {
   const bookings = resas.filter(r => r.date).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
@@ -107,7 +122,9 @@ document.getElementById('book-form').addEventListener('submit', async event => {
     if (!selService || selService.cat === 'produits') throw new Error('Les produits sont disponibles sur place. Sélectionnez un soin pour un rendez-vous.');
     const index = services.findIndex(s => s.name === selService.name);
     const payload = { name: document.getElementById('fn').value.trim() + ' ' + document.getElementById('ln').value.trim(), email: document.getElementById('em').value.trim().toLowerCase(), tel: document.getElementById('ph').value.trim(), soin: selService.name, date: document.getElementById('dt').value, time: document.getElementById('booking-time').value, expert: document.getElementById('ms').value, duration: prestSel[index] || selService.chosenDur || '60' };
-    if (document.querySelector('input[name="pay"]:checked').value === 'card' && getDeposit(selService) > 0) {
+    const payMethod = document.querySelector('input[name="pay"]:checked').value;
+    payload.requestId = await requestIdFor({ ...payload, payMethod });
+    if (payMethod === 'card' && getDeposit(selService) > 0) {
       const data = await api('create-checkout', 'POST', payload);
       const url = new URL(data.url);
       if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com') throw new Error('Adresse de paiement invalide.');
@@ -192,7 +209,7 @@ function testSmsSend() { saveSmsConfig(); }
 function queueSms() { return false; }
 function runLoyalty() { alert('Aucune campagne envoyée. L’envoi nécessitera un fournisseur de messagerie connecté et les consentements clients.'); }
 // Les formulaires existants restent utilisés ; sauvegardes séquentielles et erreurs visibles.
-const mutations = { saveServices: 'catalog', saveCategories: 'catalog', publishPromo: 'promos', clearPromo: 'promos', saveNewsForm: 'news', delNews: 'news', saveClientForm: 'clients', saveSeuilsAlerte: 'inventaire', validerInventaire: 'inventaire', toggleMasseuse: 'team', saveAiForm: 'ai', saveWaLink: 'admin' };
+const mutations = { saveServiceForm: 'catalog', delService: 'catalog', toggleCategory: 'catalog', publishPromo: 'promos', clearPromo: 'promos', saveNewsForm: 'news', delNews: 'news', saveClientForm: 'clients', saveSeuilsAlerte: 'inventaire', validerInventaire: 'inventaire', toggleMasseuse: 'team', saveAiForm: 'ai', saveWaLink: 'admin' };
 for (const [name, view] of Object.entries(mutations)) {
   const original = window[name];
   window[name] = function (...args) {
@@ -211,7 +228,7 @@ for (const [name, view] of Object.entries(mutations)) {
         renderPublic(); renderAllPro(); renderStats(); syncLabel('Données synchronisées');
         savedAlert('Modifications enregistrées pour tous les appareils.');
       } catch (error) {
-        applyState(before); renderPublic(); renderAllPro(); syncLabel('Enregistrement échoué'); savedAlert(error.message);
+        applyState(before); updatePublicCache(before); renderPublic(); renderAllPro(); syncLabel('Enregistrement échoué'); savedAlert(error.message);
       }
     }).catch(error => { syncLabel('Enregistrement échoué'); alert(error.message); });
     return saveQueue;

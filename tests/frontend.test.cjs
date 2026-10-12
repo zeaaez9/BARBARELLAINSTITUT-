@@ -1,30 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const vm = require('node:vm');
-const fs = require('node:fs');
-const { parseHTML } = require('linkedom');
-const defaults = require('../lib/defaults');
-const html = fs.readFileSync(require.resolve('../index.html'), 'utf8');
-const operations = fs.readFileSync(require.resolve('../operations.js'), 'utf8');
-async function harness(search = '') {
-  const { document, Event } = parseHTML(html), requests = [], alerts = [], storage = new Map();
-  // LinkeDOM expose seulement le getter : simuler le setter HTMLSelectElement natif.
-  for (const select of document.querySelectorAll('select')) Object.defineProperty(select, 'value', {
-    get() { const option = this.querySelector('option[selected]') || this.querySelector('option'); return option?.getAttribute('value') ?? option?.textContent ?? ''; },
-    set(value) { for (const option of this.querySelectorAll('option')) { const match = (option.getAttribute('value') ?? option.textContent) === value; if (match) option.setAttribute('selected', ''); else option.removeAttribute('selected'); } }, configurable: true
-  });
-  const context = { document, Event, console, URL, URLSearchParams, Intl, Date, Object, JSON, Promise, location: { origin: 'https://barbarella.netlify.app', pathname: '/', search, hash: '', assign(url) { context.redirect = url; } }, history: { replaceState() {} }, localStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key) }, alert: message => alerts.push(message), confirm: () => true, setTimeout: () => 1, setInterval: () => 1, clearInterval() {}, fetch: async (url, opts = {}) => {
-    const body = opts.body ? JSON.parse(opts.body) : null; requests.push({ url, body, method: opts.method });
-    const data = url.includes('site-state') ? { state: defaults, versions: {}, configured: true, payments: { enabled: true, mode: 'test' }, bookings: [], users: [] } : url.endsWith('/auth') ? { user: { id: 1, login: 'admin', name: 'Admin', role: 'admin' } } : url.endsWith('/create-checkout') ? { url: 'https://checkout.stripe.com/test' } : url.endsWith('/checkout-status') ? { paid: true, test: true } : { ok: true, version: 'new-version', id: 'new-booking' };
-    return { ok: true, status: 200, json: async () => data };
-  } };
-  context.window = context;
-  vm.createContext(context);
-  for (const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) vm.runInContext(match[1], context);
-  vm.runInContext(operations, context);
-  await new Promise(resolve => setImmediate(resolve));
-  return { context, document, requests, alerts, run: code => vm.runInContext(code, context) };
-}
+const { harness } = require('./helpers/frontend.cjs');
 test('page and server integration initialize without script errors', async () => {
   const h = await harness(); assert.ok(h.document.getElementById('prest-detail').innerHTML); assert.ok(h.requests.some(r => r.url.endsWith('/site-state')));
   assert.equal(h.document.querySelector('#cc'), null); assert.equal(h.run('users.length'), 0); assert.equal(h.run('clients.length'), 0);
@@ -58,4 +34,36 @@ test('chat text rendered without HTML injection', async () => {
 test('catalog mutation persists to backend and does not claim local-only success', async () => {
   const h = await harness(); h.run("currentUser={role:'admin'}"); h.document.getElementById('pr-title').value = 'Offre nouvelle'; h.document.getElementById('pr-desc').value = 'Texte';
   await h.run('publishPromo()'); const request = h.requests.find(r => r.method === 'PUT' && r.body.field === 'promo'); assert.equal(request.body.value.title, 'Offre nouvelle'); assert.ok(h.alerts.some(x => /tous les appareils/.test(x)));
+});
+test('editing a service sends its new price to the server and survives refresh', async () => {
+  const h = await harness(); h.run("currentUser={id:1,role:'admin'};openServiceForm(0)"); h.document.getElementById('svc-price').value = '181';
+  await h.run('saveServiceForm()');
+  const writes = h.requests.filter(r => r.method === 'PUT'); assert.equal(writes.length, 1); assert.equal(writes[0].body.field, 'services'); assert.equal(writes[0].body.value[0].price, 181);
+  await h.run('refreshPublic()'); assert.equal(h.run('services[0].price'), 181);
+});
+test('creating and deleting services persist through real form entry points', async () => {
+  const h = await harness(); h.run("currentUser={id:1,role:'admin'};openServiceForm(null)");
+  h.document.getElementById('svc-name').value = 'Nouveau soin'; h.document.getElementById('svc-price').value = '50';
+  await h.run('saveServiceForm()'); assert.ok(h.serverState.services.some(s => s.name === 'Nouveau soin'));
+  await h.run("delService(services.findIndex(s=>s.name==='Nouveau soin'))"); assert.ok(!h.serverState.services.some(s => s.name === 'Nouveau soin'));
+});
+test('category visibility persists across server refresh', async () => {
+  const h = await harness(); h.run("currentUser={role:'admin'}"); await h.run("toggleCategory('massage',false)");
+  assert.equal(h.serverState.categoriesEnabled.massage, false); await h.run('refreshPublic()'); assert.equal(h.run('categoriesEnabled.massage'), false);
+});
+test('failed catalog save rolls back runtime and cached values without success notice', async () => {
+  const h = await harness(); h.run("currentUser={role:'admin'};openServiceForm(0)"); h.document.getElementById('svc-price').value = '181';
+  const original = h.context.fetch; h.context.fetch = async (url, opts = {}) => opts.method === 'PUT' ? { ok: false, status: 409, json: async () => ({ error: 'Conflit de version' }) } : original(url, opts);
+  await h.run('saveServiceForm()'); assert.equal(h.run('services[0].price'), 180); assert.equal(JSON.parse(h.storage.get('bb_svc_v7'))[0].price, 180);
+  assert.ok(h.alerts.includes('Conflit de version')); assert.ok(!h.alerts.some(message => /tous les appareils/.test(message)));
+});
+test('dashboard counts live payments only and labels test payments separately', async () => {
+  const h = await harness(); h.run("resas=[{st:'paid',acompte:29.99,paymentMode:'live'},{st:'paid',acompte:299.99,paymentMode:'test'},{st:'paid',acompte:99}];renderStats()");
+  const stats = h.document.getElementById('live-stats'); assert.match(stats.children[0].textContent, /29.99/); assert.match(stats.children[2].textContent, /test/); assert.equal(stats.children[2].querySelector('b').textContent, '1');
+});
+test('retry reference survives reload without storing customer details', async () => {
+  const h = await harness(); const first = await h.run("requestIdFor({name:'Customer',email:'private@example.test',time:'15:00',payMethod:'card'})");
+  h.run('pendingRequest=null'); const second = await h.run("requestIdFor({name:'Customer',email:'private@example.test',time:'15:00',payMethod:'card'})");
+  assert.equal(first, second); assert.ok(!h.requestStorage.get('bb_booking_request_v2').includes('private@example.test'));
+  assert.notEqual(await h.run("requestIdFor({name:'Customer',email:'private@example.test',time:'16:00',payMethod:'card'})"), first);
 });

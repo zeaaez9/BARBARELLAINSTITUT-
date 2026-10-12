@@ -14,7 +14,7 @@ exports.handler = r.wrap(async event => {
   await r.rateLimit(db, event, 'login', 5);
   const body = r.parse(event);
   const login = r.text(body.login, 80).toLowerCase();
-  const password = r.text(body.password, 200);
+  const password = r.password(body.password);
   let user;
   if (login === 'admin') {
     const expected = process.env.BARBARELLA_ADMIN_PASSWORD;

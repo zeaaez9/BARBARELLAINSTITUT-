@@ -30,4 +30,6 @@ La demande inclut soin, durée sélectionnée, coordonnées, date, heure et expe
 L’Espace Pro utilise une session serveur avec cookie HttpOnly. Les accès sont créés par un administrateur ; mots de passe dérivés par scrypt. Les modifications des prestations, profils, actualités, promotions, stocks et configurations d’agents sont partagées. Les demandes apparaissent dans le dashboard et l’agenda. Actualisation toutes les 60 secondes pendant l’utilisation de l’espace pro.
 
 ## Limites actuelles et déploiement
+Le contre-audit et les corrections du 12 octobre sont décrits dans `AUDIT-2026-10-12.md`. Les références de demandes sont désormais obligatoires pour les API de réservation et de Checkout ; le frontend les fournit et les conserve lors d’une nouvelle tentative. Les statistiques distinguent les acomptes Live des paiements Test.
+
 Voir `AUDIT-2026-10-11.md`. Les tests locaux utilisent un stockage et Stripe simulés ; ils ne prouvent pas la configuration du compte Netlify ni un encaissement réel. La publication et un essai complet sur Netlify restent à effectuer après connexion du compte et saisie des secrets. Aucun test avec carte bancaire réelle n’est automatisé.
