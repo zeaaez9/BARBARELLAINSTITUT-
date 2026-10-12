@@ -206,3 +206,21 @@ test('actual browser forms persist price and category through real API handlers'
   await h.run("toggleCategory('massage',false)"); assert.equal((await db.get('public/categoriesEnabled')).massage, false);
   await h.run('refreshPublic()'); assert.equal(h.run('services[0].price'), 181); assert.equal(h.run('categoriesEnabled.massage'), false);
 });
+test('existing administrator configuration with eight characters remains supported', async () => {
+  reset(); const original = process.env.BARBARELLA_ADMIN_PASSWORD; process.env.BARBARELLA_ADMIN_PASSWORD = 'Admin123';
+  try { assert.equal((await handlers.auth(event('POST', { login: 'admin', password: 'Admin123' }))).statusCode, 200); }
+  finally { process.env.BARBARELLA_ADMIN_PASSWORD = original; }
+});
+test('restricted live Stripe keys retain live mode and checkout settings', async () => {
+  reset(); const original = process.env.STRIPE_SECRET_KEY; process.env.STRIPE_SECRET_KEY = 'rk_live_test'; process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test';
+  try {
+    const response = await handlers['create-checkout'](event('POST', input)); assert.equal(response.statusCode, 200);
+    const booking = await r.privateGet(db, 'bookings/' + checkoutPayload.metadata.booking_id); assert.equal(booking.paymentMode, 'live');
+    assert.equal(checkoutPayload.payment_method_types, undefined);
+    const state = JSON.parse((await handlers['site-state'](event('GET'))).body); assert.equal(state.payments.mode, 'live'); assert.equal(state.payments.enabled, true);
+  } finally { process.env.STRIPE_SECRET_KEY = original; }
+});
+test('function wrapper preserves Netlify context', async () => {
+  const handler = r.wrap(async (event, context) => r.json(200, { marker: context.marker }));
+  const result = await handler(event('GET'), { marker: 'netlify-context' }); assert.equal(JSON.parse(result.body).marker, 'netlify-context');
+});

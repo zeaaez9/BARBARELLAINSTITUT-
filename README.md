@@ -15,7 +15,7 @@ Netlify : commande de build définie dans `netlify.toml`, publication `dist`, fo
 
 ## Configuration Netlify
 Saisir les valeurs uniquement dans les variables d’environnement Netlify, accessibles aux Functions :
-- `BARBARELLA_ADMIN_PASSWORD` : au moins 12 caractères ; aucun mot de passe fourni dans le code.
+- `BARBARELLA_ADMIN_PASSWORD` : au moins 8 caractères ; aucun mot de passe fourni dans le code.
 - `BARBARELLA_SESSION_SECRET` : secret aléatoire d’au moins 32 caractères. Conserver sa valeur : elle sert aussi au chiffrement des données. La remplacer sans migration rend les anciennes données illisibles.
 - `STRIPE_SECRET_KEY` : clé Test ou Live du compte de l’institut.
 - `STRIPE_WEBHOOK_SECRET` : signature du webhook correspondant au même mode.

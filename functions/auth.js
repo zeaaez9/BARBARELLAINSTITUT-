@@ -18,7 +18,7 @@ exports.handler = r.wrap(async event => {
   let user;
   if (login === 'admin') {
     const expected = process.env.BARBARELLA_ADMIN_PASSWORD;
-    if (!expected || expected.length < 12) r.fail(503, 'Mot de passe administrateur à configurer sur Netlify (12 caractères minimum).');
+    if (!expected || expected.length < 8) r.fail(503, 'Mot de passe administrateur à configurer sur Netlify (8 caractères minimum).');
     if (r.equal(password, expected)) user = { id: 1, login: 'admin', name: 'Admin', role: 'admin' };
   } else {
     user = (await r.privateGet(db, 'users') || []).find(u => u.login === login);

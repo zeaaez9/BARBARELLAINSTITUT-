@@ -12,8 +12,8 @@ exports.handler = r.wrap(async event => {
       const entry = await db.getWithMetadata('public/' + key, { type: 'json' });
       state[key] = entry ? entry.data : defaults[key]; versions[key] = entry?.etag ?? null;
     }
-    const enabled = /^sk_(test|live)_/.test(process.env.STRIPE_SECRET_KEY || '') && /^whsec_/.test(process.env.STRIPE_WEBHOOK_SECRET || '') && (process.env.BARBARELLA_SESSION_SECRET || '').length >= 32;
-    return r.json(200, { state, versions, configured: Array.isArray(state.services), payments: { enabled, mode: process.env.STRIPE_SECRET_KEY?.startsWith('sk_live_') ? 'live' : 'test' } });
+    const enabled = /^(sk|rk)_(test|live)_/.test(process.env.STRIPE_SECRET_KEY || '') && /^whsec_/.test(process.env.STRIPE_WEBHOOK_SECRET || '') && (process.env.BARBARELLA_SESSION_SECRET || '').length >= 32;
+    return r.json(200, { state, versions, configured: Array.isArray(state.services), payments: { enabled, mode: /^(sk|rk)_live_/.test(process.env.STRIPE_SECRET_KEY || '') ? 'live' : 'test' } });
   }
   const { user } = await r.authorize(event);
   const allowed = user.role === 'employee' ? employeeFields : publicFields.concat(privateFields);
