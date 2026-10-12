@@ -4,8 +4,8 @@
  * → { text }
  */
 
+const r = require('../lib/runtime');
 const headers = {
-  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Content-Type': 'application/json'
@@ -18,13 +18,15 @@ const ACTION_HINTS = {
   test: 'Réponds en une phrase que tu es l’agent actif de l’Institut Barbarella, ton discret.'
 };
 
-exports.handler = async (event) => {
+exports.handler = r.wrap(async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, headers, body: '' };
   }
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'POST only' }) };
   }
+  const { db } = await r.authorize(event, ['admin', 'manager']);
+  await r.rateLimit(db, event, 'agent', 10);
 
   const apiKey = process.env.XAI_API_KEY;
   if (!apiKey) {
@@ -43,8 +45,9 @@ exports.handler = async (event) => {
   }
 
   const action = body.action || 'test';
-  const agentPrompt = body.prompt || '';
-  const agentName = body.agentName || 'Agent';
+  const agentPrompt = r.text(body.prompt || '', 5000);
+  const agentName = r.text(body.agentName || 'Agent', 100);
+  if (body.context) r.text(body.context, 5000);
   const hint = ACTION_HINTS[action] || ACTION_HINTS.test;
   const model = process.env.GROK_MODEL || 'grok-3-mini';
 
@@ -67,7 +70,8 @@ Règles : français, élégant, jamais vulgaire, jamais de données clients inve
         ],
         temperature: 0.7,
         max_tokens: 600
-      })
+      }),
+      signal: AbortSignal.timeout(20000)
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
@@ -75,7 +79,7 @@ Règles : français, élégant, jamais vulgaire, jamais de données clients inve
       return {
         statusCode: 502,
         headers,
-        body: JSON.stringify({ error: data.error?.message || 'Erreur Grok', text: null, fallback: true })
+        body: JSON.stringify({ error: 'Agent momentanément indisponible', text: null, fallback: true })
       };
     }
     const text = data.choices?.[0]?.message?.content?.trim() || '';
@@ -85,7 +89,7 @@ Règles : français, élégant, jamais vulgaire, jamais de données clients inve
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: err.message, text: null, fallback: true })
+      body: JSON.stringify({ error: 'Agent momentanément indisponible', text: null, fallback: true })
     };
   }
-};
+});

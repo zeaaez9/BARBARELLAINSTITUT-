@@ -1,43 +1,16 @@
-# Paiements réels — checklist
+# Paiements Stripe
+Configurer `STRIPE_SECRET_KEY` et `STRIPE_WEBHOOK_SECRET` dans Netlify, jamais dans une conversation.
 
-## État actuel (2026-10-01)
-- Site : https://barbarella.netlify.app ✅
-- pk_live_ : intégrée côté site ✅
-- sk_live_ : **MANQUANTE** (Netlify a encore sk_test_) ❌
-- Webhook : version Test uniquement
-- Compte Stripe connecté à Grok : Test seulement
+1. Utiliser d’abord le mode Test.
+2. Configurer le webhook : `https://barbarella.netlify.app/.netlify/functions/stripe-webhook`.
+3. Événements : `checkout.session.completed` et `checkout.session.async_payment_succeeded`.
+4. Après déploiement, vérifier une demande de test : redirection Stripe, retour vérifié, demande visible dans l’agenda.
+5. Passer au mode Live seulement lorsque le compte Stripe est activé, avec la clé serveur et le secret webhook Live correspondants, puis redéployer.
 
-## Pour encaisser demain (ordre strict)
+La page reçoit une URL Stripe Checkout : aucune clé publiable Stripe n’est nécessaire pour cette redirection. Les anciennes options de clé publiable et proxy dans le formulaire sont conservées visuellement mais n’autorisent pas le paiement : la configuration du serveur fait foi.
 
-### 1. Stripe Production
-1. dashboard.stripe.com → mode **Production**
-2. Compte activé (identité + IBAN validés)
-3. Copier **sk_live_…** (même compte que pk_live_ …UJcjq4Tz9iBeoh…)
+Montants serveur : massage 29,99 €, manucure 9,99 €, épilation 4,99 € ou 29,99 € pour intégrale. Les produits sont vendus sur place.
 
-### 2. Envoyer à Grok / coller ici
-```
-sk_live_...
-```
+Un acompte payé n’est pas une garantie de disponibilité : le créneau demandé doit être validé par l’institut. Aucun SMS ni email automatique n’est annoncé comme envoyé. En cas d’erreur de stockage, le webhook renvoie 500 pour demander une nouvelle livraison par Stripe.
 
-### 3. Actions automatiques (Grok)
-- Remplacer STRIPE_SECRET_KEY sur Netlify
-- Créer webhook Live → barbarella.netlify.app/.netlify/functions/stripe-webhook
-- Mettre STRIPE_WEBHOOK_SECRET (whsec Live)
-- Redeploy
-
-### 4. Test réel
-- https://barbarella.netlify.app → Réserver → Carte
-- Petite somme (ex. 4,99 € épilation)
-- Vraie carte → apparaît dans Stripe Production → Paiements
-
-## Réseaux déjà en place
-- WhatsApp communauté (3 liens)
-- Instagram : https://www.instagram.com/glora_institut
-
-## Accès Espace Pro
-- admin / (changer le mot de passe jour 1)
-
-## Ne pas mélanger
-- pk_live + sk_test = erreur Stripe
-- pk_test + sk_live = erreur Stripe
-- Toujours la paire du même compte
+Aucun paiement réel n’a été exécuté pendant l’audit. L’état Test/Live du compte Netlify n’a pas été vérifié.

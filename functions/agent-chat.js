@@ -10,8 +10,8 @@
  * Réponse : { reply }
  */
 
+const r = require('../lib/runtime');
 const headers = {
-  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Content-Type': 'application/json'
@@ -47,13 +47,14 @@ Deposits: massages €29.99 · waxing €4.99 (full €29.99) · manicure €9.9
 Guide guests to the Reserve section. Complaints: empathy + manager within 24h.
 Short answers (2–5 sentences).`;
 
-exports.handler = async (event) => {
+exports.handler = r.wrap(async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, headers, body: '' };
   }
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'POST only' }) };
   }
+  await r.rateLimit(r.store(event), event, 'chat', 10);
 
   const apiKey = process.env.XAI_API_KEY;
   if (!apiKey) {
@@ -75,12 +76,12 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'JSON invalide' }) };
   }
 
-  const message = (body.message || '').trim();
+  const message = typeof body.message === 'string' ? body.message.trim() : '';
   if (!message || message.length > 2000) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'message invalide' }) };
   }
 
-  const lang = (body.lang || 'fr').toLowerCase();
+  const lang = typeof body.lang === 'string' ? body.lang.toLowerCase() : 'fr';
   const system = lang === 'fr' ? SYSTEM_FR : SYSTEM_EN;
   const model = process.env.GROK_MODEL || 'grok-3-mini';
 
@@ -106,7 +107,8 @@ exports.handler = async (event) => {
         messages,
         temperature: 0.55,
         max_tokens: 450
-      })
+      }),
+      signal: AbortSignal.timeout(15000)
     });
 
     const data = await res.json().catch(() => ({}));
@@ -116,7 +118,7 @@ exports.handler = async (event) => {
         statusCode: 502,
         headers,
         body: JSON.stringify({
-          error: data.error?.message || 'Erreur API Grok',
+          error: 'Assistant momentanément indisponible',
           reply: null,
           fallback: true
         })
@@ -138,10 +140,10 @@ exports.handler = async (event) => {
       statusCode: 500,
       headers,
       body: JSON.stringify({
-        error: err.message,
+        error: 'Assistant momentanément indisponible',
         reply: null,
         fallback: true
       })
     };
   }
-};
+});
