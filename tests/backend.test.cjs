@@ -121,6 +121,13 @@ test('webhook persistence failure returns 500 for Stripe retry; bad signature re
   assert.equal((await handlers['stripe-webhook'](event('POST', notification))).statusCode, 200);
   const malformed = event('POST'); malformed.body = 'not-a-signed-event'; assert.equal((await handlers['stripe-webhook'](malformed)).statusCode, 400);
 });
+test('admin password of nine characters is accepted', async () => {
+  reset(); const original = process.env.BARBARELLA_ADMIN_PASSWORD;
+  process.env.BARBARELLA_ADMIN_PASSWORD = 'abcd12345';
+  assert.equal((await handlers.auth(event('POST', { login: 'admin', password: 'abcd12345' }))).statusCode, 200);
+  assert.equal((await handlers.auth(event('POST', { login: 'admin', password: 'wrongpass' }))).statusCode, 401);
+  process.env.BARBARELLA_ADMIN_PASSWORD = original;
+});
 test('login throttling and missing configuration fail closed', async () => {
   reset(); for (let i = 0; i < 5; i++) await handlers.auth(event('POST', { login: 'admin', password: 'wrong' }));
   assert.equal((await handlers.auth(event('POST', { login: 'admin', password: 'wrong' }))).statusCode, 429);
