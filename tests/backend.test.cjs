@@ -91,6 +91,13 @@ test('invalid booking inputs and disabled services rejected', async () => {
   for (const change of [{ date: '2000-01-01' }, { date: '2099-02-30' }, { time: '04:00' }, { soin: 'Unknown' }, { name: {} }, { expert: 'Unknown' }]) assert.equal((await handlers.reservations(event('POST', { ...input, ...change }))).statusCode, 400);
   await db.setJSON('public/categoriesEnabled', { massage: false }); assert.equal((await handlers.reservations(event('POST', input))).statusCode, 400);
 });
+test('restricted live key opens checkout and is advertised as live', async () => {
+  reset(); process.env.STRIPE_SECRET_KEY = 'rk_live_restricted'; process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test';
+  assert.equal((await handlers['create-checkout'](event('POST', input))).statusCode, 200);
+  assert.equal(checkoutPayload.payment_method_types, undefined);
+  const pub = JSON.parse((await handlers['site-state'](event('GET'))).body);
+  assert.equal(pub.payments.enabled, true); assert.equal(pub.payments.mode, 'live');
+});
 test('checkout amount and return URL controlled by server; payment verified with token', async () => {
   reset(); process.env.STRIPE_SECRET_KEY = 'sk_test_test'; process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test';
   const response = await handlers['create-checkout'](event('POST', input)); assert.equal(response.statusCode, 200);

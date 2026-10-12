@@ -33,7 +33,9 @@ exports.handler = r.wrap(async event => {
       const entry = await db.getWithMetadata('public/' + key, { type: 'json' });
       state[key] = entry ? entry.data : defaults[key]; versions[key] = entry?.etag ?? null;
     }
-    return r.json(200, { state, versions, configured: Array.isArray(state.services), payments: { enabled: !!process.env.STRIPE_SECRET_KEY, mode: process.env.STRIPE_SECRET_KEY?.startsWith('sk_live_') ? 'live' : 'test' } });
+    const stripeKey = process.env.STRIPE_SECRET_KEY || '';
+    const payments = { enabled: /^(sk|rk)_(test|live)_/.test(stripeKey) && /^whsec_/.test(process.env.STRIPE_WEBHOOK_SECRET || ''), mode: stripeKey.includes('_live_') ? 'live' : 'test' };
+    return r.json(200, { state, versions, configured: Array.isArray(state.services), payments });
   }
   const { user } = await r.authorize(event);
   const allowed = user.role === 'employee' ? employeeFields : publicFields.concat(privateFields);
