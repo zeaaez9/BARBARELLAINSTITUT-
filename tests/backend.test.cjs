@@ -24,7 +24,7 @@ class FakeStripe {
 const originalLoad = Module._load;
 Module._load = function (name, ...args) { if (name === '@netlify/blobs') return { getStore: () => db, connectLambda() {} }; if (name === 'stripe') return FakeStripe; return originalLoad.call(this, name, ...args); };
 const r = require('../lib/runtime');
-const handlers = Object.fromEntries(['auth', 'site-state', 'users', 'reservations', 'create-checkout', 'checkout-status', 'stripe-webhook', 'agent-run'].map(name => [name, require('../functions/' + name).handler]));
+const handlers = Object.fromEntries(['auth', 'site-state', 'users', 'reservations', 'create-checkout', 'checkout-status', 'stripe-webhook', 'agent-run', 'meta-webhook'].map(name => [name, require('../functions/' + name).handler]));
 const bookings = require('../lib/bookings');
 Module._load = originalLoad;
 process.env.URL = 'https://barbarella.netlify.app';
@@ -136,6 +136,27 @@ test('webhook persistence failure returns 500 for Stripe retry; bad signature re
   db.failWrites = true; assert.equal((await handlers['stripe-webhook'](event('POST', notification))).statusCode, 500); db.failWrites = false;
   assert.equal((await handlers['stripe-webhook'](event('POST', notification))).statusCode, 200);
   const malformed = event('POST'); malformed.body = 'not-a-signed-event'; assert.equal((await handlers['stripe-webhook'](malformed)).statusCode, 400);
+});
+test('meta webhook accepts the chosen token and a signed WhatsApp event once', async () => {
+  reset();
+  process.env.META_VERIFY_TOKEN = 'verify-token-for-tests-only-32b';
+  process.env.META_APP_SECRET = 'app-secret-for-tests';
+  process.env.META_WHATSAPP_TOKEN = 'token';
+  process.env.META_PHONE_NUMBER_ID = '123456';
+  const verified = await handlers['meta-webhook']({ httpMethod: 'GET', queryStringParameters: { 'hub.mode': 'subscribe', 'hub.verify_token': process.env.META_VERIFY_TOKEN, 'hub.challenge': '987654' } });
+  assert.equal(verified.statusCode, 200); assert.equal(verified.body, '987654');
+  assert.equal((await handlers['meta-webhook']({ httpMethod: 'GET', queryStringParameters: { 'hub.mode': 'subscribe', 'hub.verify_token': 'wrong', 'hub.challenge': '987654' } })).statusCode, 403);
+  const body = JSON.stringify({ object: 'whatsapp_business_account', entry: [{ changes: [{ value: { messages: [{ id: 'wamid.1', from: '33612345678', type: 'text', text: { body: 'bonjour' } }] } }] }] });
+  const signature = 'sha256=' + require('node:crypto').createHmac('sha256', process.env.META_APP_SECRET).update(body).digest('hex');
+  let calls = 0;
+  const original = global.fetch;
+  global.fetch = async () => { calls += 1; return { ok: true }; };
+  try {
+    assert.equal((await handlers['meta-webhook']({ httpMethod: 'POST', headers: { 'x-hub-signature-256': signature }, body })).statusCode, 200);
+    assert.equal((await handlers['meta-webhook']({ httpMethod: 'POST', headers: { 'x-hub-signature-256': signature }, body })).statusCode, 200);
+    assert.equal(calls, 1);
+    assert.equal((await handlers['meta-webhook']({ httpMethod: 'POST', headers: { 'x-hub-signature-256': 'sha256=00' }, body })).statusCode, 403);
+  } finally { global.fetch = original; }
 });
 test('admin password of nine characters is accepted', async () => {
   reset(); const original = process.env.BARBARELLA_ADMIN_PASSWORD;
