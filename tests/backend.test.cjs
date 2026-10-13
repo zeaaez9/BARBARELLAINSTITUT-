@@ -86,6 +86,22 @@ test('onsite booking durable with date, time and expert; no paid status invented
   const saved = await r.privateGet(db, 'bookings/' + JSON.parse(response.body).id);
   assert.equal(saved.date, input.date); assert.equal(saved.time, input.time); assert.equal(saved.st, 'wait'); assert.equal(saved.paymentMethod, 'onsite'); assert.equal(saved.price, 100);
 });
+test('a requested slot is kept and refused once every expert is taken', async () => {
+  reset();
+  for (let i = 0; i < 3; i++) assert.equal((await handlers.reservations(event('POST', { ...input, email: 'client' + i + '@example.test' }))).statusCode, 201);
+  assert.equal((await handlers.reservations(event('POST', input))).statusCode, 409);
+  assert.equal((await handlers.reservations(event('POST', { ...input, time: '16:00', email: 'later@example.test' }))).statusCode, 201);
+  reset();
+  assert.equal((await handlers.reservations(event('POST', { ...input, duration: '60', expert: 'Déesse Farah' }))).statusCode, 201);
+  assert.equal((await handlers.reservations(event('POST', { ...input, time: '15:30', expert: 'Déesse Farah', email: 'overlap@example.test' }))).statusCode, 409);
+  assert.equal((await handlers.reservations(event('POST', { ...input, time: '15:30', expert: 'Sabrina', email: 'free@example.test' }))).statusCode, 201);
+  assert.equal((await handlers.reservations(event('POST', { ...input, time: '19:30', duration: '60', email: 'late@example.test' }))).statusCode, 400);
+});
+test('staff password of eight characters is accepted', async () => {
+  reset(); const cookie = await login();
+  assert.equal((await handlers.users(event('POST', { login: 'farah', name: 'Farah', role: 'manager', password: 'abcd1234' }, cookie))).statusCode, 200);
+  assert.equal((await handlers.users(event('POST', { login: 'aleks', name: 'Aleks', role: 'employee', password: 'short' }, cookie))).statusCode, 400);
+});
 test('invalid booking inputs and disabled services rejected', async () => {
   reset();
   for (const change of [{ date: '2000-01-01' }, { date: '2099-02-30' }, { time: '04:00' }, { soin: 'Unknown' }, { name: {} }, { expert: 'Unknown' }]) assert.equal((await handlers.reservations(event('POST', { ...input, ...change }))).statusCode, 400);

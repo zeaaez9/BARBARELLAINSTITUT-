@@ -15,7 +15,7 @@ exports.handler = r.wrap(async event => {
   const existing = users.find(u => u.id === body.id);
   if (users.some(u => u.login === login && u !== existing)) r.fail(409, 'Identifiant déjà utilisé.');
   const password = typeof body.password === 'string' ? body.password : '';
-  if ((!existing || password) && (password.length < 12 || password.length > 200)) r.fail(400, 'Mot de passe : 12 à 200 caractères.');
+  if ((!existing || password) && (password.length < 8 || password.length > 200)) r.fail(400, 'Mot de passe : 8 à 200 caractères.');
   const user = { id: existing?.id || Date.now(), login, name, role: body.role, hash: password ? r.passwordHash(password) : existing.hash };
   if (existing) users[users.indexOf(existing)] = user; else users.push(user);
   await r.privateSet(db, 'users', users);

@@ -92,7 +92,7 @@ function renderStats() {
 }
 function renderRealAgenda() {
   const bookings = resas.filter(r => r.date).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
-  document.getElementById('agenda').innerHTML = bookings.map(r => '<div class="aday"><h5>' + escapeHTML(r.date + ' · ' + r.time) + '</h5><div class="slot">' + escapeHTML(r.client) + '</div><div>' + escapeHTML(r.expert) + '</div><div>' + escapeHTML(r.soin) + '</div><small>' + (r.st === 'paid' ? 'Acompte vérifié' : 'Sans paiement en ligne') + ' · créneau à valider</small></div>').join('') || '<p>Aucune demande de rendez-vous enregistrée.</p>';
+  document.getElementById('agenda').innerHTML = bookings.map(r => '<div class="aday"><h5>' + escapeHTML(r.date + ' · ' + r.time) + '</h5><div class="slot">' + escapeHTML(r.client) + '</div><div>' + escapeHTML(r.expert) + '</div><div>' + escapeHTML(r.soin) + '</div><small>' + (r.st === 'paid' ? 'Acompte vérifié' : 'Sans paiement en ligne') + ' · créneau retenu</small></div>').join('') || '<p>Aucune demande de rendez-vous enregistrée.</p>';
 }
 function showBookingResult(text) {
   document.getElementById('book-form').classList.add('hidden'); document.getElementById('sum-box').classList.add('hidden');
@@ -114,7 +114,7 @@ document.getElementById('book-form').addEventListener('submit', async event => {
       location.assign(url.href);
     } else {
       await api('reservations', 'POST', payload);
-      showBookingResult('Votre demande est enregistrée. L’institut vous contactera pour valider le créneau ; le paiement se fera sur place.');
+      showBookingResult('Votre demande est enregistrée et le créneau est retenu. L’institut vous contactera pour confirmer ; le paiement se fera sur place.');
     }
   } catch (error) { alert(error.message); }
   finally { button.disabled = false; button.textContent = 'Envoyer ma demande'; }
@@ -128,7 +128,7 @@ async function handleStripeReturn() {
     try {
       const result = await api('checkout-status', 'POST', request);
       if (!result.paid) throw new Error('Paiement encore en attente. Contactez l’institut avant de réessayer.');
-      showBookingResult(result.test ? 'Paiement de test vérifié : aucun montant réel encaissé. Demande reçue, créneau à valider par l’institut.' : 'Acompte vérifié et demande enregistrée. L’institut vous contactera pour valider le créneau souhaité.');
+      showBookingResult(result.test ? 'Paiement de test vérifié : aucun montant réel encaissé. Le créneau est retenu.' : 'Acompte vérifié et créneau retenu. L’institut vous contactera pour confirmer.');
     } catch (error) { alert(error.message); }
   } else if (params.get('paid') === '1') {
     history.replaceState({}, '', location.pathname + '#reserver');
@@ -174,6 +174,7 @@ async function saveUserForm() {
   if (!currentUser || currentUser.role !== 'admin') { alert('Seul un administrateur peut gérer les accès.'); return; }
   const password = document.getElementById('u-pass').value;
   if (password !== document.getElementById('u-pass2').value) { alert('Mots de passe différents.'); return; }
+  if (password && password.length < 8) { alert('Mot de passe : 8 caractères minimum.'); return; }
   try { await api('users', 'POST', { id: editUserId, login: document.getElementById('u-login').value, name: document.getElementById('u-name').value, role: document.getElementById('u-role').value, password }); await refreshPro(); closeUserForm(); alert('Accès enregistré côté serveur.'); }
   catch (error) { alert(error.message); }
 }
