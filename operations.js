@@ -135,7 +135,12 @@ document.getElementById('book-form').addEventListener('submit', async event => {
       showBookingResult('Votre demande est enregistrée et le créneau est retenu. L’institut vous contactera pour confirmer ; le paiement se fera sur place.');
     }
   } catch (error) { alert(error.message); }
-  finally { button.disabled = false; button.textContent = 'Envoyer ma demande'; }
+  finally {
+    button.disabled = false;
+    const deposit = typeof getDeposit === 'function' ? getDeposit(selService) : 0;
+    const onsite = document.querySelector('input[name="pay"]:checked')?.value === 'onsite';
+    button.textContent = typeof payLabel === 'function' ? payLabel(selService && selService.cat, deposit, onsite) : 'Payer l’acompte';
+  }
 });
 async function handleStripeReturn() {
   const params = new URLSearchParams(location.search);

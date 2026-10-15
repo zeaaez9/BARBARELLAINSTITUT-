@@ -433,7 +433,7 @@
         </div>
         <div class="panel">
           <h2>Stripe · Paiement acomptes</h2>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Suggestion 1 &amp; 2 : config Dashboard + paiement carte à la réservation. La clé secrète ne doit <strong>jamais</strong> être dans le site — utilisez un proxy serveur (Netlify Function, Cloudflare Worker, PHP…).</p>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Le paiement par carte est déjà actif sur le serveur. Ne collez aucune clé secrète dans cette page.</p>
           <div class="fg"><label><input type="checkbox" id="stripe-enabled"> Activer Stripe pour les acomptes (mode Carte)</label></div>
           <div class="row2" style="margin-bottom:10px">
             <div class="fg"><label>Clé publiable (pk_test_… ou pk_live_…)</label><input id="stripe-pk" placeholder="pk_test_..." autocomplete="off"></div>
@@ -446,27 +446,15 @@
             <button type="button" class="btn btn-ghost btn-sm" onclick="setStripeProxyLocal()">① Test local (netlify dev)</button>
             <button type="button" class="btn btn-ghost btn-sm" onclick="setStripeProxyProd()">② Test via Netlify déployé</button>
           </div>
-          <p style="font-size:11px;color:var(--muted);margin:0 0 10px">
-            <strong style="color:var(--gold2)">Deux modes de test :</strong><br>
-            ① <code>http://localhost:8888/.netlify/functions/create-checkout</code> — avec <code>netlify dev</code> + Stripe CLI<br>
-            ② <code>https://TON-SITE.netlify.app/.netlify/functions/create-checkout</code> — site local branché sur les fonctions déjà en ligne
-          </p>
 
           <div class="fg"><label>Description activité (pour Stripe Dashboard)</label><input id="stripe-biz" value="Institut de beauté et bien-être — massages, épilation cire orientale, manucure, produits de soin"></div>
-          <p style="font-size:11px;color:var(--muted);margin:12px 0 8px;padding:10px;border:1px solid var(--line);border-radius:10px;line-height:1.5">
-            <strong style="color:var(--gold2)">Webhook Stripe</strong><br>
-            URL à enregistrer dans Stripe → Developers → Webhooks :<br>
-            <code style="color:var(--gold2)">https://TON-SITE.netlify.app/.netlify/functions/stripe-webhook</code><br>
-            Événements : <code>checkout.session.completed</code>, <code>checkout.session.expired</code>, <code>payment_intent.payment_failed</code><br>
-            Puis ajouter <code>STRIPE_WEBHOOK_SECRET</code> (<code>whsec_…</code>) dans Netlify Environment variables.
-          </p>
           <button class="btn btn-gold btn-sm" onclick="saveStripeConfig()">Enregistrer Stripe</button>
           <span id="stripe-save-msg" style="margin-left:10px;font-size:12px;color:var(--green)"></span>
         </div>
 
         <div class="panel">
-          <h2>Liens WhatsApp (les 3)</h2>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Les trois boutons ouvrent des groupes. Les messages Instagram et WhatsApp reçus par l’API Meta sont répondus par le serveur, jamais par une clé collée ici. Adresse à enregistrer dans l’application Meta : <code style="color:var(--gold2)">https://barbarella.netlify.app/.netlify/functions/meta-webhook</code></p>
+          <h2>Liens WhatsApp</h2>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Le site public n’affiche plus d’invitation de groupe. Le contact direct est dans Infos pratiques.</p>
           <div class="fg"><label>1. Actualités</label><input id="wa-link-1-inp" placeholder="https://chat.whatsapp.com/..." value=""></div>
           <div class="fg"><label>2. Clients fidèles</label><input id="wa-link-2-inp" placeholder="https://chat.whatsapp.com/..." value=""></div>
           <div class="fg"><label>3. Réclamations</label><input id="wa-link-3-inp" placeholder="https://chat.whatsapp.com/..." value=""></div>
@@ -1107,14 +1095,14 @@ function setStripeProxyProd(){
   }
   var url=base
     ? base.replace(/\/$/,'')+'/.netlify/functions/create-checkout'
-    : 'https://TON-SITE.netlify.app/.netlify/functions/create-checkout';
+    : 'https://barbarella.netlify.app/.netlify/functions/create-checkout';
   var el=document.getElementById('stripe-proxy');
   if(el)el.value=url;
   var en=document.getElementById('stripe-enabled'); if(en)en.checked=true;
   var mode=document.getElementById('stripe-mode'); if(mode)mode.value='test';
   saveStripeConfig();
   if(url.indexOf('TON-SITE')>=0){
-    alert('Mode ② Netlify déployé.\n\nRemplace TON-SITE par l’URL réelle de ton site Netlify, puis Enregistrer.\n\nExemple :\nhttps://institut-barbarella.netlify.app/.netlify/functions/create-checkout');
+    alert('Indiquez l’adresse réelle du site, puis enregistrez.');
   }else{
     alert('Mode ② Netlify déployé activé.\n\nProxy : '+url);
   }
