@@ -2,7 +2,7 @@
 const publicFields = ['services', 'categoriesEnabled', 'team', 'news', 'promo', 'waLinks'];
 const privateFields = ['clients', 'aiAgents', 'stockData', 'stockSeuils', 'invHistory', 'lastInventaire', 'invConfig'];
 let stateVersions = {}, sharedReady = false, saveQueue = Promise.resolve(), proRefresh = null;
-function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function escapeHTML(value) { return String(value ?? '').replace(/[&<>\"']/g, c => ({ '&': '&', '<': '<', '>': '>', '\"': '"', "'": '&#39;' }[c])); }
 async function api(path, method = 'GET', body) {
   const response = await fetch('/.netlify/functions/' + path, { method, credentials: 'same-origin', headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
   let data;
@@ -45,7 +45,6 @@ async function refreshPro() {
   applyState(data.state); stateVersions = { ...stateVersions, ...data.versions };
   resas = (data.bookings || []).filter(Boolean).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   users = data.users;
-  // Fiches issues des demandes, sans transformer une réservation en visite effectuée.
   for (const booking of resas) if (!clients.some(c => c.email === booking.email)) clients.push({ id: booking.id, name: booking.client, email: booking.email, tel: booking.tel, visits: 0, total: 0, tag: 'Nouveau' });
   renderAllPro(); renderStats(); syncLabel('Données synchronisées');
 }
@@ -79,16 +78,15 @@ window.showView = goView;
 async function publishSite() {
   if (!currentUser || !['admin', 'manager'].includes(currentUser.role)) { alert('Accès non autorisé.'); return; }
   try {
-    // Première publication des données existantes ; ensuite les modifications sont enregistrées par champ.
     if (!sharedReady) { const state = stateSnapshot(); for (const field of publicFields) await persistField(field, state[field]); sharedReady = true; }
     await refreshPublic(); await refreshPro();
     alert('Le catalogue et le site public sont synchronisés pour tous les visiteurs.');
   } catch (error) { alert(error.message); }
 }
 function renderStats() {
-  const paid = resas.filter(r => r.st === 'paid');
+  const paid = resas.filter(r => r.st === 'paid' && r.paymentMode === 'live');
   const total = paid.reduce((sum, r) => sum + r.acompte, 0);
-  document.getElementById('live-stats').innerHTML = [ ['Acomptes encaissés', total.toFixed(2) + ' €'], ['Paiements vérifiés', paid.length], ['Demandes reçues', resas.length], ['Créneaux à valider', resas.filter(r => r.bookingStatus === 'requested').length] ].map(([label, value]) => '<div class="stat"><span>' + label + '</span><b>' + value + '</b></div>').join('');
+  document.getElementById('live-stats').innerHTML = [ ['Acomptes encaissés (Live)', total.toFixed(2) + ' €'], ['Paiements Live', paid.length], ['Demandes reçues', resas.length], ['Créneaux à valider', resas.filter(r => r.bookingStatus === 'requested').length] ].map(([label, value]) => '<div class="stat"><span>' + label + '</span><b>' + value + '</b></div>').join('');
 }
 function renderRealAgenda() {
   const bookings = resas.filter(r => r.date).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
@@ -98,6 +96,14 @@ function showBookingResult(text) {
   document.getElementById('book-form').classList.add('hidden'); document.getElementById('sum-box').classList.add('hidden');
   const box = document.getElementById('book-ok'); box.classList.remove('hidden'); box.querySelector('p').textContent = text;
 }
+function getRequestId() {
+  let id = sessionStorage.getItem('bb_requestId');
+  if (!id || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(id)) {
+    id = crypto.randomUUID();
+    sessionStorage.setItem('bb_requestId', id);
+  }
+  return id;
+}
 document.getElementById('book-form').addEventListener('submit', async event => {
   event.preventDefault();
   const button = document.getElementById('pay-btn'); button.disabled = true; button.textContent = 'Enregistrement…';
@@ -106,14 +112,26 @@ document.getElementById('book-form').addEventListener('submit', async event => {
     if (!sharedReady) throw new Error('La réservation sera disponible après validation du catalogue par l’institut. Contactez-nous par téléphone.');
     if (!selService || selService.cat === 'produits') throw new Error('Les produits sont disponibles sur place. Sélectionnez un soin pour un rendez-vous.');
     const index = services.findIndex(s => s.name === selService.name);
-    const payload = { name: document.getElementById('fn').value.trim() + ' ' + document.getElementById('ln').value.trim(), email: document.getElementById('em').value.trim().toLowerCase(), tel: document.getElementById('ph').value.trim(), soin: selService.name, date: document.getElementById('dt').value, time: document.getElementById('booking-time').value, expert: document.getElementById('ms').value, duration: prestSel[index] || selService.chosenDur || '60' };
+    const payload = {
+      requestId: getRequestId(),
+      name: document.getElementById('fn').value.trim() + ' ' + document.getElementById('ln').value.trim(),
+      email: document.getElementById('em').value.trim().toLowerCase(),
+      tel: document.getElementById('ph').value.trim(),
+      soin: selService.name,
+      date: document.getElementById('dt').value,
+      time: document.getElementById('booking-time').value,
+      expert: document.getElementById('ms').value,
+      duration: prestSel[index] || selService.chosenDur || '60'
+    };
     if (document.querySelector('input[name="pay"]:checked').value === 'card' && getDeposit(selService) > 0) {
       const data = await api('create-checkout', 'POST', payload);
       const url = new URL(data.url);
       if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com') throw new Error('Adresse de paiement invalide.');
+      sessionStorage.removeItem('bb_requestId'); // nouvelle tentative après succès
       location.assign(url.href);
     } else {
       await api('reservations', 'POST', payload);
+      sessionStorage.removeItem('bb_requestId');
       showBookingResult('Votre demande est enregistrée et le créneau est retenu. L’institut vous contactera pour confirmer ; le paiement se fera sur place.');
     }
   } catch (error) { alert(error.message); }
@@ -123,7 +141,6 @@ async function handleStripeReturn() {
   const params = new URLSearchParams(location.search);
   if (params.has('session_id')) {
     const request = Object.fromEntries(['session_id', 'booking', 'token'].map(key => [key, params.get(key)]));
-    // Retirer les références privées de l’URL avant toute interaction ou partage.
     history.replaceState({}, '', location.pathname + '#reserver');
     try {
       const result = await api('checkout-status', 'POST', request);
@@ -192,7 +209,6 @@ function saveSmsConfig() { alert('Les SMS automatiques nécessitent une intégra
 function testSmsSend() { saveSmsConfig(); }
 function queueSms() { return false; }
 function runLoyalty() { alert('Aucune campagne envoyée. L’envoi nécessitera un fournisseur de messagerie connecté et les consentements clients.'); }
-// Les formulaires existants restent utilisés ; sauvegardes séquentielles et erreurs visibles.
 const mutations = { saveServices: 'catalog', saveCategories: 'catalog', publishPromo: 'promos', clearPromo: 'promos', saveNewsForm: 'news', delNews: 'news', saveClientForm: 'clients', saveSeuilsAlerte: 'inventaire', validerInventaire: 'inventaire', toggleMasseuse: 'team', saveAiForm: 'ai', saveWaLink: 'admin' };
 for (const [name, view] of Object.entries(mutations)) {
   const original = window[name];
@@ -218,7 +234,6 @@ for (const [name, view] of Object.entries(mutations)) {
     return saveQueue;
   };
 }
-// Photos : traiter FileReader séparément, puis persister la liste finale.
 saveProfileForm = async function () {
   if (!currentUser || !['admin', 'manager'].includes(currentUser.role)) { alert('Accès non autorisé.'); return; }
   const oldTeam = JSON.parse(JSON.stringify(team));
