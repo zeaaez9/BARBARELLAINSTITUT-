@@ -3,5 +3,5 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const dist = path.join(root, 'dist');
 fs.mkdirSync(dist, { recursive: true });
-for (const name of ['index.html', 'operations.js']) fs.copyFileSync(path.join(root, name), path.join(dist, name));
-console.log('Site public préparé dans dist/ (2 fichiers, aucun code serveur ni document interne).');
+for (const name of ['index.html', 'operations.js', 'google5e81c9b146b2e8ad.html']) fs.copyFileSync(path.join(root, name), path.join(dist, name));
+console.log('Site public préparé dans dist/.');
