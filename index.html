@@ -471,6 +471,8 @@
 <script>
 const volatileStore={setItem:function(){},getItem:function(){return null}};
 function readCache(key){try{return JSON.parse(localStorage.getItem(key))}catch(e){return null}}
+function euroAmount(amount){return Number(amount).toFixed(2).replace('.',',')}
+function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function getDeposit(s){
   if(!s)return 29.99;
   const cat=s.cat||'massage';
@@ -748,14 +750,14 @@ function renderPublic(){
 
   var vis=team.filter(function(m){return m.visible!==false});
   document.getElementById('team-public').innerHTML=vis.map(function(m){
-    return '<div class="card team-card"><img src="'+m.photo+'" alt="'+m.name+', experte à l’Institut Barbarella Paris 3e" loading="lazy" width="400" height="400"><div class="team-body"><h3>'+m.name+'</h3><div class="role">'+m.role+'</div><p style="margin:0;font-size:13px;color:var(--muted)">'+m.desc+'</p></div></div>';
+    return '<div class="card team-card"><img src="'+escapeHTML(m.photo)+'" alt="'+escapeHTML(m.name)+', experte à l’Institut Barbarella Paris 3e" loading="lazy" width="400" height="400"><div class="team-body"><h3>'+escapeHTML(m.name)+'</h3><div class="role">'+escapeHTML(m.role)+'</div><p style="margin:0;font-size:13px;color:var(--muted)">'+escapeHTML(m.desc)+'</p></div></div>';
   }).join('');
 
   // Packages for booking — grouped by category (same as carte)
   renderBookCats();
 
   document.getElementById('ms').innerHTML='<option value="">Sans préférence</option>'+team.filter(function(m){return m.visible!==false}).map(function(m){
-    return '<option>'+m.name+'</option>';
+    return '<option>'+escapeHTML(m.name)+'</option>';
   }).join('');
   if(promo){
     document.getElementById('promo-banner').style.display='block';
@@ -763,7 +765,7 @@ function renderPublic(){
     document.getElementById('promo-desc-pub').textContent=promo.desc;
   }else document.getElementById('promo-banner').style.display='none';
   document.getElementById('news-public').innerHTML=news.map(function(n){
-    return '<div class="card" style="margin-bottom:10px;border-color:rgba(201,184,150,.15)"><div class="eyebrow" style="margin-bottom:6px">Nouveauté</div><h3 style="font-size:18px;margin-bottom:6px">'+n.title+'</h3><p style="margin:0;font-size:14px;color:var(--muted)">'+n.text+'</p></div>';
+    return '<div class="card" style="margin-bottom:10px;border-color:rgba(201,184,150,.15)"><div class="eyebrow" style="margin-bottom:6px">Nouveauté</div><h3 style="font-size:18px;margin-bottom:6px">'+escapeHTML(n.title)+'</h3><p style="margin:0;font-size:14px;color:var(--muted)">'+escapeHTML(n.text)+'</p></div>';
   }).join('');
   applyWaLink();
 }
@@ -839,7 +841,7 @@ function selectPkg(i,el,dur){
   selService=Object.assign({},s,{chosenDur:dur});
   const dep=getDeposit(s);
   document.getElementById('sel-name').textContent=label;
-  document.getElementById('sel-price').textContent=dep>0?(dep+' €'):(s.cat==='produits'?'Sur place':'—');
+  document.getElementById('sel-price').textContent=dep>0?euroAmount(dep)+' €':(s.cat==='produits'?'Sur place':'—');
   const onsiteNow=document.querySelector('.method.active input')&&document.querySelector('.method.active input').value==='onsite';
   document.getElementById('pay-btn').textContent=payLabel(s.cat,dep,onsiteNow);
   showDepositNote(dep);
@@ -921,13 +923,13 @@ function updateLoyaltyPrice(){
   }else label=selService.name+' — Sur mesure';
   document.getElementById('sel-name').textContent=label;
   const dep=getDeposit(selService);
-  document.getElementById('sel-price').textContent=dep>0?(dep+' €'):'Sur place';
+  document.getElementById('sel-price').textContent=dep>0?euroAmount(dep)+' €':'Sur place';
   showDepositNote(dep);
 }
 function payLabel(cat,dep,onsite){
   if(cat==='produits')return onsite?'Réserver le retrait':'Commander · Sur place';
   if(onsite||!(dep>0))return 'Réserver';
-  return 'Payer l’acompte · '+dep+' €';
+  return 'Payer l’acompte · '+euroAmount(dep)+' €';
 }
 function showDepositNote(dep){
   const note=document.getElementById('deposit-note');
@@ -1552,10 +1554,10 @@ function renderAllPro(){
     }
   }catch(e){}
   renderFeed();
-  document.getElementById('resa-body').innerHTML=resas.map(r=>`<tr><td>${r.client}</td><td>${r.soin}</td><td>${r.acompte} €</td><td><span class="tag ${r.st==='paid'?'tag-ok':'tag-wait'}">${r.st==='paid'?'Confirmé':'Attente'}</span></td></tr>`).join('');
+  document.getElementById('resa-body').innerHTML=resas.map(r=>`<tr><td>${escapeHTML(r.client)}</td><td>${escapeHTML(r.soin)}</td><td>${escapeHTML(r.acompte)} €</td><td><span class="tag ${r.st==='paid'?'tag-ok':'tag-wait'}">${r.st==='paid'?'Confirmé':'Attente'}</span></td></tr>`).join('');
   renderRealAgenda();
-  document.getElementById('clients-body').innerHTML=clients.map(c=>`<tr><td>${c.name}<br><span style="font-size:11px;color:var(--muted)">${c.email||''}</span></td><td>${c.tel||''}</td><td>${c.dob||'—'}<br><span style="font-size:11px;color:var(--muted)">${c.last||''}</span></td><td>${c.total||0} € · ${c.visits||0} vis.</td><td><span class="tag ${c.tag==='VIP'?'tag-ok':'tag-wait'}">${c.tag}</span></td></tr>`).join('');
-  document.getElementById('team-admin').innerHTML=team.map(m=>`<div class="list-row"><img src="${m.photo}" alt="Photo de ${m.name}"><div style="flex:1;min-width:0"><h4>${m.name}</h4><p>${m.role} · ${m.visible===false?'Masquée':'Visible'}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openProfileForm(${m.id})">Modifier</button><button class="btn btn-ghost btn-sm" onclick="toggleMasseuse(${m.id})">${m.visible===false?'Afficher':'Masquer'}</button></div></div>`).join('');
+  document.getElementById('clients-body').innerHTML=clients.map(c=>`<tr><td>${escapeHTML(c.name)}<br><span style="font-size:11px;color:var(--muted)">${escapeHTML(c.email||'')}</span></td><td>${escapeHTML(c.tel||'')}</td><td>${escapeHTML(c.dob||'—')}<br><span style="font-size:11px;color:var(--muted)">${escapeHTML(c.last||'')}</span></td><td>${escapeHTML(c.total||0)} € · ${escapeHTML(c.visits||0)} vis.</td><td><span class="tag ${c.tag==='VIP'?'tag-ok':'tag-wait'}">${escapeHTML(c.tag)}</span></td></tr>`).join('');
+  document.getElementById('team-admin').innerHTML=team.map(m=>`<div class="list-row"><img src="${escapeHTML(m.photo)}" alt="Photo de ${escapeHTML(m.name)}"><div style="flex:1;min-width:0"><h4>${escapeHTML(m.name)}</h4><p>${escapeHTML(m.role)} · ${m.visible===false?'Masquée':'Visible'}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openProfileForm(${Number(m.id)})">Modifier</button><button class="btn btn-ghost btn-sm" onclick="toggleMasseuse(${Number(m.id)})">${m.visible===false?'Afficher':'Masquer'}</button></div></div>`).join('');
   document.getElementById('users-body').innerHTML=users.map(u=>`<tr><td>${u.login}</td><td>${u.name}</td><td>${u.role}</td><td>${currentUser&&currentUser.role==='admin'&&u.login!=='admin'?`<button class="btn btn-ghost btn-sm" onclick="openUserForm(${u.id})">Éditer</button> <button class="btn btn-ghost btn-sm" onclick="delUser(${u.id})">Suppr.</button>`:''}</td></tr>`).join('');
   renderCatalog();renderNewsAdmin();renderAiConfig();
 }
@@ -1623,7 +1625,7 @@ function saveServiceForm(){
 function delService(i){if(!confirm('Supprimer cette prestation ?'))return;services.splice(i,1);saveServices()}
 function publishPromo(){promo={title:document.getElementById('pr-title').value,desc:document.getElementById('pr-desc').value};localStorage.setItem('bb_promo_v5',JSON.stringify(promo));renderPublic();alert('Offre publiée.')}
 function clearPromo(){promo=null;localStorage.removeItem('bb_promo_v5');renderPublic();alert('Offre retirée.')}
-function renderNewsAdmin(){const el=document.getElementById('news-list');if(!el)return;el.innerHTML=news.map(n=>`<div class="list-row"><div style="flex:1"><h4>${n.title}</h4><p>${n.text}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openNewsForm(${n.id})">Modifier</button><button class="btn btn-ghost btn-sm" onclick="delNews(${n.id})">Suppr.</button></div></div>`).join('')||'<p style="color:var(--muted);font-size:13px">Aucune nouveauté.</p>'}
+function renderNewsAdmin(){const el=document.getElementById('news-list');if(!el)return;el.innerHTML=news.map(n=>`<div class="list-row"><div style="flex:1"><h4>${escapeHTML(n.title)}</h4><p>${escapeHTML(n.text)}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openNewsForm(${Number(n.id)})">Modifier</button><button class="btn btn-ghost btn-sm" onclick="delNews(${Number(n.id)})">Suppr.</button></div></div>`).join('')||'<p style="color:var(--muted);font-size:13px">Aucune nouveauté.</p>'}
 function openNewsForm(id){editNewsId=id||null;const n=id?news.find(x=>x.id===id):null;document.getElementById('news-form-title').textContent=n?'Modifier':'Nouvelle actualité';document.getElementById('news-title').value=n?n.title:'';document.getElementById('news-text').value=n?n.text:'';document.getElementById('news-form-panel').classList.remove('hidden')}
 function closeNewsForm(){document.getElementById('news-form-panel').classList.add('hidden');editNewsId=null}
 function saveNewsForm(){const title=document.getElementById('news-title').value.trim();if(!title){alert('Titre obligatoire');return}const text=document.getElementById('news-text').value.trim();if(editNewsId){const n=news.find(x=>x.id===editNewsId);if(n){n.title=title;n.text=text}}else news.unshift({id:Date.now(),title,text});localStorage.setItem('bb_news_v5',JSON.stringify(news));renderPublic();renderNewsAdmin();closeNewsForm()}
@@ -1712,7 +1714,7 @@ function openUserForm(id){editUserId=id||null;const u=id?users.find(x=>x.id===id
 function closeUserForm(){document.getElementById('user-form-panel').classList.add('hidden');editUserId=null;document.getElementById('u-login').disabled=false}
 function saveUserForm(){const login=document.getElementById('u-login').value.trim().toLowerCase();const name=document.getElementById('u-name').value.trim();const pass=document.getElementById('u-pass').value;const pass2=document.getElementById('u-pass2').value;const role=document.getElementById('u-role').value;if(!login||!name){alert('Login et nom obligatoires');return}if(editUserId){const u=users.find(x=>x.id===editUserId);if(!u)return;u.name=name;u.role=role;if(pass){if(pass!==pass2){alert('Mots de passe différents');return}u.pass=pass}}else{if(!pass||pass!==pass2){alert('Mot de passe obligatoire et identique à la confirmation');return}if(users.some(x=>x.login===login)){alert('Cet identifiant existe déjà');return}users.push({id:Date.now(),login,name,pass,role})}volatileStore.setItem('bb_users_v5',JSON.stringify(users));renderAllPro();closeUserForm();alert('Accès enregistré. Le mot de passe n’est plus affiché.')}
 function delUser(id){if(!confirm('Supprimer cet accès ?'))return;users=users.filter(x=>x.id!==id);volatileStore.setItem('bb_users_v5',JSON.stringify(users));renderAllPro()}
-function renderAiConfig(){const el=document.getElementById('ai-config-list');if(!el)return;const st={active:'Actif',pause:'En pause',setup:'À configurer'};el.innerHTML=aiAgents.map(a=>`<div class="list-row"><div style="flex:1"><h4>${a.name}</h4><p><span class="tag ${a.status==='active'?'tag-ok':'tag-wait'}">${st[a.status]||a.status}</span> · ${a.langs}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openAiForm('${a.id}')">Programmer</button></div></div>`).join('')}
+function renderAiConfig(){const el=document.getElementById('ai-config-list');if(!el)return;const st={active:'Actif',pause:'En pause',setup:'À configurer'};el.innerHTML=aiAgents.map(a=>`<div class="list-row"><div style="flex:1"><h4>${escapeHTML(a.name)}</h4><p><span class="tag ${a.status==='active'?'tag-ok':'tag-wait'}">${escapeHTML(st[a.status]||a.status)}</span> · ${escapeHTML(a.langs)}</p></div><div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openAiForm('${String(a.id).replace(/[^a-z0-9_-]/gi,'')}')">Programmer</button></div></div>`).join('')}
 function openAiForm(id){editAiId=id;const a=aiAgents.find(x=>x.id===id);if(!a)return;document.getElementById('ai-form-title').textContent='Programmer · '+a.name;document.getElementById('ai-name').value=a.name;document.getElementById('ai-status').value=a.status;document.getElementById('ai-langs').value=a.langs;document.getElementById('ai-prompt').value=a.prompt;document.getElementById('ai-escalade').value=a.escalade?'1':'0';document.getElementById('ai-notes').value=a.notes||'';document.getElementById('ai-action-out').textContent='';const btn=document.getElementById('ai-action-btn');btn.textContent=a.action==='invoice'?'Générer factures':a.action==='mkt'?'Générer contenu':a.action==='maintain'?'Check santé':'Tester agent';document.getElementById('ai-form-panel').classList.remove('hidden')}
 function closeAiForm(){document.getElementById('ai-form-panel').classList.add('hidden');editAiId=null}
 function saveAiForm(){const a=aiAgents.find(x=>x.id===editAiId);if(!a)return;a.status=document.getElementById('ai-status').value;a.langs=document.getElementById('ai-langs').value.trim();a.prompt=document.getElementById('ai-prompt').value.trim();a.escalade=document.getElementById('ai-escalade').value==='1';a.notes=document.getElementById('ai-notes').value.trim();volatileStore.setItem('bb_ai_v5',JSON.stringify(aiAgents));renderAiConfig();pushManagerFeed('Agent « '+a.name+' » · config mise à jour ('+a.status+')');alert('Configuration agent enregistrée. Évolutive : branchez API dans les notes techniques.')}

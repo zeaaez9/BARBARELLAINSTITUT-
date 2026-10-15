@@ -2,7 +2,7 @@
 const publicFields = ['services', 'categoriesEnabled', 'team', 'news', 'promo', 'waLinks'];
 const privateFields = ['clients', 'aiAgents', 'stockData', 'stockSeuils', 'invHistory', 'lastInventaire', 'invConfig'];
 let stateVersions = {}, sharedReady = false, saveQueue = Promise.resolve(), proRefresh = null;
-function escapeHTML(value) { return String(value ?? '').replace(/[&<>\"']/g, c => ({ '&': '&', '<': '<', '>': '>', '\"': '"', "'": '&#39;' }[c])); }
+function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 async function api(path, method = 'GET', body) {
   const response = await fetch('/.netlify/functions/' + path, { method, credentials: 'same-origin', headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
   let data;
@@ -43,7 +43,7 @@ async function refreshPublic() {
 async function refreshPro() {
   const data = await api('site-state?scope=pro');
   applyState(data.state); stateVersions = { ...stateVersions, ...data.versions };
-  resas = (data.bookings || []).filter(Boolean).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  resas = (data.bookings || []).filter(Boolean).sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
   users = data.users;
   for (const booking of resas) if (!clients.some(c => c.email === booking.email)) clients.push({ id: booking.id, name: booking.client, email: booking.email, tel: booking.tel, visits: 0, total: 0, tag: 'Nouveau' });
   renderAllPro(); renderStats(); syncLabel('Données synchronisées');
