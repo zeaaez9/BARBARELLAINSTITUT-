@@ -6,6 +6,13 @@
   <title>Institut Barbarella — Paris République</title>
   <meta name="description" content="Institut Barbarella — Massages d'exception, épilation à la cire orientale, manucure & produits dérivés. Cadre feutré, sensualité raffinée et soins. 58 rue Notre Dame de Nazareth, 75003 Paris.">
   <meta name="theme-color" content="#070707">
+  <link rel="icon" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:title" content="Institut Barbarella — Paris République">
+  <meta property="og:description" content="Massages, épilation à la cire orientale et manucure. 58 rue Notre Dame de Nazareth, 75003 Paris.">
+  <meta property="og:image" content="https://barbarella.netlify.app/og-image.jpg">
+  <meta property="og:url" content="https://barbarella.netlify.app/">
+  <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#070707;--dark:#0c0c0c;--card:#131313;--elev:#181818;--gold:#c9b896;--gold2:#e8d5b0;--muted:rgba(255,255,255,.52);--green:#5eead4;--line:rgba(255,255,255,.06);--ease:cubic-bezier(.16,1,.3,1)}
@@ -96,12 +103,12 @@
     <div id="promo-banner" class="card" style="margin-top:24px;border-color:rgba(94,234,212,.22);display:none"><div class="eyebrow" style="margin-bottom:6px">Offre en cours</div><h3 id="promo-title-pub" style="font-size:20px;margin-bottom:6px"></h3><p id="promo-desc-pub" style="margin:0;color:var(--muted);font-size:14px"></p></div>
     <div id="news-public" style="margin-top:16px"></div>
     <div id="manucure-section" class="hidden" style="margin-top:40px">
-      <div class="sec-head"><div class="eyebrow">Manucure & Pédicure</div><h2>Soins des mains et des pieds</h2><p>Section activable depuis le Dashboard.</p></div>
-      <div id="manucure-public" class="card" style="text-align:center;color:var(--muted)">Bientôt disponible — activez cette section dans l’Espace Pro.</div>
+      <div class="sec-head"><div class="eyebrow">Manucure & Pédicure</div><h2>Soins des mains et des pieds</h2><p>Des soins posés, dans le même esprit que la maison.</p></div>
+      <div id="manucure-public" class="card" style="text-align:center;color:var(--muted)">Cette carte sera publiée lors de son ouverture.</div>
     </div>
     <div id="produits-section" class="hidden" style="margin-top:40px">
       <div class="sec-head"><div class="eyebrow">Boutique</div><h2>Produits dérivés</h2><p>Huiles, bougies, savons noirs, cires maison et diffuseurs — prolonger le soin chez soi, dans le même esprit de sensualité et de bien-être.</p></div>
-      <div id="produits-public" class="card" style="text-align:center;color:var(--muted)">Section masquée — activez « Produits dérivés » dans l’Espace Pro pour publier la boutique.</div>
+      <div id="produits-public" class="card" style="text-align:center;color:var(--muted)">Cette sélection sera publiée lors de son ouverture.</div>
     </div>
   </div></section>
 
@@ -128,7 +135,7 @@
         </div>
       </div>
       <div class="pay-box">
-        <div class="sum" id="sum-box"><div><div id="sel-name">Massage Iris — 1 heure · 180 €</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Page de paiement · confirmation</div></div><strong id="sel-price">29,99 €</strong></div>
+        <div class="sum" id="sum-box"><div><div id="sel-name">Massage Iris — 1 heure · 180 €</div><div style="font-size:11px;color:var(--muted);margin-top:3px" id="sum-kind">Acompte de confirmation, pas le prix du soin</div></div><strong id="sel-price">29,99 €</strong></div>
         <form id="book-form">
           <div class="row2"><div class="fg"><label>Prénom</label><input id="fn" required></div><div class="fg"><label>Nom</label><input id="ln" required></div></div>
           <div class="fg"><label>Email</label><input type="email" id="em" required placeholder="vous@email.com"></div>
@@ -142,7 +149,8 @@
             <label class="method"><input type="radio" name="pay" value="onsite"> Sur place</label>
           </div>
           <div id="card-fields"><p class="note">Vous saisirez vos coordonnées bancaires sur la page sécurisée Stripe.</p></div>
-          <button type="submit" class="btn btn-gold" style="width:100%" id="pay-btn">Confirmer · 29,99 €</button>
+          <button type="submit" class="btn btn-gold" style="width:100%" id="pay-btn">Payer l’acompte · 29,99 €</button>
+          <p class="note" id="deposit-note">29,99 € est un acompte de confirmation, pas le prix du soin. Le solde se règle sur place.</p>
           <p class="note">Demande de rendez-vous · Créneau validé par l’institut</p>
         </form>
         <div id="book-ok" class="hidden" style="text-align:center;padding:28px 8px"><div style="font-size:40px;margin-bottom:10px">✓</div><h3 style="font-size:24px;margin-bottom:8px">Demande enregistrée</h3><p style="color:var(--muted);font-size:14px">L’institut vous contactera pour valider le créneau souhaité.</p></div>
@@ -163,12 +171,7 @@
   </div></section>
   <footer>
     Institut Barbarella · 58 rue Notre Dame de Nazareth, 75003 Paris · 01 43 31 53 00 · Tous les jours, 11h – 20h
-    <div id="wa-footer" style="margin-top:10px;font-size:11px;opacity:.55;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center">
-      <a id="wa-link-1" href="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3" target="_blank" rel="noopener" style="color:rgba(201,184,150,.7);text-decoration:none;letter-spacing:.04em">Actualités · WhatsApp</a>
-      <a id="wa-link-2" href="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3" target="_blank" rel="noopener" style="color:rgba(201,184,150,.7);text-decoration:none;letter-spacing:.04em">Clients fidèles · WhatsApp</a>
-      <a id="wa-link-3" href="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3" target="_blank" rel="noopener" style="color:rgba(201,184,150,.7);text-decoration:none;letter-spacing:.04em">Réclamations · WhatsApp</a>
-    </div>
-
+    <div style="margin-top:10px"><a href="/mentions-legales.html" style="color:rgba(201,184,150,.8)">Mentions légales</a> · <a href="/cgv.html" style="color:rgba(201,184,150,.8)">CGV</a></div>
   </footer>
   <button class="chat-fab" onclick="toggleChat()" title="Assistant">✦</button>
   <div class="chat-panel" id="chat-panel">
@@ -413,9 +416,9 @@
         <div class="panel">
           <h2>Liens WhatsApp (les 3)</h2>
           <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Les trois boutons ouvrent des groupes. Les messages Instagram et WhatsApp reçus par l’API Meta sont répondus par le serveur, jamais par une clé collée ici. Adresse à enregistrer dans l’application Meta : <code style="color:var(--gold2)">https://barbarella.netlify.app/.netlify/functions/meta-webhook</code></p>
-          <div class="fg"><label>1. Actualités</label><input id="wa-link-1-inp" placeholder="https://chat.whatsapp.com/..." value="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3"></div>
-          <div class="fg"><label>2. Clients fidèles</label><input id="wa-link-2-inp" placeholder="https://chat.whatsapp.com/..." value="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3"></div>
-          <div class="fg"><label>3. Réclamations</label><input id="wa-link-3-inp" placeholder="https://chat.whatsapp.com/..." value="https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3"></div>
+          <div class="fg"><label>1. Actualités</label><input id="wa-link-1-inp" placeholder="https://chat.whatsapp.com/..." value=""></div>
+          <div class="fg"><label>2. Clients fidèles</label><input id="wa-link-2-inp" placeholder="https://chat.whatsapp.com/..." value=""></div>
+          <div class="fg"><label>3. Réclamations</label><input id="wa-link-3-inp" placeholder="https://chat.whatsapp.com/..." value=""></div>
           <button class="btn btn-gold btn-sm" onclick="saveWaLink()">Enregistrer les 3 liens</button>
         </div>
 
@@ -799,7 +802,8 @@ function selectPkg(i,el,dur){
   document.getElementById('sel-name').textContent=label;
   document.getElementById('sel-price').textContent=dep>0?(dep+' €'):(s.cat==='produits'?'Sur place':'—');
   const onsiteNow=document.querySelector('.method.active input')&&document.querySelector('.method.active input').value==='onsite';
-  document.getElementById('pay-btn').textContent=s.cat==='produits'?(onsiteNow?'Réserver le retrait':'Commander · Sur place'):(onsiteNow?'Réserver':(dep>0?('Confirmer · '+dep+' €'):'Réserver'));
+  document.getElementById('pay-btn').textContent=payLabel(s.cat,dep,onsiteNow);
+  showDepositNote(dep);
   updateLoyaltyPrice();
   // Panneau détail — massages : 3 onglets ; autres : description simple
   const det=document.getElementById('pkg-detail');
@@ -847,7 +851,8 @@ document.querySelectorAll('.method').forEach(m=>{
     const onsite=m.querySelector('input').value==='onsite';
     document.getElementById('card-fields').style.display=onsite?'none':'block';
     const dep=getDeposit(selService);
-    document.getElementById('pay-btn').textContent=onsite?'Réserver':(dep>0?('Confirmer · '+dep+' €'):'Réserver');
+    document.getElementById('pay-btn').textContent=payLabel(selService&&selService.cat,dep,onsite);
+    showDepositNote(onsite?0:dep);
   });
 });
 // Submission uses the server-backed handler in operations.js.
@@ -878,6 +883,19 @@ function updateLoyaltyPrice(){
   document.getElementById('sel-name').textContent=label;
   const dep=getDeposit(selService);
   document.getElementById('sel-price').textContent=dep>0?(dep+' €'):'Sur place';
+  showDepositNote(dep);
+}
+function payLabel(cat,dep,onsite){
+  if(cat==='produits')return onsite?'Réserver le retrait':'Commander · Sur place';
+  if(onsite||!(dep>0))return 'Réserver';
+  return 'Payer l’acompte · '+dep+' €';
+}
+function showDepositNote(dep){
+  const note=document.getElementById('deposit-note');
+  if(!note)return;
+  if(!(dep>0)){note.textContent='Aucun acompte : le règlement se fait sur place.';return}
+  const amount=Number(dep).toFixed(2).replace('.',',');
+  note.textContent=amount+' € est un acompte de confirmation, pas le prix du soin. Le solde se règle sur place.';
 }
 function openClientSpace(){
   const email=(document.getElementById('client-login-email').value||'').trim().toLowerCase();
@@ -974,7 +992,7 @@ function publishSite(){
   document.body.appendChild(toast);
   setTimeout(function(){toast.remove()},2200);
 }
-const WA_DEFAULT='https://chat.whatsapp.com/LjVGbUovqIlDDERiFdVGe3';
+const WA_DEFAULT='';
 let waLinks=readCache('bb_wa_v3')||{a:WA_DEFAULT,b:WA_DEFAULT,c:WA_DEFAULT};
 function applyWaLink(){
   const map=[['wa-link-1',waLinks.a],['wa-link-2',waLinks.b],['wa-link-3',waLinks.c]];
