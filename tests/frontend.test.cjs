@@ -20,7 +20,10 @@ async function harness(search = '') {
   } };
   context.window = context;
   vm.createContext(context);
-  for (const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) vm.runInContext(match[1], context);
+  for (const match of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+    if (/type\s*=\s*["']application\/ld\+json["']/i.test(match[1] || '')) continue;
+    vm.runInContext(match[2], context);
+  }
   vm.runInContext(operations, context);
   await new Promise(resolve => setImmediate(resolve));
   return { context, document, requests, alerts, run: code => vm.runInContext(code, context) };

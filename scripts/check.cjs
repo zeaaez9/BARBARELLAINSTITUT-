@@ -3,7 +3,10 @@ const vm = require('node:vm');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-for (const [i, match] of [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].entries()) new vm.Script(match[1], { filename: 'index.html#script' + i });
+for (const [i, match] of [...html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)].entries()) {
+  if (/type\s*=\s*["']application\/ld\+json["']/i.test(match[1] || '')) continue;
+  new vm.Script(match[2], { filename: 'index.html#script' + i });
+}
 for (const directory of ['functions', 'lib', 'scripts', 'tests']) {
   for (const file of fs.readdirSync(path.join(root, directory))) {
     if (/\.(js|cjs)$/.test(file)) new vm.Script(fs.readFileSync(path.join(root, directory, file), 'utf8'), { filename: directory + '/' + file });
