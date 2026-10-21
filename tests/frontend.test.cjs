@@ -4,9 +4,11 @@ const vm = require('node:vm');
 const fs = require('node:fs');
 const { parseHTML } = require('linkedom');
 const defaults = require('../lib/defaults');
-const html = fs.readFileSync(require.resolve('../index.html'), 'utf8');
+const indexHtml = fs.readFileSync(require.resolve('../index.html'), 'utf8');
+const adminHtml = fs.readFileSync(require.resolve('../admin.html'), 'utf8');
 const operations = fs.readFileSync(require.resolve('../operations.js'), 'utf8');
-async function harness(search = '') {
+async function harness(search = '', page = indexHtml) {
+  const html = page;
   const { document, Event } = parseHTML(html), requests = [], alerts = [], storage = new Map();
   // LinkeDOM expose seulement le getter : simuler le setter HTMLSelectElement natif.
   for (const select of document.querySelectorAll('select')) Object.defineProperty(select, 'value', {
@@ -33,7 +35,7 @@ test('page and server integration initialize without script errors', async () =>
   assert.equal(h.document.querySelector('#cc'), null); assert.equal(h.run('users.length'), 0); assert.equal(h.run('clients.length'), 0);
 });
 test('all eleven admin tabs and role restrictions work', async () => {
-  const h = await harness(); h.run("currentUser={id:1,name:'Admin',role:'admin'};buildSide();renderAllPro();renderStats()");
+  const h = await harness('', adminHtml); h.run("currentUser={id:1,name:'Admin',role:'admin'};buildSide();renderAllPro();renderStats()");
   for (const tab of ['dash', 'agenda', 'catalog', 'inventaire', 'promos', 'news', 'clients', 'team', 'roles', 'ai', 'admin']) { h.run("goView('" + tab + "')"); assert.ok(!h.document.getElementById('view-' + tab).classList.contains('hidden')); }
   h.run("currentUser={role:'employee'};goView('admin')"); assert.match(h.alerts.at(-1), /non autorisé/);
   assert.match(h.document.getElementById('agenda').textContent, /Aucune demande/); assert.ok(!h.document.getElementById('live-stats').textContent.includes('1 240'));
@@ -59,6 +61,6 @@ test('chat text rendered without HTML injection', async () => {
   const h = await harness(); h.run("addUser('<img src=x onerror=alert(1)>')"); assert.equal(h.document.querySelector('#chat-body img'), null); assert.match(h.document.getElementById('chat-body').textContent, /<img/);
 });
 test('catalog mutation persists to backend and does not claim local-only success', async () => {
-  const h = await harness(); h.run("currentUser={role:'admin'}"); h.document.getElementById('pr-title').value = 'Offre nouvelle'; h.document.getElementById('pr-desc').value = 'Texte';
+  const h = await harness('', adminHtml); h.run("currentUser={role:'admin'}"); h.document.getElementById('pr-title').value = 'Offre nouvelle'; h.document.getElementById('pr-desc').value = 'Texte';
   await h.run('publishPromo()'); const request = h.requests.find(r => r.method === 'PUT' && r.body.field === 'promo'); assert.equal(request.body.value.title, 'Offre nouvelle'); assert.ok(h.alerts.some(x => /tous les appareils/.test(x)));
 });

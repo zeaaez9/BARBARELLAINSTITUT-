@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /.netlify/
+Disallow: /admin
+Disallow: /admin.html
 
 Sitemap: https://barbarella.netlify.app/sitemap.xml

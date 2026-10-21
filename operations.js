@@ -36,7 +36,9 @@ async function refreshPublic() {
   const data = await api('site-state');
   applyState(data.state); stateVersions = { ...stateVersions, ...data.versions };
   sharedReady = data.configured;
-  stripeConfig = { ...stripeConfig, enabled: data.payments.enabled, mode: data.payments.mode, proxy: location.origin + '/.netlify/functions/create-checkout' };
+  if (typeof stripeConfig !== 'undefined') {
+    stripeConfig = { ...stripeConfig, enabled: data.payments.enabled, mode: data.payments.mode, proxy: location.origin + '/.netlify/functions/create-checkout' };
+  }
   renderPublic(); renderBookCats(); applyWaLink();
   document.getElementById('ms').value = expert;
 }
@@ -84,11 +86,15 @@ async function publishSite() {
   } catch (error) { alert(error.message); }
 }
 function renderStats() {
+  const box = document.getElementById('live-stats');
+  if (!box) return;
   const paid = resas.filter(r => r.st === 'paid' && r.paymentMode === 'live');
   const total = paid.reduce((sum, r) => sum + r.acompte, 0);
   document.getElementById('live-stats').innerHTML = [ ['Acomptes encaissés (Live)', total.toFixed(2) + ' €'], ['Paiements Live', paid.length], ['Demandes reçues', resas.length], ['Créneaux à valider', resas.filter(r => r.bookingStatus === 'requested').length] ].map(([label, value]) => '<div class="stat"><span>' + label + '</span><b>' + value + '</b></div>').join('');
 }
 function renderRealAgenda() {
+  const box = document.getElementById('agenda');
+  if (!box) return;
   const bookings = resas.filter(r => r.date).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
   document.getElementById('agenda').innerHTML = bookings.map(r => '<div class="aday"><h5>' + escapeHTML(r.date + ' · ' + r.time) + '</h5><div class="slot">' + escapeHTML(r.client) + '</div><div>' + escapeHTML(r.expert) + '</div><div>' + escapeHTML(r.soin) + '</div><small>' + (r.st === 'paid' ? 'Acompte vérifié' : 'Sans paiement en ligne') + ' · créneau retenu</small></div>').join('') || '<p>Aucune demande de rendez-vous enregistrée.</p>';
 }
@@ -258,6 +264,7 @@ saveProfileForm = async function () {
   } catch (error) { team = oldTeam; renderPublic(); renderAllPro(); alert(error.message); }
 };
 document.getElementById('dt').min = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date());
-document.getElementById('login-pass').addEventListener('keydown', event => { if (event.key === 'Enter') doLogin(); });
+const loginPass = document.getElementById('login-pass');
+if (loginPass) loginPass.addEventListener('keydown', event => { if (event.key === 'Enter') doLogin(); });
 refreshPublic().catch(() => { sharedReady = false; });
 handleStripeReturn();
