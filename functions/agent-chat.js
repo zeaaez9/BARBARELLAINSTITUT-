@@ -82,7 +82,8 @@ exports.handler = r.wrap(async (event) => {
   }
 
   const lang = typeof body.lang === 'string' ? body.lang.toLowerCase() : 'fr';
-  const system = lang === 'fr' ? SYSTEM_FR : SYSTEM_EN;
+  const names = { fr: 'français', en: 'English', es: 'español', it: 'italiano' };
+  const system = (lang === 'fr' ? SYSTEM_FR : SYSTEM_EN) + '\nLangue de réponse : ' + (names[lang] || 'la langue du client') + '.';
   const model = process.env.GROK_MODEL || 'grok-3-mini';
 
   const messages = [{ role: 'system', content: system }];

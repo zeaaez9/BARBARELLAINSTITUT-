@@ -141,6 +141,8 @@ test('webhook persistence failure returns 500 for Stripe retry; bad signature re
 });
 test('meta webhook accepts the chosen token and a signed WhatsApp event once', async () => {
   reset();
+  const savedKey = process.env.XAI_API_KEY;
+  delete process.env.XAI_API_KEY;
   process.env.META_VERIFY_TOKEN = 'verify-token-for-tests-only-32b';
   process.env.META_APP_SECRET = 'app-secret-for-tests';
   process.env.META_WHATSAPP_TOKEN = 'token';
@@ -158,7 +160,7 @@ test('meta webhook accepts the chosen token and a signed WhatsApp event once', a
     assert.equal((await handlers['meta-webhook']({ httpMethod: 'POST', headers: { 'x-hub-signature-256': signature }, body })).statusCode, 200);
     assert.equal(calls, 1);
     assert.equal((await handlers['meta-webhook']({ httpMethod: 'POST', headers: { 'x-hub-signature-256': 'sha256=00' }, body })).statusCode, 403);
-  } finally { global.fetch = original; }
+  } finally { global.fetch = original; if (savedKey) process.env.XAI_API_KEY = savedKey; }
 });
 test('admin password of nine characters is accepted', async () => {
   reset(); const original = process.env.BARBARELLA_ADMIN_PASSWORD;

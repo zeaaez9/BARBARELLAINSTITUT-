@@ -182,13 +182,23 @@ function appendMessage(role, text) {
   const box = document.getElementById('chat-body'); box.appendChild(message); box.scrollTop = box.scrollHeight;
 }
 let chatPending = false;
+function chatHistory() {
+  return [...document.querySelectorAll('#chat-body .msg')].slice(-8).map(el => ({
+    role: el.classList.contains('user') ? 'user' : 'assistant',
+    content: (el.textContent || '').slice(0, 1500)
+  })).filter(item => item.content);
+}
 async function sendChat() {
   if (chatPending) return;
   const input = document.getElementById('chat-in'), message = input.value.trim();
   if (!message || message.length > 2000) return;
+  const history = chatHistory();
   chatPending = true; addUser(message); input.value = '';
-  try { const data = await api('agent-chat', 'POST', { message, lang: chatLangCode }); addBot(data.reply); }
-  catch { addBot(replyAI(message)); }
+  try {
+    const data = await api('agent-chat', 'POST', { message, lang: chatLangCode, history });
+    if (!data.reply) throw new Error('vide');
+    addBot(data.reply);
+  } catch { addBot(replyAI(message)); }
   finally { chatPending = false; }
 }
 async function runAiAction() {
